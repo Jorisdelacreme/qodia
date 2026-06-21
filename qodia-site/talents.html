@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Qodia — Rejoindre le collectif en tant que talent</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/2.44.0/iconfont/tabler-icons.min.css">
+<style>
+  :root{
+    --violet:#3B0F8C;
+    --violet-dark:#270A5E;
+    --violet-light:#5A22B8;
+    --coral:#F2375A;
+    --coral-dark:#C01F3D;
+    --yellow:#FFD23F;
+    --cyan:#1FE3D8;
+    --cyan-dark:#0FB5AC;
+    --offwhite:#F5F4FA;
+    --ink:#1A1230;
+    --ink-soft:#6B6480;
+    --white:#FFFFFF;
+    --border:#E4E1F0;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',sans-serif;
+    color:var(--ink);
+    background:var(--white);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{font-family:'Outfit',sans-serif;font-weight:700;letter-spacing:-0.02em;}
+  a{text-decoration:none;color:inherit;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 32px;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'Outfit',sans-serif;font-weight:600;font-size:13px;
+    letter-spacing:0.06em;text-transform:uppercase;
+    padding:7px 14px;border-radius:999px;
+  }
+
+  .nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(255,255,255,0.92);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav-inner{
+    max-width:1140px;margin:0 auto;padding:18px 32px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .logo{display:flex;align-items:center;gap:10px;}
+  .logo-mark{width:30px;height:30px;}
+  .logo-text{font-family:'Outfit',sans-serif;font-weight:800;font-size:22px;color:var(--violet);}
+  .nav-right{display:flex;align-items:center;}
+  .nav-link{font-family:'Outfit',sans-serif;font-weight:500;font-size:14px;color:var(--ink-soft);margin-right:20px;}
+  .nav-cta{
+    background:var(--violet);color:var(--white);
+    font-family:'Outfit',sans-serif;font-weight:600;font-size:14px;
+    padding:11px 22px;border-radius:10px;
+    box-shadow:0 2px 0 var(--violet-dark);
+    transition:transform .15s ease;
+  }
+  .nav-cta:hover{transform:translateY(-1px);}
+
+  .hero{
+    background:var(--ink);
+    position:relative;overflow:hidden;
+    padding:90px 0 70px;
+  }
+  .chevron-field{
+    position:absolute;inset:0;opacity:0.06;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='60' viewBox='0 0 120 60'%3E%3Cpath d='M10 10 L25 30 L10 50' stroke='white' stroke-width='6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M35 10 L50 30 L35 50' stroke='white' stroke-width='6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-size:120px 60px;
+  }
+  .hero-inner{position:relative;z-index:2;max-width:720px;margin:0 auto;text-align:center;}
+  .hero .eyebrow{background:rgba(255,210,63,0.12);color:var(--yellow);border:1px solid rgba(255,210,63,0.35);margin-bottom:26px;}
+  .hero h1{font-size:48px;line-height:1.1;color:var(--white);margin-bottom:22px;}
+  .hero h1 .accent{color:var(--cyan);}
+  .hero p.lead{font-size:18px;color:rgba(255,255,255,0.72);max-width:560px;margin:0 auto 36px;}
+  .btn-primary{
+    background:var(--coral);color:var(--white);
+    font-family:'Outfit',sans-serif;font-weight:600;font-size:16px;
+    padding:16px 32px;border-radius:12px;
+    box-shadow:0 4px 0 var(--coral-dark);
+    transition:transform .15s ease;display:inline-flex;align-items:center;gap:8px;
+  }
+  .btn-primary:hover{transform:translateY(-2px);}
+
+  .colorstrip{display:flex;height:6px;}
+  .colorstrip span{flex:1;}
+
+  section{padding:90px 0;}
+  .section-light{background:var(--white);}
+  .section-tint{background:var(--offwhite);}
+  .section-head{max-width:620px;margin:0 0 50px;}
+  .section-head.center{margin:0 auto 50px;text-align:center;}
+  .section-eyebrow{
+    font-family:'Outfit',sans-serif;font-weight:600;font-size:13px;
+    letter-spacing:0.06em;text-transform:uppercase;color:var(--violet-light);
+    margin-bottom:14px;display:block;
+  }
+  .section-head h2{font-size:34px;color:var(--ink);margin-bottom:14px;}
+  .section-head p{font-size:17px;color:var(--ink-soft);}
+
+  .benefit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .benefit-card{
+    background:var(--white);border:1px solid var(--border);border-radius:18px;
+    padding:30px 26px;
+  }
+  .benefit-icon{
+    width:46px;height:46px;border-radius:12px;
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:18px;font-size:21px;
+  }
+  .benefit-card:nth-child(1) .benefit-icon{background:#FFF1F3;color:var(--coral);}
+  .benefit-card:nth-child(2) .benefit-icon{background:#F0EAFB;color:var(--violet-light);}
+  .benefit-card:nth-child(3) .benefit-icon{background:#E6FBFA;color:var(--cyan-dark);}
+  .benefit-card:nth-child(4) .benefit-icon{background:#FFF8E5;color:#C99300;}
+  .benefit-card:nth-child(5) .benefit-icon{background:#FFF1F3;color:var(--coral);}
+  .benefit-card h3{font-size:17px;color:var(--ink);margin-bottom:8px;}
+  .benefit-card p{font-size:14px;color:var(--ink-soft);}
+
+  .domains-wrap{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;}
+  .domain-pill{
+    font-family:'Outfit',sans-serif;font-weight:600;font-size:14px;
+    padding:10px 20px;border-radius:999px;
+    background:var(--white);border:1px solid var(--border);color:var(--ink);
+  }
+
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;position:relative;}
+  .step{padding:0 20px;position:relative;}
+  .step:not(:last-child)::after{
+    content:'';position:absolute;top:23px;right:-10px;width:20px;height:2px;
+    background:var(--border);
+  }
+  .step-num{
+    width:46px;height:46px;border-radius:50%;
+    background:var(--violet);color:var(--white);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;
+    margin-bottom:18px;
+  }
+  .step h4{font-size:16px;color:var(--ink);margin-bottom:8px;}
+  .step p{font-size:14px;color:var(--ink-soft);}
+
+  .quote-block{
+    max-width:640px;margin:0 auto;text-align:center;
+    padding:8px 0;
+  }
+  .quote-block p{
+    font-family:'Outfit',sans-serif;font-weight:500;font-size:22px;
+    color:var(--ink);line-height:1.5;
+  }
+  .quote-mark{font-size:48px;color:var(--violet-light);line-height:1;margin-bottom:8px;font-family:'Outfit',sans-serif;}
+
+  .apply{
+    background:var(--violet);border-radius:24px;
+    padding:56px 48px;text-align:center;position:relative;overflow:hidden;
+  }
+  .apply::before{
+    content:'';position:absolute;inset:0;opacity:0.08;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='60' viewBox='0 0 120 60'%3E%3Cpath d='M10 10 L25 30 L10 50' stroke='white' stroke-width='6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M35 10 L50 30 L35 50' stroke='white' stroke-width='6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-size:100px 50px;
+  }
+  .apply-inner{position:relative;z-index:2;}
+  .apply .eyebrow{background:rgba(31,227,216,0.12);color:var(--cyan);border:1px solid rgba(31,227,216,0.35);margin-bottom:22px;}
+  .apply h2{color:var(--white);font-size:30px;margin-bottom:14px;}
+  .apply p{color:rgba(255,255,255,0.75);font-size:16px;max-width:480px;margin:0 auto 32px;}
+
+  .form-card{
+    background:var(--white);border-radius:18px;
+    max-width:560px;margin:0 auto;padding:28px;
+    text-align:left;
+  }
+  .form-row{display:flex;gap:12px;margin-bottom:12px;}
+  .form-row.single{display:block;}
+  .form-field{flex:1;}
+  .form-field label{
+    display:block;font-family:'Outfit',sans-serif;font-weight:600;font-size:13px;
+    color:var(--ink-soft);margin-bottom:6px;
+  }
+  .form-field input,.form-field select{
+    width:100%;border:1px solid var(--border);outline:none;
+    padding:12px 14px;font-family:'Inter',sans-serif;font-size:14px;
+    border-radius:10px;color:var(--ink);background:var(--white);
+  }
+  .form-field input:focus,.form-field select:focus{border-color:var(--violet-light);}
+  .form-submit{
+    width:100%;background:var(--coral);color:var(--white);border:none;cursor:pointer;
+    font-family:'Outfit',sans-serif;font-weight:600;font-size:15px;
+    padding:14px 26px;border-radius:12px;margin-top:8px;
+    box-shadow:0 3px 0 var(--coral-dark);
+    transition:transform .15s ease;
+  }
+  .form-submit:hover{transform:translateY(-1px);}
+  .form-note{font-size:13px;color:rgba(255,255,255,0.5);margin-top:16px;}
+
+  footer{background:var(--violet-dark);padding:48px 0 32px;}
+  .footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}
+  .footer-logo{display:flex;align-items:center;gap:10px;}
+  .footer-logo .logo-text{color:var(--white);}
+  .footer-tag{font-size:13px;color:rgba(255,255,255,0.45);margin-top:4px;}
+  .footer-links{display:flex;gap:24px;flex-wrap:wrap;}
+  .footer-links a{font-size:14px;color:rgba(255,255,255,0.6);transition:color .15s ease;}
+  .footer-links a:hover{color:var(--white);}
+  .footer-bottom{
+    margin-top:36px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.08);
+    font-size:13px;color:rgba(255,255,255,0.35);text-align:center;
+  }
+
+  @media(max-width:880px){
+    .hero h1{font-size:34px;}
+    .benefit-grid{grid-template-columns:1fr;}
+    .steps{grid-template-columns:1fr;gap:28px 0;}
+    .step:not(:last-child)::after{display:none;}
+    .apply{padding:36px 22px;}
+    .form-row{flex-direction:column;gap:12px;}
+    .footer-inner{flex-direction:column;align-items:flex-start;}
+    .nav-link{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <svg class="logo-mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M15 20 L40 50 L15 80" stroke="#F2375A" stroke-width="11" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M45 20 L70 50 L45 80" stroke="#1FE3D8" stroke-width="11" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M60 20 L85 50 L60 80" stroke="#FFD23F" stroke-width="11" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+      </svg>
+      <span class="logo-text">Qodia</span>
+    </a>
+    <div class="nav-right">
+      <a href="index.html#expertise" class="nav-link">Pour les entreprises</a>
+      <a href="faq.html" class="nav-link">FAQ</a>
+      <a href="#apply" class="nav-cta">Candidater ↗</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="chevron-field"></div>
+  <div class="wrap hero-inner">
+    <span class="eyebrow"><i class="ti ti-users" aria-hidden="true"></i>Cooptation et validation manuelle</span>
+    <h1>Rejoignez un collectif de talents <span class="accent">sélectifs</span>, pas une plateforme de plus</h1>
+    <p class="lead">Qodia rassemble des développeurs, designers, marketers et spécialistes IA francophones qui choisissent leurs missions sans sacrifier leur liberté.</p>
+    <a href="#apply" class="btn-primary">Candidater au collectif <i class="ti ti-arrow-right" aria-hidden="true"></i></a>
+  </div>
+</header>
+<div class="colorstrip">
+  <span style="background:var(--coral)"></span>
+  <span style="background:var(--yellow)"></span>
+  <span style="background:var(--cyan)"></span>
+  <span style="background:var(--violet)"></span>
+</div>
+
+<section class="section-light">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="section-eyebrow">Pourquoi Qodia</span>
+      <h2>Liberté de fonctionnement, exigence de sélection</h2>
+      <p>Pas d'exclusivité, pas de charges fixes, pas de missions imposées — un collectif construit par et pour des indépendants qui veulent du sens autant que des projets.</p>
+    </div>
+    <div class="benefit-grid">
+      <div class="benefit-card">
+        <div class="benefit-icon"><i class="ti ti-lock-open" aria-hidden="true"></i></div>
+        <h3>Liberté totale</h3>
+        <p>Aucune exclusivité. Vous restez maître de votre activité et de vos autres clients.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon"><i class="ti ti-heart-handshake" aria-hidden="true"></i></div>
+        <h3>Communauté bienveillante</h3>
+        <p>Des projets triés sur le volet, sans course au moins-disant ni mise en concurrence brutale.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon"><i class="ti ti-target-arrow" aria-hidden="true"></i></div>
+        <h3>Projets ambitieux</h3>
+        <p>Accès facilité à des missions exigeantes que vous n'auriez pas forcément trouvées seul.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon"><i class="ti ti-share" aria-hidden="true"></i></div>
+        <h3>Outils mutualisés</h3>
+        <p>Templates, formations, ressources et leads partagés entre les membres du collectif.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon"><i class="ti ti-chart-pie" aria-hidden="true"></i></div>
+        <h3>Devenez actionnaire</h3>
+        <p>Une levée de fonds est prévue à 12-18 mois, ouverte en priorité aux talents actifs du collectif.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-tint">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="section-eyebrow">Domaines recherchés</span>
+      <h2>Quel que soit votre domaine, si vous êtes excellent, on veut vous rencontrer</h2>
+    </div>
+    <div class="domains-wrap">
+      <span class="domain-pill">Développement web & no-code</span>
+      <span class="domain-pill">UX / UI design</span>
+      <span class="domain-pill">Growth & ads</span>
+      <span class="domain-pill">SEO / GEO</span>
+      <span class="domain-pill">Brand content & copywriting</span>
+      <span class="domain-pill">Automatisation & emailing</span>
+      <span class="domain-pill">Prompt engineering & IA</span>
+      <span class="domain-pill">Community management</span>
+    </div>
+  </div>
+</section>
+
+<section class="section-light">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="section-eyebrow">Le process</span>
+      <h2>Une sélection simple, en trois étapes</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h4>Vous candidatez</h4>
+        <p>Quelques informations sur votre expertise, votre expérience et vos disponibilités.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h4>Échange de cooptation</h4>
+        <p>Un appel rapide pour vérifier l'adéquation avec l'esprit du collectif.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h4>Vous rejoignez Qodia</h4>
+        <p>Accès aux missions, aux ressources mutualisées et à la communauté.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-tint">
+  <div class="wrap">
+    <div class="quote-block">
+      <div class="quote-mark">"</div>
+      <p>Un environnement fluide, collaboratif et stimulant — la liberté du freelance, l'entraide d'un collectif.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section-light" id="apply">
+  <div class="wrap">
+    <div class="apply">
+      <div class="apply-inner">
+        <span class="eyebrow"><i class="ti ti-send" aria-hidden="true"></i>Candidature</span>
+        <h2>Postulez pour rejoindre le collectif</h2>
+        <p>Décrivez votre profil — nous revenons vers vous sous 48h pour un premier échange.</p>
+        <form class="form-card" onsubmit="event.preventDefault(); this.querySelector('.form-submit').textContent='Candidature envoyée, merci !'; this.querySelector('.form-submit').style.background='#1FE3D8'; this.querySelector('.form-submit').style.boxShadow='0 3px 0 #0FB5AC'; this.querySelector('.form-submit').style.color='#1A1230';">
+          <div class="form-row">
+            <div class="form-field">
+              <label for="t-name">Nom complet</label>
+              <input type="text" id="t-name" required>
+            </div>
+            <div class="form-field">
+              <label for="t-email">Email</label>
+              <input type="email" id="t-email" required>
+            </div>
+          </div>
+          <div class="form-row single">
+            <div class="form-field">
+              <label for="t-domain">Domaine d'expertise principal</label>
+              <select id="t-domain" required>
+                <option value="">Sélectionnez votre domaine</option>
+                <option>Développement web & no-code</option>
+                <option>UX / UI design</option>
+                <option>Growth & ads</option>
+                <option>SEO / GEO</option>
+                <option>Brand content & copywriting</option>
+                <option>Automatisation & emailing</option>
+                <option>Prompt engineering & IA</option>
+                <option>Community management</option>
+                <option>Autre</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row single">
+            <div class="form-field">
+              <label for="t-link">Portfolio ou profil LinkedIn</label>
+              <input type="text" id="t-link" placeholder="https://...">
+            </div>
+          </div>
+          <button type="submit" class="form-submit">Envoyer ma candidature</button>
+        </form>
+        <p class="form-note">Cooptation ou validation manuelle — réponse sous 48h.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">
+          <svg class="logo-mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="26" height="26">
+            <path d="M15 20 L40 50 L15 80" stroke="#F2375A" stroke-width="11" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M45 20 L70 50 L45 80" stroke="#1FE3D8" stroke-width="11" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M60 20 L85 50 L60 80" stroke="#FFD23F" stroke-width="11" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+          </svg>
+          <span class="logo-text">Qodia</span>
+        </div>
+        <p class="footer-tag">beyond the code</p>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Pour les entreprises</a>
+        <a href="faq.html">FAQ</a>
+        <a href="#apply">Candidater</a>
+        <a href="mailto:qodia.pro@gmail.com">Contact</a>
+        <a href="mentions-legales.html">Mentions légales</a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 Qodia — Un projet porté avec DeLaCrème</div>
+  </div>
+</footer>
+
+</body>
+</html>
