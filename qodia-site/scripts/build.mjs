@@ -1,0 +1,483 @@
+// Qodia : générateur du site statique (Node 18+, sans dépendance).
+// Lit data/*.json, src/pages/*.html et src/blog/*.html, écrit dist/.
+// Les fiches membres viennent de data/members.json, ou du CRM si
+// la variable d'environnement CRM_MEMBERS_URL est définie (voir README).
+import { readFile, writeFile, mkdir, readdir, cp, rm } from "node:fs/promises";
+import { existsSync } from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const DIST = path.join(ROOT, "dist");
+const BUILD_DATE = new Date().toISOString().slice(0, 10);
+
+const esc = (s = "") => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+const slugify = (s) => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/&/g, "et").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+const initials = (name) => {
+  const w = name.replace(/[^A-Za-zÀ-ÿ0-9 ]/g, " ").split(/\s+/).filter(Boolean);
+  if (/^\d/.test(w[0] || "")) return w[0].slice(0, 2);
+  return (w.length > 1 ? w[0][0] + w[1][0] : (w[0] || "Q").slice(0, 2)).toUpperCase();
+};
+const KIND = { agence: "Agence", freelance: "Freelance", employe: "Expert en agence" };
+
+async function json(p) { return JSON.parse(await readFile(path.join(ROOT, p), "utf8")); }
+
+async function loadMembers() {
+  const url = process.env.CRM_MEMBERS_URL;
+  if (url) {
+    try {
+      const headers = process.env.CRM_TOKEN ? { Authorization: `Bearer ${process.env.CRM_TOKEN}` } : {};
+      const r = await fetch(url, { headers });
+      if (!r.ok) throw new Error(`HTTP ${r.status}`);
+      const data = await r.json();
+      console.log(`Membres chargés depuis le CRM (${(data.members || data).length}).`);
+      return data.members || data;
+    } catch (e) {
+      console.warn(`CRM indisponible (${e.message}) : repli sur data/members.json.`);
+    }
+  }
+  return (await json("data/members.json")).members;
+}
+
+const site = await json("data/site.json");
+const FAM = Object.fromEntries(site.families.map((f) => [f.id, f]));
+const members = (await loadMembers()).filter((m) => m.visible !== false).map((m) => ({ ...m, slug: m.slug || slugify(m.name) }));
+const SECTORS = [...new Set(members.flatMap((m) => m.sectors || []))].sort((a, b) => a.localeCompare(b, "fr"));
+const COLORS = { violet: "#350085", rouge: "#FF294A", jaune: "#FFD300", cyan: "#00F3E9" };
+
+/* ------------------------------------------------------------------ */
+/* Éléments communs                                                    */
+/* ------------------------------------------------------------------ */
+const ICON = {
+  arrow: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
+  ext: '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline"><path d="M7 17 17 7M9 7h8v8"/></svg>',
+  search: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>',
+  check: '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5 10 17 19 7"/></svg>',
+  cal: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>'
+};
+
+function head(meta) {
+  const url = site.url + (meta.path === "/" ? "/" : meta.path);
+  const title = meta.path === "/" ? meta.title : `${meta.title} · Qodia`;
+  const og = meta.ogImage || "/assets/img/og-qodia.png";
+  return `<!doctype html>
+<html lang="fr" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${esc(title)}</title>
+<meta name="description" content="${esc(meta.description)}">
+<link rel="canonical" href="${esc(url)}">
+${meta.noindex ? '<meta name="robots" content="noindex">' : ""}
+<meta property="og:type" content="${meta.ogType || "website"}">
+<meta property="og:site_name" content="Qodia">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="${esc(meta.ogTitle || meta.title)}">
+<meta property="og:description" content="${esc(meta.description)}">
+<meta property="og:url" content="${esc(url)}">
+<meta property="og:image" content="${site.url}${og}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#350085">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="/assets/css/qodia.css">
+<script src="/assets/js/config.js"></script>
+<script src="/assets/js/site.js" defer></script>
+${(meta.scripts || []).map((s) => `<script src="${s}" defer></script>`).join("\n")}
+${meta.jsonld ? `<script type="application/ld+json">${JSON.stringify(meta.jsonld)}</script>` : ""}
+</head>
+<body>
+<a class="skip" href="#contenu">Aller au contenu</a>`;
+}
+
+function header(active) {
+  const links = [
+    ["annuaire", "/annuaire", "Explorer le cercle"],
+    ["comment", "/#comment-ca-marche", "Comment ça marche"],
+    ["rejoindre", "/rejoindre", "Rejoindre le cercle"],
+    ["blog", "/blog", "Blog"],
+    ["faq", "/faq", "FAQ"]
+  ];
+  const nav = links.map(([id, href, label]) => `<a href="${href}"${id === active ? ' aria-current="page"' : ""}>${label}</a>`).join("");
+  const mnav = links.map(([, href, label]) => `<a class="mnav" href="${href}">${label}</a>`).join("");
+  return `<header class="site-header">
+  <div class="wrap site-header__inner">
+    <a class="site-header__logo" href="/" aria-label="Qodia, accueil"><img src="/assets/img/qodia-logo.svg" alt="Qodia" width="146" height="28"></a>
+    <nav class="nav" aria-label="Navigation principale">${nav}</nav>
+    <div class="site-header__ctas">
+      <a class="btn btn--secondary btn--sm" href="/#rappel" data-calendly="header">Réserver un appel</a>
+      <a class="btn btn--primary btn--sm" href="/brief">Déposer un brief</a>
+    </div>
+    <button class="burger" type="button" aria-expanded="false" aria-controls="mobile-nav"><span class="bars"></span><span class="sr-only">Menu</span></button>
+  </div>
+  <div class="wrap mobile-nav" id="mobile-nav">
+    <nav aria-label="Navigation mobile">${mnav}</nav>
+    <div class="btns">
+      <a class="btn btn--primary btn--block" href="/brief">Déposer un brief</a>
+      <a class="btn btn--secondary btn--block" href="/#rappel" data-calendly="menu-mobile">Réserver un appel</a>
+    </div>
+  </div>
+</header>`;
+}
+
+function footer() {
+  return `<footer class="site-footer on-brand">
+  <div class="wrap">
+    <div class="site-footer__grid">
+      <div class="site-footer__brand">
+        <img src="/assets/img/qodia-signature-blanc.svg" alt="Qodia, beyond the code" width="190" height="56">
+        <p>Le cercle fermé des spécialistes du branding et du marketing digital. Une initiative DeLaCrème.</p>
+        <p><a href="mailto:${site.email}">${site.email}</a></p>
+      </div>
+      <div>
+        <h2>Clients</h2>
+        <ul>
+          <li><a href="/annuaire">Explorer le cercle</a></li>
+          <li><a href="/brief">Déposer un brief</a></li>
+          <li><a href="/#comment-ca-marche">Comment ça marche</a></li>
+          <li><a href="/#rappel" data-calendly="footer">Réserver un appel</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Membres</h2>
+        <ul>
+          <li><a href="/rejoindre">Rejoindre le cercle</a></li>
+          <li><a href="/faq#membres">FAQ membres</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Qodia</h2>
+        <ul>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="https://www.delacreme.pro" rel="noopener">DeLaCrème</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="site-footer__bottom">
+      <span>© ${new Date().getFullYear()} Qodia, une initiative DeLaCrème</span>
+      <span style="display:flex;gap:20px;flex-wrap:wrap">
+        <a href="/mentions-legales">Mentions légales et CGU</a>
+        <a href="/confidentialite">Confidentialité</a>
+        <a href="/cookies">Cookies</a>
+        <button type="button" class="linklike" data-consent-open>Gérer les cookies</button>
+      </span>
+    </div>
+  </div>
+</footer>
+<div class="consent" id="consent" role="dialog" aria-labelledby="consent-title" aria-describedby="consent-desc" hidden>
+  <h2 id="consent-title">Vos choix de cookies</h2>
+  <p id="consent-desc">Avec votre accord, nous mesurons l'audience du site (Google Analytics) et analysons la navigation de façon anonymisée (Microsoft Clarity) pour l'améliorer. Rien n'est déposé si vous refusez. Vous pouvez changer d'avis à tout moment depuis le pied de page. <a href="/cookies">En savoir plus</a></p>
+  <div class="consent__prefs" hidden>
+    <div class="toggle"><span><strong>Nécessaires</strong><small>Mémorisent votre choix de cookies. Toujours actifs.</small></span><input type="checkbox" checked disabled aria-label="Cookies nécessaires, toujours actifs"></div>
+    <label class="toggle"><span><strong>Mesure d'audience</strong><small>Google Analytics 4 : pages vues, sources de trafic, conversions.</small></span><input type="checkbox" id="consent-ga"></label>
+    <label class="toggle"><span><strong>Analyse de navigation</strong><small>Microsoft Clarity : cartes de clics et sessions anonymisées.</small></span><input type="checkbox" id="consent-clarity"></label>
+  </div>
+  <div class="consent__actions">
+    <button type="button" class="btn btn--secondary" data-consent-refuse>Tout refuser</button>
+    <button type="button" class="btn btn--primary" data-consent-accept>Tout accepter</button>
+    <button type="button" class="btn btn--primary" data-consent-save hidden style="grid-column:1/-1">Enregistrer mes choix</button>
+    <button type="button" class="consent__more" data-consent-more>Personnaliser</button>
+  </div>
+</div>
+</body>
+</html>`;
+}
+
+function page(meta, body) {
+  return `${head(meta)}\n${header(meta.nav)}\n<main id="contenu">\n${body}\n</main>\n${footer()}`;
+}
+
+/* ------------------------------------------------------------------ */
+/* Composants                                                          */
+/* ------------------------------------------------------------------ */
+function avatar(m, size = "") {
+  const cls = `avatar ${size ? "avatar--" + size : ""}`;
+  if (m.logo) return `<span class="${cls} avatar--logo"><img src="${esc(m.logo)}" alt="" loading="lazy"></span>`;
+  if (m.photo) return `<span class="${cls} avatar--photo"><img src="${esc(m.photo)}" alt="" loading="lazy"></span>`;
+  return `<span class="${cls} avatar--${m.color || "violet"}" aria-hidden="true">${esc(initials(m.name))}</span>`;
+}
+function coverStyle(m) { return m.cover ? "" : ` cov--${m.color || "violet"} cov-motif`; }
+const memberUrl = (m) => `/membres/${m.slug}`;
+
+function card(m, headingLevel = "h3") {
+  const refs = (m.references || []).slice(0, 3);
+  const search = [m.name, m.headline, (m.skills || []).join(" "), (m.tools || []).join(" "), (m.sectors || []).join(" "), (m.references || []).join(" "), m.city, FAM[m.family]?.label, KIND[m.kind]].join(" ");
+  return `<article class="card" data-member data-family="${esc(m.family)}" data-kind="${esc(m.kind)}" data-sectors="${esc((m.sectors || []).join("|"))}" data-search="${esc(search)}">
+  <div class="card__cover${coverStyle(m)}">${m.cover ? `<img class="cover-img" src="${esc(m.cover)}" alt="" loading="lazy">` : ""}<span class="badge ${m.color === "violet" ? "badge--light" : "badge--brand"}">${KIND[m.kind] || ""}</span></div>
+  <div class="card__avatar">${avatar(m)}</div>
+  <div class="card__body">
+    <${headingLevel} class="card__name"><a href="${memberUrl(m)}" data-track="click_member_card" data-track-label="${esc(m.name)}">${esc(m.name)}</a></${headingLevel}>
+    <p class="card__meta">${esc([FAM[m.family]?.label, m.city].filter(Boolean).join(" · "))}</p>
+    <p class="card__role">${esc(m.headline)}</p>
+    ${refs.length ? `<div class="card__refs"><span class="label">A travaillé pour</span><p>${esc(refs.join(", "))}</p></div>` : ""}
+  </div>
+</article>`;
+}
+
+function logosGrid() {
+  return `<ul class="logos__grid">${site.brands.map((b) => {
+    const tall = /ffr|lnv|paris-basketball|caves/.test(b.logo);
+    return `<li><img src="${b.logo}" alt="${esc(b.name)}" loading="lazy"${tall ? ' class="is-tall"' : ""}></li>`;
+  }).join("")}</ul>`;
+}
+
+function familyCards() {
+  const dots = ["var(--violet)", "var(--rouge)", "var(--cyan)", "var(--jaune)", "var(--rouge)", "var(--violet)"];
+  return site.families.map((f, i) => {
+    const n = members.filter((m) => m.family === f.id).length;
+    return `<a class="family" href="/annuaire?expertise=${f.id}"><span class="family__dot" style="background:${dots[i]}" aria-hidden="true"></span><h3>${esc(f.label)}</h3><p>${esc(f.desc)}</p><span class="family__count">${n ? `${n} ${n > 1 ? "membres visibles" : "membre visible"}` : "Sur brief"}</span></a>`;
+  }).join("");
+}
+
+function callbackForm(id = "rappel") {
+  return `<form class="form" data-lead-form="rappel" action="/api/lead" method="post" novalidate><input type="hidden" name="form_type" value="rappel">
+  <div class="form__success" role="status">
+    <div class="form__success-icon">${ICON.check}</div>
+    <h3>C'est noté, on vous rappelle.</h3>
+    <p class="muted">Un membre de l'équipe vous appelle aujourd'hui, ou le prochain jour ouvré si votre demande arrive après 17 h.</p>
+  </div>
+  <h3>Être rappelé aujourd'hui</h3>
+  <div class="row">
+    <div class="field"><label class="field__label" for="${id}-prenom">Prénom et nom</label><input class="field__input" id="${id}-prenom" name="nom" autocomplete="name" required><span class="field__error"></span></div>
+    <div class="field"><label class="field__label" for="${id}-tel">Téléphone</label><input class="field__input" id="${id}-tel" name="telephone" type="tel" autocomplete="tel" required pattern="[0-9 +\-\.\(\)]{8,20}" data-msg-pattern="Indiquez un numéro de téléphone, par exemple 06 12 34 56 78."><span class="field__error"></span></div>
+  </div>
+  <div class="row">
+    <div class="field"><label class="field__label" for="${id}-societe">Entreprise <span class="opt">(facultatif)</span></label><input class="field__input" id="${id}-societe" name="entreprise" autocomplete="organization"></div>
+    <div class="field"><label class="field__label" for="${id}-creneau">Le meilleur moment</label><select class="field__input" id="${id}-creneau" name="creneau"><option>Dès que possible</option><option>Ce matin</option><option>Cet après-midi</option><option>En fin de journée</option></select></div>
+  </div>
+  <div class="field"><label class="field__label" for="${id}-sujet">En une phrase, votre besoin <span class="opt">(facultatif)</span></label><input class="field__input" id="${id}-sujet" name="message" maxlength="300"></div>
+  <div class="hp" aria-hidden="true"><label>Ne pas remplir <input name="website" tabindex="-1" autocomplete="off"></label></div>
+  <p class="form__status" aria-live="polite"></p>
+  <button class="btn btn--primary btn--block" type="submit">Être rappelé ${ICON.arrow}</button>
+  <p class="form__legal">Vos coordonnées servent uniquement à vous rappeler et à suivre votre demande. <a href="/confidentialite">Confidentialité</a></p>
+</form>`;
+}
+
+function blogArt(seed, color) {
+  // Illustration abstraite tirée du symbole Qodia (chevrons), unique par article
+  const pal = [COLORS.rouge, COLORS.jaune, COLORS.cyan];
+  const bg = COLORS[color] || COLORS.violet;
+  let s = 0; for (const c of seed) s = (s * 31 + c.charCodeAt(0)) >>> 0;
+  const rnd = () => ((s = (s * 1664525 + 1013904223) >>> 0) / 4294967296);
+  let shapes = "";
+  for (let i = 0; i < 5; i++) {
+    const x = 40 + rnd() * 520, y = 20 + rnd() * 300, k = 0.5 + rnd() * 0.9;
+    const c = pal[(i + Math.floor(rnd() * 3)) % 3] === bg ? COLORS.violet : pal[(i + Math.floor(rnd() * 3)) % 3];
+    shapes += `<path transform="translate(${x.toFixed(0)} ${y.toFixed(0)}) scale(${k.toFixed(2)})" d="M0 0 L60 60 L0 120 L-22 98 L16 60 L-22 22 Z" fill="${c}"/>`;
+  }
+  return `<svg viewBox="0 0 640 400" preserveAspectRatio="xMidYMid slice" role="img" aria-hidden="true"><rect width="640" height="400" fill="${bg}"/>${shapes}</svg>`;
+}
+
+/* ------------------------------------------------------------------ */
+/* Blog                                                                */
+/* ------------------------------------------------------------------ */
+function parseMeta(src) {
+  const m = src.match(/^<!--meta\s*([\s\S]*?)-->\s*/);
+  if (!m) return [{}, src];
+  return [JSON.parse(m[1]), src.slice(m[0].length)];
+}
+const fmtDate = (d) => new Date(d + "T12:00:00").toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" });
+
+const posts = [];
+for (const f of (await readdir(path.join(ROOT, "src/blog"))).filter((f) => f.endsWith(".html"))) {
+  const [meta, body] = parseMeta(await readFile(path.join(ROOT, "src/blog", f), "utf8"));
+  posts.push({ ...meta, slug: f.replace(/\.html$/, ""), body });
+}
+posts.sort((a, b) => b.date.localeCompare(a.date));
+
+function postCard(p) {
+  return `<a class="post-card" href="/blog/${p.slug}"><div class="post-card__media">${blogArt(p.slug, p.color)}</div><span class="label">${esc(p.category)} · ${fmtDate(p.date)}</span><h3>${esc(p.title)}</h3><p>${esc(p.excerpt)}</p></a>`;
+}
+
+/* ------------------------------------------------------------------ */
+/* Fiche membre                                                        */
+/* ------------------------------------------------------------------ */
+function memberPage(m) {
+  const fam = FAM[m.family];
+  const others = members.filter((o) => o.slug !== m.slug).sort((a, b) => (b.family === m.family) - (a.family === m.family)).slice(0, 3);
+  const refLogos = m.referenceLogos || {};
+  const site_ = m.website ? `<a href="${esc(m.website)}" rel="noopener" target="_blank" data-track="click_member_website" data-track-label="${esc(m.name)}">${esc(m.website.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, ""))} ${ICON.ext}</a>` : "";
+  const projects = (m.projects || []).filter((p) => p.image);
+  const brief = (mode) => `/brief?membre=${m.slug}&mode=${mode}`;
+  const jsonld = {
+    "@context": "https://schema.org",
+    "@type": m.kind === "agence" ? "Organization" : "Person",
+    name: m.name, description: m.headline, url: site.url + memberUrl(m),
+    ...(m.website ? { sameAs: [m.website] } : {}),
+    ...(m.kind === "agence" ? {} : { jobTitle: m.headline })
+  };
+  const body = `
+<div class="profile-cover${coverStyle(m)}">${m.cover ? `<img class="cover-img" src="${esc(m.cover)}" alt="">` : ""}</div>
+<div class="wrap">
+  <div class="profile-head">
+    ${avatar(m, "lg")}
+    <div class="profile-head__text">
+      <div style="display:flex;gap:8px;flex-wrap:wrap"><span class="badge badge--brand">Membre du cercle</span><span class="badge badge--neutral">${KIND[m.kind]}</span></div>
+      <h1 class="display">${esc(m.name)}</h1>
+      <p class="profile-head__meta"><span>${esc(m.headline)}</span>${m.city ? `<span>${esc(m.city)}</span>` : ""}${site_}</p>
+    </div>
+  </div>
+  <ol class="crumbs" aria-label="Fil d'Ariane"><li><a href="/annuaire">Le cercle</a></li><li><a href="/annuaire?expertise=${m.family}">${esc(fam?.label || "")}</a></li><li aria-current="page">${esc(m.name)}</li></ol>
+  <div class="profile" style="padding-top:var(--space-4)">
+    <div class="profile__main">
+      <section aria-labelledby="apropos">
+        <h2 class="h2" id="apropos">À propos</h2>
+        <div class="prose">${(m.bio || []).map((p) => `<p>${esc(p)}</p>`).join("")}</div>
+        ${(m.skills || []).length ? `<ul class="tags" aria-label="Expertises">${m.skills.map((s) => `<li class="tag tag--static">${esc(s)}</li>`).join("")}</ul>` : ""}
+        ${(m.tools || []).length ? `<p class="small muted">Outils : ${esc(m.tools.join(", "))}</p>` : ""}
+      </section>
+
+      <section aria-labelledby="realisations">
+        <div class="section-head" style="margin:0"><h2 class="h2" id="realisations">Réalisations</h2>${m.portfolio ? `<a class="link-arrow" href="${esc(m.portfolio)}" rel="noopener" target="_blank" data-track="click_member_portfolio" data-track-label="${esc(m.name)}">Tout le portfolio ${ICON.ext}</a>` : ""}</div>
+        ${projects.length ? `<div class="projects">${projects.map((p) => `<figure class="project" style="margin:0"><div class="project__media"><img src="${esc(p.image)}" alt="${esc(p.title)}" loading="lazy"></div><figcaption><span class="label">${esc([p.client, p.discipline].filter(Boolean).join(" · "))}</span><p class="project__title">${esc(p.title)}</p></figcaption></figure>`).join("")}</div>`
+        : `<div class="portfolio-cta"><span class="avatar avatar--${m.color || "violet"}" aria-hidden="true">${ICON.arrow}</span><div><p style="font-weight:600;color:var(--ink-brand)">Les projets de ${esc(m.name)} arrivent bientôt sur cette fiche.</p><p class="small muted">${m.portfolio || m.website ? "En attendant, le portfolio complet est en ligne." : "Demandez une sélection de réalisations lors de la mise en relation."}</p></div>${m.portfolio || m.website ? `<a class="btn btn--secondary btn--sm" href="${esc(m.portfolio || m.website)}" rel="noopener" target="_blank" data-track="click_member_portfolio" data-track-label="${esc(m.name)}">Voir le portfolio</a>` : ""}</div>`}
+      </section>
+
+      ${(m.references || []).length ? `<section aria-labelledby="refs">
+        <h2 class="h2" id="refs">${m.kind === "freelance" ? "Ils lui ont fait confiance" : "Ils leur ont fait confiance"}</h2>
+        <ul class="refs">${m.references.map((r) => `<li>${refLogos[r] ? `<img src="${esc(refLogos[r])}" alt="${esc(r)}" loading="lazy">` : esc(r)}</li>`).join("")}</ul>
+        ${m.referencesNote ? `<p class="muted">${esc(m.referencesNote)}</p>` : ""}
+        <p class="small muted">Références publiées par ${esc(m.name)}.</p>
+      </section>` : ""}
+
+      <section aria-labelledby="avis">
+        <h2 class="h2" id="avis">Avis clients</h2>
+        ${(m.reviews || []).length ? m.reviews.map((r) => `<blockquote class="reviews-empty" style="margin:0"><p>« ${esc(r.text)} »</p><p class="small muted">${esc(r.author)}${r.company ? ", " + esc(r.company) : ""} · mission ${esc(r.date || "")}</p></blockquote>`).join("")
+        : `<div class="reviews-empty"><p style="font-weight:600;color:var(--ink-brand)">Les premiers avis arrivent après la première mission Qodia.</p><p class="small muted">Chaque avis est recueilli par Qodia auprès du client en fin de mission, jamais auprès du membre.</p></div>`}
+      </section>
+    </div>
+
+    <aside class="side" aria-label="Contacter ${esc(m.name)}">
+      <div class="contact-box on-brand">
+        <h2>Travailler avec ${esc(m.name)}</h2>
+        <fieldset class="choices">
+          <legend class="sr-only">Comment voulez-vous collaborer ?</legend>
+          <label class="choice"><input type="radio" name="mode-${m.slug}" value="mise-en-relation" checked data-href="${brief("mise-en-relation")}"><strong>Je travaille en direct</strong><span>Qodia vous présente, vous pilotez la mission.</span></label>
+          <label class="choice"><input type="radio" name="mode-${m.slug}" value="pilote" data-href="${brief("pilote")}"><strong>Qodia pilote le projet</strong><span>Un interlocuteur, une seule facture.</span></label>
+        </fieldset>
+        <a class="btn btn--accent btn--block" id="contact-cta" href="${brief("mise-en-relation")}" data-track="contact_member" data-track-label="${esc(m.name)}">Être mis en relation ${ICON.arrow}</a>
+        <p class="small" style="color:var(--on-brand-muted)">On vous rappelle dans la journée pour cadrer le besoin.</p>
+      </div>
+      <div class="facts"><dl>
+        <div><dt>Type</dt><dd>${KIND[m.kind]}</dd></div>
+        <div><dt>Expertise</dt><dd>${esc(fam?.label || "")}</dd></div>
+        ${m.city ? `<div><dt>Basé à</dt><dd>${esc(m.city)}</dd></div>` : ""}
+        ${(m.sectors || []).length ? `<div><dt>Secteurs</dt><dd>${esc(m.sectors.join(", "))}</dd></div>` : ""}
+        ${m.budget ? `<div><dt>Budget indicatif</dt><dd>${esc(m.budget)}</dd></div>` : ""}
+        <div><dt>Réponse</dt><dd>Dans la journée</dd></div>
+      </dl></div>
+      ${m.qodiaNote ? `<div class="reviews-empty"><span class="label">Le mot de Qodia</span><p>${esc(m.qodiaNote)}</p></div>` : ""}
+    </aside>
+  </div>
+</div>
+
+<section class="section section--alt">
+  <div class="wrap">
+    <div class="section-head"><div><span class="label">À découvrir aussi dans le cercle</span><h2 class="h2">D'autres membres à connaître.</h2></div><a class="link-arrow" href="/annuaire">Explorer tout le cercle ${ICON.arrow}</a></div>
+    <div class="cards">${others.map((o) => card(o)).join("")}</div>
+  </div>
+</section>
+<section class="brand-band cta-band">
+  <div class="brand-band__motif" aria-hidden="true"></div>
+  <div class="wrap stack-6" style="max-width:var(--wrap)">
+    <h2 class="display" style="max-width:720px">Un projet en tête ? Parlons-en aujourd'hui.</h2>
+    <div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn btn--accent" href="${brief("mise-en-relation")}" data-track="contact_member" data-track-label="${esc(m.name)}">Être mis en relation avec ${esc(m.name)}</a><a class="btn btn--ghost-light" href="/#rappel" data-calendly="fiche-membre">Réserver un appel</a></div>
+  </div>
+</section>
+<script>
+document.querySelectorAll('input[name="mode-${m.slug}"]').forEach(function(r){r.addEventListener('change',function(){var a=document.getElementById('contact-cta');a.href=r.dataset.href;a.firstChild.textContent=r.value==='pilote'?'Confier le projet à Qodia ':'Être mis en relation ';});});
+</script>`;
+  return page({
+    title: `${m.name}, ${m.headline.charAt(0).toLowerCase() + m.headline.slice(1)}`.slice(0, 90),
+    ogTitle: `${m.name} · membre du cercle Qodia`,
+    description: `${m.name} (${KIND[m.kind].toLowerCase()}${m.city ? ", " + m.city : ""}) : ${m.headline}. Membre du cercle Qodia, mise en relation sous 24 h.`.slice(0, 160),
+    path: memberUrl(m), nav: "annuaire", ogType: "profile", jsonld
+  }, body);
+}
+
+/* ------------------------------------------------------------------ */
+/* Directives des pages                                                */
+/* ------------------------------------------------------------------ */
+const opts = (arr, sel) => arr.map(([v, l]) => `<option value="${esc(v)}"${v === sel ? " selected" : ""}>${esc(l)}</option>`).join("");
+const directives = {
+  "logos": () => logosGrid(),
+  "cards-featured": () => members.filter((m) => m.featured).slice(0, 6).map((m) => card(m)).join(""),
+  "cards-all": () => members.map((m) => card(m, "h2")).join(""),
+  "member-count": () => String(members.length),
+  "families": () => familyCards(),
+  "family-options": () => opts(site.families.map((f) => [f.id, f.label])),
+  "sector-options": () => opts(SECTORS.map((s) => [s, s])),
+  "sector-tags": () => SECTORS.map((s) => `<a class="tag" href="/annuaire?secteur=${encodeURIComponent(s)}">${esc(s)}</a>`).join(""),
+  "family-chips": () => site.families.map((f) => `<label class="chip"><input type="checkbox" name="expertises" value="${f.id}" data-multi><span>${esc(f.label)}</span></label>`).join(""),
+  "member-options": () => opts(members.map((m) => [m.slug, m.name])),
+  "posts-3": () => posts.slice(0, 3).map(postCard).join(""),
+  "posts-all": () => posts.map(postCard).join(""),
+  "callback-form": () => callbackForm(),
+  "icon-arrow": () => ICON.arrow,
+  "icon-search": () => ICON.search,
+  "icon-check": () => ICON.check,
+  "email": () => site.email,
+  "build-date": () => fmtDate(BUILD_DATE)
+};
+function render(src) {
+  return src.replace(/<!--@([a-z0-9-]+)-->/g, (all, name) => {
+    if (!directives[name]) throw new Error(`Directive inconnue : ${name}`);
+    return directives[name]();
+  });
+}
+
+/* ------------------------------------------------------------------ */
+/* Écriture                                                            */
+/* ------------------------------------------------------------------ */
+async function out(rel, html) {
+  const file = path.join(DIST, rel);
+  await mkdir(path.dirname(file), { recursive: true });
+  await writeFile(file, html);
+}
+
+await rm(DIST, { recursive: true, force: true });
+await mkdir(DIST, { recursive: true });
+await cp(path.join(ROOT, "static"), DIST, { recursive: true });
+
+const urls = [];
+for (const f of (await readdir(path.join(ROOT, "src/pages"))).filter((f) => f.endsWith(".html"))) {
+  const [meta, body] = parseMeta(await readFile(path.join(ROOT, "src/pages", f), "utf8"));
+  const name = f.replace(/\.html$/, "");
+  meta.path = meta.path || (name === "index" ? "/" : "/" + name);
+  await out(`${name}.html`, page(meta, render(body)));
+  if (!meta.noindex) urls.push(meta.path);
+}
+for (const m of members) { await out(`membres/${m.slug}.html`, memberPage(m)); urls.push(memberUrl(m)); }
+
+for (const p of posts) {
+  const more = posts.filter((o) => o.slug !== p.slug).slice(0, 2);
+  const body = `
+<article>
+  <header class="article-head"><div class="wrap"><div class="article-head__inner">
+    <ol class="crumbs" style="padding:0" aria-label="Fil d'Ariane"><li><a href="/blog">Blog</a></li><li>${esc(p.category)}</li></ol>
+    <h1 class="h1" style="font-size:clamp(32px,5vw,48px)">${esc(p.title)}</h1>
+    <p class="lead">${esc(p.excerpt)}</p>
+    <p class="label">${fmtDate(p.date)} · ${esc(p.readingTime || "")} · L'équipe Qodia</p>
+  </div></div></header>
+  <div class="wrap"><div class="article-cover">${blogArt(p.slug, p.color)}</div></div>
+  <div class="wrap wrap--narrow rich">${render(p.body)}</div>
+</article>
+<section class="section"><div class="wrap wrap--narrow"><div class="join"><div class="stack-2"><h2 class="h2">Besoin du bon expert ?</h2><p>Déposez un brief en cinq minutes : on vous rappelle dans la journée avec une sélection de membres du cercle.</p></div><a class="btn btn--primary" href="/brief">Déposer un brief</a></div></div></section>
+<section class="section section--alt"><div class="wrap"><div class="section-head"><h2 class="h2">À lire aussi</h2><a class="link-arrow" href="/blog">Tous les articles ${ICON.arrow}</a></div><div class="grid grid--2">${more.map(postCard).join("")}</div></div></section>`;
+  await out(`blog/${p.slug}.html`, page({
+    title: p.title, description: p.excerpt, path: `/blog/${p.slug}`, nav: "blog", ogType: "article",
+    jsonld: { "@context": "https://schema.org", "@type": "BlogPosting", headline: p.title, description: p.excerpt, datePublished: p.date, author: { "@type": "Organization", name: "Qodia" }, publisher: { "@type": "Organization", name: "Qodia" }, mainEntityOfPage: site.url + `/blog/${p.slug}` }
+  }, body));
+  urls.push(`/blog/${p.slug}`);
+}
+
+await out("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `  <url><loc>${site.url}${u === "/" ? "/" : u}</loc><lastmod>${BUILD_DATE}</lastmod></url>`).join("\n")}\n</urlset>\n`);
+await out("robots.txt", `User-agent: *\nAllow: /\nDisallow: /api/\n\nSitemap: ${site.url}/sitemap.xml\n`);
+await out("data/members.json", JSON.stringify({ generated: BUILD_DATE, members: members.map(({ slug, name, kind, family, headline, city, sectors, skills, logo, photo, color }) => ({ slug, name, kind, family, headline, city, sectors, skills, logo, photo, color, url: memberUrl({ slug }) })) }, null, 2));
+
+console.log(`Site généré dans dist/ : ${urls.length} pages, ${members.length} membres, ${posts.length} articles.`);

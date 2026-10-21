@@ -1,0 +1,92 @@
+<!--meta {
+  "title": "Rejoindre le cercle : freelances et agences du digital",
+  "description": "Freelance, agence ou expert en agence : rejoignez le cercle Qodia. Des missions qualifiées sans prospection, au sein d'un réseau de pairs choisis un par un.",
+  "nav": "rejoindre"
+} -->
+<section class="brand-band hero" aria-labelledby="join-hero">
+  <div class="brand-band__motif" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="hero__content">
+      <span class="badge badge--light" style="justify-self:start">Cooptation et sélection</span>
+      <h1 class="display-xl" id="join-hero">Rejoindre le cercle Qodia.</h1>
+      <p class="hero__lead">Des missions qualifiées, sans prospection, au sein d'un réseau de pairs. Pour les freelances, les agences et les experts qui y travaillent.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn btn--accent" href="#candidature">Candidater <!--@icon-arrow--></a><a class="btn btn--ghost-light" href="/faq#membres">Questions fréquentes</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="why-join">
+  <div class="wrap">
+    <div class="section-head"><div><span class="label">Ce que le cercle vous apporte</span><h2 class="display" id="why-join">Moins de prospection, de meilleurs projets.</h2></div></div>
+    <div class="grid grid--3">
+      <div class="reason"><h3>Des demandes déjà qualifiées</h3><p>Chaque brief est lu et cadré par l'équipe avant de vous être présenté : budget, délai, interlocuteur. Vous ne recevez que ce qui correspond à votre expertise.</p></div>
+      <div class="reason"><h3>Une vitrine soignée</h3><p>Une fiche à votre image, avec vos réalisations, vos références et les avis recueillis par Qodia après chaque mission.</p></div>
+      <div class="reason"><h3>Des projets à plusieurs</h3><p>Les projets pilotés réunissent plusieurs membres du cercle. Une façon de travailler avec des pairs que vous n'auriez pas croisés seul.</p></div>
+    </div>
+    <div class="grid grid--3 mt-8">
+      <div class="reason"><h3>Aucune exclusivité</h3><p>Vous gardez vos clients, vos tarifs et votre statut. Vous acceptez ou déclinez chaque mission.</p></div>
+      <div class="reason"><h3>Le réseau DeLaCrème</h3><p>Le cercle s'appuie sur une agence active depuis 2015 et sur ses clients, dans le sport, la santé, le luxe ou l'industrie.</p></div>
+      <div class="reason"><h3>Un modèle simple</h3><p>Pas d'abonnement. Qodia se rémunère uniquement sur les missions qu'elle apporte, selon une charte présentée lors de l'entretien.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt" aria-labelledby="process">
+  <div class="wrap">
+    <div class="section-head"><div><span class="label">Le processus</span><h2 class="display" id="process">Trois étapes, deux semaines environ.</h2></div></div>
+    <div class="grid grid--3">
+      <div class="mode"><span class="mode__num">01</span><h3 class="h3">Vous candidatez</h3><p class="muted">Votre activité, vos références, votre portfolio. Si un membre vous recommande, dites-le : la cooptation accélère tout.</p></div>
+      <div class="mode"><span class="mode__num">02</span><h3 class="h3">On se rencontre</h3><p class="muted">Un échange avec l'équipe pour parler de vos projets, de votre façon de travailler et de vos disponibilités.</p></div>
+      <div class="mode"><span class="mode__num">03</span><h3 class="h3">Votre fiche est publiée</h3><p class="muted">Après vérification de vos documents (Kbis ou SIRET, attestation URSSAF, charte signée), votre fiche rejoint le cercle.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="candidature" aria-labelledby="apply-title">
+  <div class="wrap" style="max-width:860px">
+    <div class="stack-4" style="margin-bottom:var(--space-8)">
+      <span class="label">Candidature</span>
+      <h2 class="display" id="apply-title">Présentez-vous.</h2>
+      <p class="lead">Nous répondons à chaque candidature sous dix jours ouvrés.</p>
+    </div>
+    <div class="form-card" style="box-shadow:none;border:1px solid var(--line)">
+      <form class="form" data-lead-form="candidature" action="/api/lead" method="post" novalidate><input type="hidden" name="form_type" value="candidature">
+        <div class="form__success" role="status">
+          <div class="form__success-icon"><!--@icon-check--></div>
+          <h3 class="h2">Candidature reçue, merci.</h3>
+          <p class="lead">Nous l'étudions et revenons vers vous sous dix jours ouvrés pour organiser un premier échange.</p>
+        </div>
+        <fieldset class="choices choices--3">
+          <legend>Vous êtes</legend>
+          <label class="choice"><input type="radio" name="statut" value="freelance" required data-msg-required="Indiquez votre statut."><strong>Freelance</strong></label>
+          <label class="choice"><input type="radio" name="statut" value="agence"><strong>Une agence</strong></label>
+          <label class="choice"><input type="radio" name="statut" value="employe"><strong>Expert en agence</strong><span>Vous travaillez dans une agence membre</span></label>
+          <span class="field__error" style="grid-column:1/-1"></span>
+        </fieldset>
+        <div class="row">
+          <div class="field"><label class="field__label" for="c-nom">Prénom et nom</label><input class="field__input" id="c-nom" name="nom" autocomplete="name" required><span class="field__error"></span></div>
+          <div class="field"><label class="field__label" for="c-structure">Agence ou nom commercial <span class="opt">(facultatif)</span></label><input class="field__input" id="c-structure" name="structure" autocomplete="organization"></div>
+        </div>
+        <div class="row">
+          <div class="field"><label class="field__label" for="c-email">E-mail</label><input class="field__input" id="c-email" name="email" type="email" autocomplete="email" required><span class="field__error"></span></div>
+          <div class="field"><label class="field__label" for="c-tel">Téléphone <span class="opt">(facultatif)</span></label><input class="field__input" id="c-tel" name="telephone" type="tel" autocomplete="tel" pattern="[0-9 +\-\.\(\)]{8,20}" data-msg-pattern="Indiquez un numéro de téléphone, par exemple 06 12 34 56 78."><span class="field__error"></span></div>
+        </div>
+        <div class="row">
+          <div class="field"><label class="field__label" for="c-famille">Expertise principale</label><select class="field__input" id="c-famille" name="expertise" required data-msg-required="Choisissez votre expertise principale."><option value="">Choisir…</option><!--@family-options--><option value="autre">Autre</option></select><span class="field__error"></span></div>
+          <div class="field"><label class="field__label" for="c-ville">Ville</label><input class="field__input" id="c-ville" name="ville" autocomplete="address-level2" required><span class="field__error"></span></div>
+        </div>
+        <div class="field"><label class="field__label" for="c-metier">Votre métier en une ligne</label><input class="field__input" id="c-metier" name="metier" required maxlength="140" placeholder="Ex. : Motion designer, spécialiste des formats courts pour le sport"><span class="field__error"></span></div>
+        <div class="row">
+          <div class="field"><label class="field__label" for="c-portfolio">Portfolio ou site</label><input class="field__input" id="c-portfolio" name="portfolio" type="url" placeholder="https://" required inputmode="url"><span class="field__error"></span></div>
+          <div class="field"><label class="field__label" for="c-linkedin">LinkedIn <span class="opt">(facultatif)</span></label><input class="field__input" id="c-linkedin" name="linkedin" type="url" placeholder="https://www.linkedin.com/in/…" inputmode="url"><span class="field__error"></span></div>
+        </div>
+        <div class="field"><label class="field__label" for="c-refs">Trois clients ou projets dont vous êtes fier <span class="opt">(facultatif)</span></label><textarea class="field__input" id="c-refs" name="references" maxlength="1500" style="min-height:100px"></textarea></div>
+        <div class="field"><label class="field__label" for="c-parrain">Qui vous recommande ? <span class="opt">(facultatif)</span></label><input class="field__input" id="c-parrain" name="parrain" placeholder="Un membre du cercle ou de l'équipe DeLaCrème"></div>
+        <div class="hp" aria-hidden="true"><label>Ne pas remplir <input name="website" tabindex="-1" autocomplete="off"></label></div>
+        <p class="form__status" aria-live="polite"></p>
+        <p class="form__legal">Vos informations servent uniquement à étudier votre candidature. Sans suite, elles sont supprimées au bout de deux ans. <a href="/confidentialite">Politique de confidentialité</a></p>
+        <button class="btn btn--primary" type="submit" style="justify-self:start">Envoyer ma candidature <!--@icon-arrow--></button>
+      </form>
+    </div>
+  </div>
+</section>

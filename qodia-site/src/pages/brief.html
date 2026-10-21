@@ -1,0 +1,120 @@
+<!--meta {
+  "title": "Déposer un brief",
+  "description": "Décrivez votre projet en cinq minutes. Qodia vous rappelle dans la journée avec une sélection d'experts du cercle, ou compose et pilote l'équipe pour vous.",
+  "nav": "brief",
+  "scripts": ["/assets/js/brief.js"]
+} -->
+<section class="brand-band" style="padding:var(--space-16) 0 160px">
+  <div class="brand-band__motif" aria-hidden="true"></div>
+  <div class="wrap stack-4" style="max-width:var(--wrap)">
+    <span class="label">Déposer un brief</span>
+    <h1 class="display" style="max-width:760px">Parlez-nous de votre projet.</h1>
+    <p class="lead" style="max-width:620px">Cinq minutes, quatre étapes. Un membre de l'équipe lit chaque brief et vous rappelle dans la journée.</p>
+  </div>
+</section>
+<section style="position:relative;z-index:1;margin-top:-120px;padding-bottom:var(--space-24)">
+  <div class="wrap" style="max-width:860px">
+    <div class="form-card">
+      <ol class="steps-nav" aria-label="Étapes du brief">
+        <li class="is-current"><span>Le projet</span></li>
+        <li><span>Le besoin</span></li>
+        <li><span>Le cadre</span></li>
+        <li><span>Vos coordonnées</span></li>
+      </ol>
+      <form class="form" id="brief-form" data-lead-form="brief" action="/api/lead" method="post" novalidate><input type="hidden" name="form_type" value="brief">
+        <div class="form__success" role="status">
+          <div class="form__success-icon"><!--@icon-check--></div>
+          <h2 class="h2">Brief reçu, merci.</h2>
+          <p class="lead">Nous le lisons et revenons vers vous dans la journée (le prochain jour ouvré si vous écrivez le soir ou le week-end).</p>
+          <a class="btn btn--primary" href="#" data-calendly-prefill hidden>Choisir mon créneau d'appel</a>
+          <a class="link-arrow" href="/annuaire">En attendant, explorer le cercle <!--@icon-arrow--></a>
+        </div>
+
+        <p id="brief-context" class="badge badge--cyan" hidden></p>
+
+        <fieldset class="step is-active" style="border:0;padding:0;margin:0">
+          <h2 class="h3">Comment voulez-vous travailler ?</h2>
+          <div class="choices choices--2">
+            <label class="choice"><input type="radio" name="mode" value="pilote" required data-msg-required="Choisissez une façon de travailler."><strong>Qodia pilote mon projet</strong><span>On compose l'équipe dans le cercle et on la coordonne. Un interlocuteur, une seule facture.</span></label>
+            <label class="choice"><input type="radio" name="mode" value="mise-en-relation"><strong>Je veux être mis en relation</strong><span>On vous présente le bon membre, vous pilotez la mission en direct.</span></label>
+            <label class="choice" style="grid-column:1/-1"><input type="radio" name="mode" value="conseil"><strong>Je ne sais pas encore</strong><span>On en parle au téléphone et on vous conseille.</span></label>
+            <span class="field__error" style="grid-column:1/-1"></span>
+          </div>
+          <div class="field" id="member-wrap" hidden>
+            <label class="field__label" for="b-membre">Un membre en particulier ? <span class="opt">(facultatif)</span></label>
+            <select class="field__input" id="b-membre" name="membre"><option value="">Pas de préférence : proposez-moi des profils</option><!--@member-options--></select>
+          </div>
+          <div class="step__actions"><span></span><button class="btn btn--primary js-only" type="button" data-next>Continuer <!--@icon-arrow--></button></div>
+        </fieldset>
+
+        <fieldset class="step" style="border:0;padding:0;margin:0">
+          <h2 class="h3">De quoi avez-vous besoin ?</h2>
+          <div class="field">
+            <span class="field__label" id="exp-label">Expertises recherchées <span class="opt">(plusieurs choix possibles)</span></span>
+            <div class="chips" role="group" aria-labelledby="exp-label"><!--@family-chips--></div>
+          </div>
+          <div class="field">
+            <label class="field__label" for="b-desc">Votre projet en quelques lignes</label>
+            <textarea class="field__input" id="b-desc" name="description" required minlength="30" maxlength="4000" placeholder="Le contexte, ce que vous voulez obtenir, ce qui existe déjà (site, marque, campagnes)…" data-msg-required="Décrivez votre projet en quelques lignes."></textarea>
+            <span class="field__hint">Pas besoin d'un cahier des charges : trois ou quatre phrases suffisent.</span>
+            <span class="field__error"></span>
+          </div>
+          <div class="row">
+            <div class="field"><label class="field__label" for="b-secteur">Votre secteur <span class="opt">(facultatif)</span></label><input class="field__input" id="b-secteur" name="secteur" list="sectors" placeholder="Sport, santé, mode…"><datalist id="sectors"><!--@sector-options--></datalist></div>
+            <div class="field"><label class="field__label" for="b-site">Votre site actuel <span class="opt">(facultatif)</span></label><input class="field__input" id="b-site" name="site" type="url" placeholder="https://" inputmode="url"><span class="field__error"></span></div>
+          </div>
+          <div class="step__actions"><button class="btn btn--secondary js-only" type="button" data-prev>Retour</button><button class="btn btn--primary js-only" type="button" data-next>Continuer <!--@icon-arrow--></button></div>
+        </fieldset>
+
+        <fieldset class="step" style="border:0;padding:0;margin:0">
+          <h2 class="h3">Le cadre du projet</h2>
+          <fieldset class="choices choices--3">
+            <legend>Budget envisagé</legend>
+            <label class="choice"><input type="radio" name="budget" value="Moins de 5 000 €" required data-msg-required="Choisissez une fourchette, même approximative."><strong>Moins de 5 k€</strong></label>
+            <label class="choice"><input type="radio" name="budget" value="5 000 à 15 000 €"><strong>5 à 15 k€</strong></label>
+            <label class="choice"><input type="radio" name="budget" value="15 000 à 50 000 €"><strong>15 à 50 k€</strong></label>
+            <label class="choice"><input type="radio" name="budget" value="Plus de 50 000 €"><strong>Plus de 50 k€</strong></label>
+            <label class="choice" style="grid-column:span 2"><input type="radio" name="budget" value="À définir ensemble"><strong>À définir ensemble</strong></label>
+            <span class="field__error" style="grid-column:1/-1"></span>
+          </fieldset>
+          <fieldset class="choices choices--2">
+            <legend>Pour quand ?</legend>
+            <label class="choice"><input type="radio" name="delai" value="Urgent, moins d'un mois" required data-msg-required="Indiquez un horizon."><strong>Urgent</strong><span>Démarrage sous un mois</span></label>
+            <label class="choice"><input type="radio" name="delai" value="Dans 1 à 3 mois"><strong>Dans 1 à 3 mois</strong></label>
+            <label class="choice"><input type="radio" name="delai" value="Plus tard"><strong>Plus tard</strong><span>Je prépare le terrain</span></label>
+            <label class="choice"><input type="radio" name="delai" value="Mission récurrente"><strong>En continu</strong><span>Un besoin récurrent</span></label>
+            <span class="field__error" style="grid-column:1/-1"></span>
+          </fieldset>
+          <div class="step__actions"><button class="btn btn--secondary js-only" type="button" data-prev>Retour</button><button class="btn btn--primary js-only" type="button" data-next>Continuer <!--@icon-arrow--></button></div>
+        </fieldset>
+
+        <fieldset class="step" id="etape-4" style="border:0;padding:0;margin:0">
+          <h2 class="h3">Comment vous joindre ?</h2>
+          <div class="row">
+            <div class="field"><label class="field__label" for="b-prenom">Prénom</label><input class="field__input" id="b-prenom" name="prenom" autocomplete="given-name" required><span class="field__error"></span></div>
+            <div class="field"><label class="field__label" for="b-nom">Nom</label><input class="field__input" id="b-nom" name="nom" autocomplete="family-name" required><span class="field__error"></span></div>
+          </div>
+          <div class="row">
+            <div class="field"><label class="field__label" for="b-entreprise">Entreprise</label><input class="field__input" id="b-entreprise" name="entreprise" autocomplete="organization" required><span class="field__error"></span></div>
+            <div class="field"><label class="field__label" for="b-fonction">Fonction <span class="opt">(facultatif)</span></label><input class="field__input" id="b-fonction" name="fonction" autocomplete="organization-title"></div>
+          </div>
+          <div class="row">
+            <div class="field"><label class="field__label" for="b-email">E-mail professionnel</label><input class="field__input" id="b-email" name="email" type="email" autocomplete="email" required><span class="field__error"></span></div>
+            <div class="field"><label class="field__label" for="b-tel">Téléphone</label><input class="field__input" id="b-tel" name="telephone" type="tel" autocomplete="tel" required pattern="[0-9 +\-\.\(\)]{8,20}" data-msg-pattern="Indiquez un numéro de téléphone, par exemple 06 12 34 56 78."><span class="field__error"></span></div>
+          </div>
+          <fieldset class="choices choices--3">
+            <legend>Pour la suite, vous préférez…</legend>
+            <label class="choice"><input type="radio" name="contact" value="rappel" checked><strong>Être rappelé aujourd'hui</strong><span>On vous appelle dans la journée.</span></label>
+            <label class="choice"><input type="radio" name="contact" value="calendly"><strong>Choisir un créneau</strong><span>Un appel de 20 minutes, à l'heure qui vous va.</span></label>
+            <label class="choice"><input type="radio" name="contact" value="email"><strong>Un e-mail d'abord</strong><span>On vous écrit avec une première sélection.</span></label>
+          </fieldset>
+          <div class="hp" aria-hidden="true"><label>Ne pas remplir <input name="website" tabindex="-1" autocomplete="off"></label></div>
+          <p class="form__status" aria-live="polite"></p>
+          <p class="form__legal">Vos informations servent à traiter votre demande et, si vous le souhaitez, à vous présenter des membres du cercle. Elles ne sont transmises à un membre qu'avec votre accord, au moment de la mise en relation. <a href="/confidentialite">Politique de confidentialité</a></p>
+          <div class="step__actions"><button class="btn btn--secondary js-only" type="button" data-prev>Retour</button><button class="btn btn--primary" type="submit">Envoyer mon brief <!--@icon-arrow--></button></div>
+        </fieldset>
+      </form>
+    </div>
+    <p class="center muted small" style="margin-top:var(--space-6)">Une question avant de vous lancer ? Écrivez-nous à <a class="link" href="mailto:hello@delacreme.pro">hello@delacreme.pro</a>.</p>
+  </div>
+</section>

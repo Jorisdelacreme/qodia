@@ -1,0 +1,49 @@
+<!--meta {
+  "title": "Explorer le cercle : agences et freelances du digital",
+  "description": "Recherchez un freelance ou une agence du cercle Qodia par nom, besoin, expertise ou secteur : branding, contenu et vidéo, acquisition, web et e-commerce.",
+  "nav": "annuaire",
+  "scripts": ["/assets/js/annuaire.js"]
+} -->
+<section class="dir-head section--alt">
+  <div class="wrap">
+    <div class="stack-4" style="max-width:760px">
+      <span class="label">Le cercle</span>
+      <h1 class="display">Trouver le bon expert.</h1>
+      <p class="lead">Freelances, agences et experts en agence, choisis un par un par l'équipe Qodia. Une partie du cercle est visible ici : déposez un brief pour recevoir une sélection complète.</p>
+    </div>
+    <form class="filters" id="dir-form" role="search" aria-label="Filtrer les membres">
+      <div class="filters__row">
+        <div class="field search"><label class="sr-only" for="f-q">Rechercher par nom ou par besoin</label><!--@icon-search--><input class="field__input" id="f-q" name="q" type="search" placeholder="Un nom, un besoin, un outil : Shopify, motion design, SEO…" autocomplete="off"></div>
+        <div class="field"><label class="sr-only" for="f-family">Expertise</label><select class="field__input" id="f-family" name="expertise"><option value="">Toutes les expertises</option><!--@family-options--></select></div>
+        <div class="field"><label class="sr-only" for="f-sector">Secteur</label><select class="field__input" id="f-sector" name="secteur"><option value="">Tous les secteurs</option><!--@sector-options--></select></div>
+      </div>
+      <div class="tags" role="group" aria-label="Type de membre">
+        <button type="button" class="tag" data-kind="" aria-pressed="true">Tous</button>
+        <button type="button" class="tag" data-kind="agence" aria-pressed="false">Agences</button>
+        <button type="button" class="tag" data-kind="freelance" aria-pressed="false">Freelances</button>
+      </div>
+    </form>
+  </div>
+</section>
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <div class="dir-meta">
+      <p><strong id="dir-count" aria-live="polite"><!--@member-count--> membres</strong> <span class="muted">visibles dans le cercle</span></p>
+      <button type="button" class="link" style="background:none;border:0;cursor:pointer;padding:0" data-reset>Effacer les filtres</button>
+    </div>
+    <div class="cards" id="members"><!--@cards-all--></div>
+    <div class="empty" id="dir-empty">
+      <h2 class="h3">Aucun membre visible ne correspond.</h2>
+      <p class="muted" style="max-width:520px">Tout le cercle n'est pas publié. Décrivez votre besoin : on vous propose une sélection dans la journée.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center"><a class="btn btn--primary" href="/brief">Déposer un brief</a><button type="button" class="btn btn--secondary" data-reset>Effacer les filtres</button></div>
+    </div>
+  </div>
+</section>
+<section class="section section--tight section--alt">
+  <div class="wrap">
+    <div class="join" style="background:var(--violet);color:#fff">
+      <div class="stack-2"><h2 class="h2" style="color:#fff">Vous préférez qu'on choisisse pour vous ?</h2><p style="color:var(--on-brand-muted)">Décrivez votre projet en cinq minutes. On compose l'équipe dans le cercle et on la pilote, avec un seul interlocuteur.</p></div>
+      <a class="btn btn--accent" href="/brief?mode=pilote">Déposer un brief</a>
+    </div>
+  </div>
+</section>

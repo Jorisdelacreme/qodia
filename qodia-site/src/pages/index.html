@@ -1,0 +1,124 @@
+<!--meta {
+  "title": "Qodia · Le cercle fermé des spécialistes du branding et du marketing digital",
+  "ogTitle": "Qodia, le cercle fermé des spécialistes du digital",
+  "description": "Une centaine de freelances et d'agences choisis un par un, en branding, contenu, acquisition et web. Choisissez votre expert, ou laissez Qodia composer l'équipe. Une initiative DeLaCrème.",
+  "nav": "home",
+  "jsonld": {"@context":"https://schema.org","@type":"Organization","name":"Qodia","url":"https://qodia.pro","logo":"https://qodia.pro/assets/img/qodia-logo.svg","email":"hello@delacreme.pro","parentOrganization":{"@type":"Organization","name":"DeLaCrème"}}
+} -->
+<section class="brand-band hero" aria-labelledby="hero-title">
+  <div class="brand-band__motif" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="hero__content">
+      <span class="badge badge--light" style="justify-self:start">Une initiative DeLaCrème</span>
+      <h1 class="display-xl" id="hero-title">Le cercle fermé des spécialistes du branding et du marketing digital.</h1>
+      <p class="hero__lead">Une centaine de freelances et d'agences choisis un par un. Choisissez votre expert, ou laissez-nous composer l'équipe.</p>
+    </div>
+    <form class="finder" action="/annuaire" method="get" role="search" aria-label="Trouver un expert">
+      <label><span>Je cherche</span><input name="q" placeholder="Un nom, un besoin : refonte, SEO, vidéo…" autocomplete="off"></label>
+      <label><span>Expertise</span><select name="expertise"><option value="">Toutes les expertises</option><!--@family-options--></select></label>
+      <label><span>Secteur</span><select name="secteur"><option value="">Tous les secteurs</option><!--@sector-options--></select></label>
+      <button class="btn btn--accent" type="submit">Trouver <!--@icon-arrow--></button>
+    </form>
+    <p class="hero__alt" style="margin-top:var(--space-6)">Pas sûr de ce qu'il vous faut ? <a href="/brief">Déposez un brief</a>, on vous rappelle dans la journée.</p>
+  </div>
+</section>
+<div class="colorstrip" aria-hidden="true"><span style="background:var(--rouge)"></span><span style="background:var(--jaune)"></span><span style="background:var(--cyan)"></span><span style="background:var(--violet)"></span></div>
+
+<section class="logos" aria-labelledby="logos-title">
+  <div class="wrap">
+    <p class="label logos__label" id="logos-title">Ils nous font confiance</p>
+    <!--@logos-->
+  </div>
+</section>
+
+<section class="section" id="comment-ca-marche" aria-labelledby="how-title">
+  <div class="wrap">
+    <div class="section-head"><div><span class="label">Comment ça marche</span><h2 class="display" id="how-title">Deux façons de travailler avec le cercle.</h2><p class="lead">Dans les deux cas, chaque demande est qualifiée par l'équipe Qodia avant la mise en relation.</p></div></div>
+    <div class="grid grid--2">
+      <div class="mode">
+        <span class="label">Mise en relation</span>
+        <span class="mode__num">01</span>
+        <h3 class="h2">Je choisis mon expert.</h3>
+        <p class="muted">Vous parcourez le cercle, vous choisissez un freelance ou une agence, on vous présente. Vous pilotez la mission en direct.</p>
+        <ol class="mode__steps">
+          <li>Vous demandez un contact depuis la fiche du membre.</li>
+          <li>On vous rappelle dans la journée pour cadrer le besoin.</li>
+          <li>Vous échangez avec le membre et signez avec lui.</li>
+        </ol>
+        <a class="btn btn--secondary" href="/annuaire">Explorer le cercle</a>
+      </div>
+      <div class="mode mode--brand on-brand">
+        <span class="label">Projet piloté</span>
+        <span class="mode__num">02</span>
+        <h3 class="h2">Qodia s'occupe de tout.</h3>
+        <p class="muted">Vous décrivez votre projet, on compose l'équipe dans le cercle et on la pilote. Un interlocuteur, une seule facture.</p>
+        <ol class="mode__steps">
+          <li>Vous déposez un brief en cinq minutes.</li>
+          <li>On vous propose une équipe et un devis global.</li>
+          <li>Qodia coordonne les experts jusqu'à la livraison.</li>
+        </ol>
+        <a class="btn btn--accent" href="/brief?mode=pilote">Déposer un brief</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt" aria-labelledby="circle-title">
+  <div class="wrap">
+    <div class="section-head"><div><span class="label">Le cercle</span><h2 class="display" id="circle-title">Quelques membres.</h2><p class="lead">Une partie du cercle est visible ici. Après votre brief, on vous présente aussi des profils qui ne sont pas publiés.</p></div><a class="btn btn--secondary" href="/annuaire">Voir les <!--@member-count--> membres</a></div>
+    <div class="cards"><!--@cards-featured--></div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="needs-title">
+  <div class="wrap">
+    <div class="section-head"><div><span class="label">Par expertise</span><h2 class="display" id="needs-title">De quoi avez-vous besoin ?</h2></div></div>
+    <div class="grid grid--3"><!--@families--></div>
+    <div class="stack-4 mt-8">
+      <span class="label">Ou par secteur</span>
+      <div class="tags"><!--@sector-tags--></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt" aria-labelledby="why-title">
+  <div class="wrap">
+    <div class="section-head"><div><span class="label">Pourquoi un cercle fermé</span><h2 class="display" id="why-title">Moins de profils.<br>De meilleurs profils.</h2></div></div>
+    <div class="grid grid--3">
+      <div class="reason"><h3>Choisis un par un</h3><p>Chaque membre est coopté, rencontré et vérifié : portfolio, références, documents légaux. Pas d'inscription libre.</p></div>
+      <div class="reason"><h3>Le réseau d'une agence</h3><p>Le cercle est né du réseau de DeLaCrème, agence fondée en 2015 et forte de plus de 170 clients. Ses membres sont des partenaires avec qui l'agence a déjà travaillé.</p></div>
+      <div class="reason"><h3>Un humain au bout du fil</h3><p>Chaque demande est lue par l'équipe et vous êtes rappelé dans la journée. Les avis clients sont recueillis par Qodia en fin de mission.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="blog-title">
+  <div class="wrap">
+    <div class="section-head"><div><span class="label">Le blog</span><h2 class="display" id="blog-title">Bien s'entourer.</h2></div><a class="link-arrow" href="/blog">Tous les articles <!--@icon-arrow--></a></div>
+    <div class="grid grid--3"><!--@posts-3--></div>
+  </div>
+</section>
+
+<section class="section section--tight" aria-labelledby="join-title">
+  <div class="wrap">
+    <div class="join">
+      <div class="stack-2"><span class="label" style="color:var(--violet)">Freelance ou agence</span><h2 class="display" id="join-title">Rejoindre le cercle.</h2><p>Le cercle s'agrandit par cooptation et sélection. Des missions qualifiées, sans prospection, au sein d'un réseau de pairs.</p></div>
+      <a class="btn btn--primary" href="/rejoindre">Candidater au cercle</a>
+    </div>
+  </div>
+</section>
+
+<section class="brand-band cta-band" id="rappel" aria-labelledby="cta-title">
+  <div class="brand-band__motif" aria-hidden="true"></div>
+  <div class="wrap cta-band__grid">
+    <div class="stack-6">
+      <h2 class="display" id="cta-title">Parlons de votre projet.</h2>
+      <p class="lead">Déposez un brief ou réservez un appel de 20 minutes. On vous rappelle dans la journée.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <a class="btn btn--accent" href="/brief">Déposer un brief</a>
+        <a class="btn btn--ghost-light" href="#rappel-form" data-calendly="accueil-cta" data-fallback="#rappel-form">Réserver un appel</a>
+      </div>
+    </div>
+    <div class="form-card" id="rappel-form"><!--@callback-form--></div>
+  </div>
+</section>
