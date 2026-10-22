@@ -136,56 +136,158 @@
       "projects": []
     },
     {
-      "slug": "mothaiba",
+      "slug": "dareth-nhang",
       "visible": true,
       "featured": true,
       "featuredOrder": 3,
-      "name": "Mothaiba",
-      "kind": "agence",
-      "family": "contenu",
-      "headline": "Agence créative : production audiovisuelle et formats pour les plateformes",
-      "city": "Ivry-sur-Seine",
+      "name": "Dareth Nhang",
+      "kind": "freelance",
+      "family": "branding",
+      "headline": "Directeur artistique, brand designer et développeur WordPress",
+      "city": "Lyon",
       "bio": [
-        "Mothaiba conçoit et produit des contenus pour les marques comme pour les créateurs : événements, contenus d'influence, productions corporate, vidéos YouTube et TikTok.",
-        "Le studio porte la direction artistique autant que la production. Pour un dispositif régulier, l'agence propose aussi une offre dédiée au brand content, Mothaiba DLC."
+        "Dareth conçoit des identités de marque et des sites web éthiques et responsables : direction artistique, supports print et digitaux, sites WordPress éco-conçus et accessibles.",
+        "Plus de vingt ans de métier, entre son studio D SIGNED puis DZGND.studio, la direction de projet chez Insign et le pilotage de l'équipe Run de Be API, agence WordPress. Il a aussi été associé de DeLaCrème de 2018 à 2020."
       ],
       "skills": [
-        "Production audiovisuelle",
         "Direction artistique",
-        "Formats YouTube & TikTok",
-        "Contenus créateurs",
-        "Brand content"
+        "Identité visuelle",
+        "Brand design",
+        "Sites WordPress éco-conçus",
+        "SEO",
+        "Formation"
       ],
-      "tools": [],
+      "tools": [
+        "WordPress",
+        "WooCommerce",
+        "Bedrock",
+        "Tailwind"
+      ],
       "sectors": [
-        "Sport",
         "Médias & divertissement",
-        "Grande consommation"
+        "Culture & institutions",
+        "Éducation"
       ],
       "references": [
-        "Lacoste",
-        "Red Bull",
-        "Prime Video",
-        "Ligue 1",
-        "Betclic",
-        "Deliveroo",
-        "Super U",
-        "Deezer"
+        "Devialet",
+        "Eurosport",
+        "Universal Music France",
+        "Tencent",
+        "BlackBerry",
+        "Orange",
+        "Mairie de Villeurbanne",
+        "Université Claude Bernard Lyon 1"
       ],
-      "referencesNote": "Et côté créateurs : Inoxtag, Michou, EnjoyPhoenix, Joyca.",
-      "website": "https://www.mothaiba.co/",
-      "portfolio": "https://www.mothaiba.co/nos-realisations",
+      "website": "https://dzgnd.studio/",
+      "portfolio": "",
+      "logo": "",
+      "photo": "",
+      "cover": "",
+      "color": "jaune",
+      "projects": [],
+      "budget": "",
+      "qodiaNote": ""
+    },
+    {
+      "slug": "quentin-boulestin",
+      "visible": true,
+      "featured": true,
+      "featuredOrder": 4,
+      "name": "Quentin Boulestin",
+      "kind": "freelance",
+      "family": "branding",
+      "headline": "Brand designer et stratège, fondateur de One Last Rodeo",
+      "city": "Paris",
+      "bio": [
+        "Quentin construit l'identité des marques en phase de lancement ou de développement : positionnement, identité visuelle, direction artistique, sites Webflow sur mesure et landing pages orientées conversion.",
+        "Fondateur du studio One Last Rodeo depuis 2022, il est aussi intervenu en freelance pour PUMA (visuels de campagnes display), le Crédit Mutuel Arkéa (supports de marque) et Billet Réduc' (refonte UX/UI de la plateforme)."
+      ],
+      "skills": [
+        "Stratégie de marque",
+        "Identité visuelle",
+        "Direction artistique",
+        "Webflow",
+        "UX/UI design",
+        "Landing pages"
+      ],
+      "tools": [
+        "Webflow",
+        "Figma"
+      ],
+      "sectors": [
+        "SaaS & tech",
+        "Sport"
+      ],
+      "references": [
+        "PUMA",
+        "Crédit Mutuel Arkéa",
+        "Billet Réduc'"
+      ],
+      "website": "",
+      "portfolio": "https://www.behance.net/quentinboulest/projects",
       "logo": "",
       "photo": "",
       "cover": "",
       "color": "rouge",
-      "projects": []
+      "projects": [],
+      "budget": "",
+      "qodiaNote": ""
+    },
+    {
+      "slug": "jordan-toi",
+      "visible": true,
+      "featured": true,
+      "featuredOrder": 5,
+      "name": "Jordan Toi",
+      "kind": "freelance",
+      "family": "acquisition",
+      "headline": "Head of Growth externalisé pour marques e-commerce",
+      "city": "Paris",
+      "bio": [
+        "Jordan aide les dirigeants e-commerce à piloter leur acquisition comme un levier de croissance rentable : où investir, quoi arrêter, comment passer un cap sans dégrader la marge.",
+        "Fondateur d'Orvik, il accompagne des marques D2C depuis 2017. Il a auparavant passé près de quatre ans chez Coudac, de media buyer à Lead Performance Manager puis Business Development Manager. Il annonce plus de 100 marques accompagnées et plus de 10 M€ de budgets publicitaires pilotés."
+      ],
+      "skills": [
+        "Head of Growth externalisé",
+        "Meta Ads",
+        "Google Ads",
+        "Tracking et attribution",
+        "CRO",
+        "Arbitrage budgétaire"
+      ],
+      "tools": [
+        "Meta Ads",
+        "Google Ads"
+      ],
+      "sectors": [
+        "E-commerce",
+        "Mode & beauté"
+      ],
+      "references": [
+        "Delsey Paris",
+        "Bonnuit Matelas",
+        "Comptoir Sud Pacifique",
+        "BRAVI",
+        "Bourgeon",
+        "Campus Coach",
+        "Archie",
+        "SuperSmart",
+        "Barbecue Expo"
+      ],
+      "website": "",
+      "portfolio": "",
+      "logo": "",
+      "photo": "",
+      "cover": "",
+      "color": "violet",
+      "projects": [],
+      "budget": "",
+      "qodiaNote": ""
     },
     {
       "slug": "31-grammes-studio",
       "visible": true,
-      "featured": true,
-      "featuredOrder": 4,
+      "featured": false,
       "name": "31 Grammes Studio",
       "kind": "agence",
       "family": "branding",
@@ -211,40 +313,6 @@
       "photo": "",
       "cover": "",
       "color": "rouge",
-      "projects": []
-    },
-    {
-      "slug": "startperf",
-      "visible": true,
-      "featured": true,
-      "featuredOrder": 5,
-      "name": "StartPerf",
-      "kind": "agence",
-      "family": "acquisition",
-      "headline": "Agence SEO data-driven et stratégie d'acquisition",
-      "city": "Paris",
-      "bio": [
-        "Créée en 2014, StartPerf construit des stratégies de référencement naturel pilotées par la donnée, pour des PME, des start-up et des grands groupes.",
-        "Une vingtaine de collaborateurs, et une approche de l'acquisition qui part de la recherche."
-      ],
-      "skills": [
-        "SEO",
-        "Stratégie d'acquisition",
-        "Audit technique",
-        "Contenu SEO"
-      ],
-      "tools": [],
-      "sectors": [
-        "PME & start-up",
-        "Grands groupes"
-      ],
-      "references": [],
-      "website": "https://www.startperf.com/",
-      "portfolio": "",
-      "logo": "",
-      "photo": "",
-      "cover": "",
-      "color": "violet",
       "projects": []
     },
     {
@@ -366,6 +434,84 @@
         "Smile"
       ],
       "website": "https://grapheine.com/",
+      "portfolio": "",
+      "logo": "",
+      "photo": "",
+      "cover": "",
+      "color": "violet",
+      "projects": []
+    },
+    {
+      "slug": "mothaiba",
+      "visible": true,
+      "featured": false,
+      "name": "Mothaiba",
+      "kind": "agence",
+      "family": "contenu",
+      "headline": "Agence créative : production audiovisuelle et formats pour les plateformes",
+      "city": "Ivry-sur-Seine",
+      "bio": [
+        "Mothaiba conçoit et produit des contenus pour les marques comme pour les créateurs : événements, contenus d'influence, productions corporate, vidéos YouTube et TikTok.",
+        "Le studio porte la direction artistique autant que la production. Pour un dispositif régulier, l'agence propose aussi une offre dédiée au brand content, Mothaiba DLC."
+      ],
+      "skills": [
+        "Production audiovisuelle",
+        "Direction artistique",
+        "Formats YouTube & TikTok",
+        "Contenus créateurs",
+        "Brand content"
+      ],
+      "tools": [],
+      "sectors": [
+        "Sport",
+        "Médias & divertissement",
+        "Grande consommation"
+      ],
+      "references": [
+        "Lacoste",
+        "Red Bull",
+        "Prime Video",
+        "Ligue 1",
+        "Betclic",
+        "Deliveroo",
+        "Super U",
+        "Deezer"
+      ],
+      "referencesNote": "Et côté créateurs : Inoxtag, Michou, EnjoyPhoenix, Joyca.",
+      "website": "https://www.mothaiba.co/",
+      "portfolio": "https://www.mothaiba.co/nos-realisations",
+      "logo": "",
+      "photo": "",
+      "cover": "",
+      "color": "rouge",
+      "projects": []
+    },
+    {
+      "slug": "startperf",
+      "visible": true,
+      "featured": false,
+      "name": "StartPerf",
+      "kind": "agence",
+      "family": "acquisition",
+      "headline": "Agence SEO data-driven et stratégie d'acquisition",
+      "city": "Paris",
+      "bio": [
+        "Créée en 2014, StartPerf construit des stratégies de référencement naturel pilotées par la donnée, pour des PME, des start-up et des grands groupes.",
+        "Une vingtaine de collaborateurs, et une approche de l'acquisition qui part de la recherche."
+      ],
+      "skills": [
+        "SEO",
+        "Stratégie d'acquisition",
+        "Audit technique",
+        "Contenu SEO"
+      ],
+      "tools": [],
+      "sectors": [
+        "PME & start-up",
+        "Grands groupes"
+      ],
+      "references": [],
+      "website": "https://www.startperf.com/",
       "portfolio": "",
       "logo": "",
       "photo": "",
