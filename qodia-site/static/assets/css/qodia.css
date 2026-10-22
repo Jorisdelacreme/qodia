@@ -475,3 +475,6 @@ button.linklike { background: none; border: 0; padding: 0; cursor: pointer; font
 .mt-8 { margin-top: var(--space-8); }
 .hide { display: none !important; }
 .form-card:has(.form.is-sent) .steps-nav { display: none; }
+/* Cartes de formulaire posées sur une bande de marque : retour aux couleurs de texte normales */
+.brand-band .form-card h2, .brand-band .form-card h3 { color: var(--ink-brand); }
+.brand-band .form-card .muted, .brand-band .form-card .lead, .brand-band .form-card .label { color: var(--ink-muted); }
