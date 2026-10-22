@@ -178,8 +178,10 @@
     patternMismatch: "Le format n'est pas reconnu.",
     tooShort: "Ce texte est un peu court."
   };
+  var FREE_MAIL = /@(gmail|googlemail|yahoo|ymail|hotmail|outlook|live|msn|icloud|me|mac|aol|gmx|proton|protonmail|pm|yandex|mail|orange|wanadoo|free|sfr|neuf|laposte|bbox|numericable|club-internet|aliceadsl|libertysurf|voila|tutanota|zoho|hey)\.[a-z.]+$/i;
   function fieldMessage(input) {
     var v = input.validity;
+    if (input.hasAttribute("data-b2b") && !v.valueMissing && !v.typeMismatch && FREE_MAIL.test(input.value.trim())) return "Utilisez votre adresse e-mail professionnelle (pas Gmail, Outlook, Orange…).";
     if (v.valueMissing) return input.dataset.msgRequired || MESSAGES.valueMissing;
     if (v.typeMismatch) return MESSAGES.typeMismatch[input.type] || MESSAGES.patternMismatch;
     if (v.patternMismatch) return input.dataset.msgPattern || MESSAGES.patternMismatch;
@@ -192,7 +194,7 @@
       if (input.closest(".hp") || input.disabled || input.closest("[hidden]")) return;
       var field = input.closest(".field, .choices");
       if (!field) return;
-      var ok = input.checkValidity();
+      var ok = input.checkValidity() && !(input.hasAttribute("data-b2b") && FREE_MAIL.test(input.value.trim()));
       if (input.type === "radio" || input.type === "checkbox") {
         if (input.required) {
           var group = scope.querySelectorAll('input[name="' + input.name + '"]');
@@ -263,7 +265,7 @@
         headers: { "Content-Type": "application/json", "Accept": "application/json" },
         body: JSON.stringify(payload)
       }).then(function (r) {
-        return r.json().catch(function () { return {}; }).then(function (j) { if (!r.ok || !j.ok) throw new Error(j.error || "Erreur " + r.status); return j; });
+        return r.json().catch(function () { return {}; }).then(function (j) { if (!r.ok || !j.ok) { var er = new Error(j.error || "Erreur " + r.status); er.validation = r.status === 422; throw er; } return j; });
       }).then(function () {
         form.classList.add("is-sent");
         var cal = form.querySelector("[data-calendly-prefill]");
@@ -275,12 +277,14 @@
         }
         var title = form.querySelector(".form__success h2, .form__success h3");
         if (title) { title.setAttribute("tabindex", "-1"); title.focus(); }
+        document.dispatchEvent(new CustomEvent("qodia:lead", { detail: payload }));
         qodiaTrack("generate_lead", { form_type: payload.form_type, mode: payload.mode || "", contact_pref: payload.contact || "", member: payload.membre || "" });
         if (form.closest(".form-card")) form.closest(".form-card").scrollIntoView({ behavior: "smooth", block: "start" });
       }).catch(function (err) {
         if (status) {
           status.className = "form__status is-error";
-          status.innerHTML = "L'envoi n'a pas abouti (" + String(err.message).replace(/[<>&]/g, "") + "). Réessayez dans un instant, ou écrivez-nous à <a href=\"mailto:hello@delacreme.pro\">hello@delacreme.pro</a>.";
+          var msg = String(err.message).replace(/[<>&]/g, "");
+          status.innerHTML = err.validation ? msg.charAt(0).toUpperCase() + msg.slice(1) + "." : "L'envoi n'a pas abouti (" + msg + "). Réessayez dans un instant, ou écrivez-nous à <a href=\"mailto:hello@delacreme.pro\">hello@delacreme.pro</a>.";
           status.setAttribute("tabindex", "-1");
           status.focus();
         }
@@ -289,6 +293,13 @@
         if (btn) { btn.disabled = false; btn.innerHTML = label; }
       });
     });
+  });
+
+  /* Accès au cercle : déverrouille les profils réservés sur cet appareil */
+  document.addEventListener("qodia:lead", function (e) {
+    if (!e.detail || e.detail.form_type !== "acces") return;
+    try { localStorage.setItem("qodia_access", JSON.stringify({ at: Date.now() })); } catch (err) {}
+    setTimeout(function () { doc.classList.add("has-access"); }, 1200);
   });
 
   /* Clics sortants vers les sites des membres */

@@ -85,6 +85,7 @@ ${meta.noindex ? '<meta name="robots" content="noindex">' : ""}
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
 <link rel="stylesheet" href="/assets/css/qodia.css">
+<script>try{if(localStorage.getItem("qodia_access"))document.documentElement.classList.add("has-access")}catch(e){}</script>
 <script src="/assets/js/config.js"></script>
 <script src="/assets/js/site.js" defer></script>
 ${(meta.scripts || []).map((s) => `<script src="${s}" defer></script>`).join("\n")}
@@ -207,7 +208,8 @@ const memberUrl = (m) => `/membres/${m.slug}`;
 function card(m, headingLevel = "h3") {
   const refs = (m.references || []).slice(0, 3);
   const search = [m.name, m.headline, (m.skills || []).join(" "), (m.tools || []).join(" "), (m.sectors || []).join(" "), (m.references || []).join(" "), m.city, FAM[m.family]?.label, KIND[m.kind]].join(" ");
-  return `<article class="card" data-member data-family="${esc(m.family)}" data-kind="${esc(m.kind)}" data-sectors="${esc((m.sectors || []).join("|"))}" data-search="${esc(search)}">
+  const locked = !m.featured;
+  return `<article class="card${locked ? " is-locked" : ""}"${locked ? " data-locked" : ""} data-member data-family="${esc(m.family)}" data-kind="${esc(m.kind)}" data-sectors="${esc((m.sectors || []).join("|"))}" data-search="${esc(search)}">
   <div class="card__cover${coverStyle(m)}">${m.cover ? `<img class="cover-img" src="${esc(m.cover)}" alt="" loading="lazy">` : ""}<span class="badge ${m.color === "violet" ? "badge--light" : "badge--brand"}">${KIND[m.kind] || ""}</span></div>
   <div class="card__avatar">${avatar(m)}</div>
   <div class="card__body">
@@ -281,12 +283,61 @@ function parseMeta(src) {
   if (!m) return [{}, src];
   return [JSON.parse(m[1]), src.slice(m[0].length)];
 }
+
+/* Markdown minimal (articles écrits dans l'éditeur) : titres, paragraphes, listes, citations, tableaux, gras, italique, liens */
+function mdInline(t) {
+  return esc(t)
+    .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+    .replace(/(^|[^*])\*(?!\s)([^*]+?)\*/g, "$1<em>$2</em>")
+    .replace(/`([^`]+)`/g, "<code>$1</code>")
+    .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (m, txt, url) => `<a href="${url}">${txt}</a>`);
+}
+function markdown(src) {
+  const lines = String(src).replace(/\r\n?/g, "\n").split("\n");
+  const out = [];
+  let i = 0;
+  const isBlockStart = (l) => /^(#{2,4}\s|>\s?|[-*]\s|\d+\.\s|\|)/.test(l);
+  while (i < lines.length) {
+    const l = lines[i];
+    if (!l.trim()) { i++; continue; }
+    let m;
+    if ((m = l.match(/^(#{2,4})\s+(.*)$/))) { out.push(`<h${m[1].length}>${mdInline(m[2])}</h${m[1].length}>`); i++; continue; }
+    if (/^>\s?/.test(l)) {
+      const buf = [];
+      while (i < lines.length && /^>\s?/.test(lines[i])) buf.push(lines[i++].replace(/^>\s?/, ""));
+      out.push(`<blockquote>${markdown(buf.join("\n"))}</blockquote>`); continue;
+    }
+    if (/^[-*]\s/.test(l) || /^\d+\.\s/.test(l)) {
+      const ordered = /^\d+\.\s/.test(l), re = ordered ? /^\d+\.\s+/ : /^[-*]\s+/, items = [];
+      while (i < lines.length && re.test(lines[i])) {
+        let item = lines[i++].replace(re, "");
+        while (i < lines.length && /^\s{2,}\S/.test(lines[i]) && !re.test(lines[i].trim())) item += " " + lines[i++].trim();
+        items.push(`<li>${mdInline(item)}</li>`);
+      }
+      out.push(`<${ordered ? "ol" : "ul"}>${items.join("")}</${ordered ? "ol" : "ul"}>`); continue;
+    }
+    if (/^\|/.test(l)) {
+      const rows = [];
+      while (i < lines.length && /^\|/.test(lines[i])) rows.push(lines[i++]);
+      const cells = (r) => r.trim().replace(/^\||\|$/g, "").split("|").map((c) => c.trim());
+      const head = cells(rows[0]), body = rows.slice(/^\|\s*:?-{2,}/.test(rows[1] || "") ? 2 : 1);
+      out.push(`<div class="table-scroll"><table><thead><tr>${head.map((c) => `<th>${mdInline(c)}</th>`).join("")}</tr></thead><tbody>${body.map((r) => `<tr>${cells(r).map((c) => `<td>${mdInline(c)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`);
+      continue;
+    }
+    const para = [];
+    while (i < lines.length && lines[i].trim() && !(para.length && isBlockStart(lines[i]))) para.push(lines[i++].trim());
+    out.push(`<p>${mdInline(para.join(" "))}</p>`);
+  }
+  return out.join("\n");
+}
+
 const fmtDate = (d) => new Date(d + "T12:00:00").toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" });
 
 const posts = [];
-for (const f of (await readdir(path.join(ROOT, "src/blog"))).filter((f) => f.endsWith(".html"))) {
-  const [meta, body] = parseMeta(await readFile(path.join(ROOT, "src/blog", f), "utf8"));
-  posts.push({ ...meta, slug: f.replace(/\.html$/, ""), body });
+for (const f of (await readdir(path.join(ROOT, "src/blog"))).filter((f) => /\.(html|md)$/.test(f))) {
+  const [meta, raw] = parseMeta(await readFile(path.join(ROOT, "src/blog", f), "utf8"));
+  if (meta.draft) continue;
+  posts.push({ ...meta, slug: f.replace(/\.(html|md)$/, ""), body: f.endsWith(".md") ? markdown(raw) : raw });
 }
 posts.sort((a, b) => b.date.localeCompare(a.date));
 
@@ -301,7 +352,7 @@ function memberPage(m) {
   const fam = FAM[m.family];
   const others = members.filter((o) => o.slug !== m.slug).sort((a, b) => (b.family === m.family) - (a.family === m.family)).slice(0, 3);
   const refLogos = m.referenceLogos || {};
-  const site_ = m.website ? `<a href="${esc(m.website)}" rel="noopener" target="_blank" data-track="click_member_website" data-track-label="${esc(m.name)}">${esc(m.website.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, ""))} ${ICON.ext}</a>` : "";
+  const site_ = m.website ? `<a${m.featured ? "" : ' class="needs-access"'} href="${esc(m.website)}" rel="noopener" target="_blank" data-track="click_member_website" data-track-label="${esc(m.name)}">${esc(m.website.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, ""))} ${ICON.ext}</a>` : "";
   const projects = (m.projects || []).filter((p) => p.image);
   const brief = (mode) => `/brief?membre=${m.slug}&mode=${mode}`;
   const jsonld = {
@@ -323,7 +374,8 @@ function memberPage(m) {
     </div>
   </div>
   <ol class="crumbs" aria-label="Fil d'Ariane"><li><a href="/annuaire">Le cercle</a></li><li><a href="/annuaire?expertise=${m.family}">${esc(fam?.label || "")}</a></li><li aria-current="page">${esc(m.name)}</li></ol>
-  <div class="profile" style="padding-top:var(--space-4)">
+  <div class="profile${m.featured ? "" : " gated"}" style="padding-top:var(--space-4)">
+    ${m.featured ? "" : accessWall(`Le profil complet de ${m.name}`)}
     <div class="profile__main">
       <section aria-labelledby="apropos">
         <h2 class="h2" id="apropos">À propos</h2>
@@ -404,9 +456,49 @@ document.querySelectorAll('input[name="mode-${m.slug}"]').forEach(function(r){r.
 /* Directives des pages                                                */
 /* ------------------------------------------------------------------ */
 const opts = (arr, sel) => arr.map(([v, l]) => `<option value="${esc(v)}"${v === sel ? " selected" : ""}>${esc(l)}</option>`).join("");
+
+/* Accès au cercle : formulaire professionnel qui déverrouille les profils hors « à la une » */
+function accessForm(id) {
+  return `<form class="form" data-lead-form="acces" action="/api/lead" method="post" novalidate><input type="hidden" name="form_type" value="acces">
+  <div class="form__success" role="status">
+    <div class="form__success-icon">${ICON.check}</div>
+    <h3>C'est ouvert, bonne exploration.</h3>
+    <p class="muted">Tous les profils du cercle sont maintenant visibles sur cet appareil.</p>
+  </div>
+  <div class="row">
+    <div class="field"><label class="field__label" for="${id}-prenom">Prénom</label><input class="field__input" id="${id}-prenom" name="prenom" autocomplete="given-name" required><span class="field__error"></span></div>
+    <div class="field"><label class="field__label" for="${id}-nom">Nom</label><input class="field__input" id="${id}-nom" name="nom" autocomplete="family-name" required><span class="field__error"></span></div>
+  </div>
+  <div class="row">
+    <div class="field"><label class="field__label" for="${id}-email">E-mail professionnel</label><input class="field__input" id="${id}-email" name="email" type="email" autocomplete="email" required data-b2b><span class="field__error"></span></div>
+    <div class="field"><label class="field__label" for="${id}-entreprise">Entreprise</label><input class="field__input" id="${id}-entreprise" name="entreprise" autocomplete="organization" required><span class="field__error"></span></div>
+  </div>
+  <div class="field"><label class="field__label" for="${id}-poste">Poste <span class="opt">(facultatif)</span></label><input class="field__input" id="${id}-poste" name="fonction" autocomplete="organization-title"></div>
+  <div class="hp" aria-hidden="true"><label>Ne pas remplir <input name="website" tabindex="-1" autocomplete="off"></label></div>
+  <p class="form__status" aria-live="polite"></p>
+  <button class="btn btn--primary btn--block" type="submit">Voir tous les profils ${ICON.arrow}</button>
+  <p class="form__legal">Réservé aux professionnels : une adresse d'entreprise est demandée (pas de Gmail, Outlook…). Vos coordonnées permettent à l'équipe Qodia de vous recontacter au sujet de vos projets. <a href="/confidentialite">Confidentialité</a></p>
+</form>`;
+}
+let accessCount = 0;
+function accessWall(title) {
+  const id = `acces-${++accessCount}`;
+  return `<div class="access-wall" data-access-wall>
+  <div class="access-wall__card form-card">
+    <span class="badge badge--brand" style="justify-self:start">Accès réservé aux professionnels</span>
+    <h2 class="h3">${esc(title)} est réservé aux entreprises.</h2>
+    <p class="muted">Renseignez vos coordonnées professionnelles pour consulter tous les profils, agences et freelances du cercle. C'est gratuit et immédiat.</p>
+    ${accessForm(id)}
+  </div>
+</div>`;
+}
+
 const directives = {
+  "access-panel": () => accessWall("Le reste du cercle"),
+  "free-count": () => String(members.filter((m) => m.featured).length),
+  "locked-count": () => String(members.filter((m) => !m.featured).length),
   "logos": () => logosGrid(),
-  "cards-featured": () => members.filter((m) => m.featured).slice(0, 6).map((m) => card(m)).join(""),
+  "cards-featured": () => members.filter((m) => m.featured).sort((a, b) => (a.featuredOrder ?? 99) - (b.featuredOrder ?? 99)).slice(0, 6).map((m) => card(m)).join(""),
   "cards-all": () => members.map((m) => card(m, "h2")).join(""),
   "member-count": () => String(members.length),
   "families": () => familyCards(),

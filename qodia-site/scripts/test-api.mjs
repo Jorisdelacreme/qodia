@@ -2,6 +2,9 @@
 // Usage : node scripts/test-api.mjs
 import assert from "node:assert/strict";
 import { Readable } from "node:stream";
+import { promises as dnsp } from "node:dns";
+// DNS simulé : seuls les domaines connus ont un serveur de messagerie
+dnsp.resolveMx = async (d) => { if (["delacreme.pro", "acme.fr"].includes(d)) return [{ exchange: "mx." + d, priority: 1 }]; const e = new Error("queryMx ENOTFOUND " + d); e.code = "ENOTFOUND"; throw e; };
 
 process.env.RESEND_API_KEY = "re_test";
 process.env.LEAD_FROM = "Qodia <formulaires@qodia.pro>";
@@ -72,4 +75,12 @@ process.env.CRM_WEBHOOK_URL = "https://crm.test/hook"; process.env.CRM_WEBHOOK_S
 r = await call(brief);
 assert.equal(sent.length, 2); assert.equal(sent[1].url, "https://crm.test/hook"); assert.equal(sent[1].body.type, "brief");
 console.log("✓ transfert au CRM quand CRM_WEBHOOK_URL est défini");
+delete process.env.CRM_WEBHOOK_URL; sent.length = 0;
+r = await call({ form_type: "acces", prenom: "Léa", nom: "Martin", entreprise: "Acme", email: "lea@gmail.com", elapsed_ms: 9000 });
+assert.equal(r.status, 422); assert.match(r.body.error, /professionnelle/);
+r = await call({ form_type: "acces", prenom: "Léa", nom: "Martin", entreprise: "Acme", email: "lea@domaine-qui-n-existe-pas-qodia.fr", elapsed_ms: 9000 });
+assert.equal(r.status, 422); assert.match(r.body.error, /domaine/);
+r = await call({ form_type: "acces", prenom: "Léa", nom: "Martin", entreprise: "Acme", fonction: "CMO", email: "lea@delacreme.pro", elapsed_ms: 9000 });
+assert.equal(r.status, 200); assert.match(sent.at(-1).body.subject, /Accès au cercle : Acme, Léa Martin/);
+console.log("✓ accès au cercle : adresse professionnelle exigée, domaine vérifié");
 console.log("\nTous les tests passent.");

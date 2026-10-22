@@ -93,3 +93,13 @@ Le site publie aussi `/data/members.json` (version allégée) pour un futur widg
 - L'usage des logos clients (« Ils nous font confiance »).
 - Les pages légales (mentions, confidentialité, cookies) : à relire, idéalement par un juriste.
 - Les polices viennent de Google Fonts (mentionné dans la politique de confidentialité). Pour supprimer ce transfert, les auto-héberger dans `static/assets/fonts/`.
+
+## Éditeur Qodia et mise en ligne par Claude
+
+Les fiches membres, la sélection « À la une » et les articles se modifient dans l'**Éditeur Qodia** (page claude.ai privée). Le bouton « Demander la mise en ligne » enregistre la demande ; Claude récupère ensuite le contenu, met à jour `data/members.json`, `src/blog/*.md` et `static/assets/membres/`, vérifie le build, puis pousse sur `main` (Vercel déploie).
+
+Les articles sont en Markdown (`src/blog/*.md`, bloc `<!--meta {...} -->` en tête). Un article avec `"draft": true` n'est pas publié.
+
+## Accès aux profils réservés
+
+Les membres « à la une » (`featured`) sont en accès libre. Les autres fiches sont floutées tant que le visiteur n'a pas rempli le formulaire d'accès (prénom, nom, e-mail professionnel, entreprise, poste facultatif). L'adresse est refusée si elle vient d'une messagerie grand public ou si son domaine ne reçoit pas d'e-mails (vérification MX). Chaque accès arrive sur hello@delacreme.pro (« [Qodia] Accès au cercle ») et l'accès est mémorisé sur l'appareil (`qodia_access`). Il s'agit d'un filtrage côté navigateur : le contenu reste dans les pages pour le référencement.

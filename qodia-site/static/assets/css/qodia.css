@@ -478,3 +478,15 @@ button.linklike { background: none; border: 0; padding: 0; cursor: pointer; font
 /* Cartes de formulaire posées sur une bande de marque : retour aux couleurs de texte normales */
 .brand-band .form-card h2, .brand-band .form-card h3 { color: var(--ink-brand); }
 .brand-band .form-card .muted, .brand-band .form-card .lead, .brand-band .form-card .label { color: var(--ink-muted); }
+
+/* Accès réservé aux professionnels (profils hors « à la une ») */
+.access-wall { display: none; }
+.access-wall__card { width: 100%; max-width: 600px; display: grid; gap: var(--space-4); margin: 0 auto; border: 1px solid var(--line); }
+.access-panel .access-wall { display: block; }
+html.has-access .access-panel { display: none; }
+html:not(.has-access) .gated { position: relative; min-height: 820px; }
+html:not(.has-access) .gated > :not(.access-wall) { filter: blur(7px); user-select: none; pointer-events: none; max-height: 640px; overflow: hidden; -webkit-mask-image: linear-gradient(#000 45%, transparent); mask-image: linear-gradient(#000 45%, transparent); }
+html:not(.has-access) .gated > .access-wall { display: block; position: absolute; inset: var(--space-6) 0 auto; z-index: 3; }
+html:not(.has-access) .card.is-locked .card__body > *, html:not(.has-access) .card.is-locked .card__avatar { filter: blur(5px); }
+html:not(.has-access) .card.is-locked::after { content: "Profil réservé"; position: absolute; left: 50%; top: 58%; transform: translate(-50%, -50%); background: var(--violet); color: #fff; font: 500 12px/1 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; padding: 8px 12px; border-radius: var(--radius-pill); pointer-events: none; white-space: nowrap; }
+html:not(.has-access) .needs-access { display: none !important; }

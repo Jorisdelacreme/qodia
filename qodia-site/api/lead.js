@@ -13,11 +13,13 @@
 //   ALLOWED_ORIGINS  facultatif   origines autorisées, ex. "https://qodia.pro,https://www.qodia.pro"
 
 import crypto from "node:crypto";
+import { promises as dns } from "node:dns";
 
 const TYPES = {
   brief: { label: "Nouveau brief", required: ["mode", "description", "prenom", "nom", "entreprise", "email", "telephone"] },
   rappel: { label: "Demande de rappel", required: ["nom", "telephone"] },
-  candidature: { label: "Candidature au cercle", required: ["statut", "nom", "email", "expertise", "ville", "metier", "portfolio"] }
+  candidature: { label: "Candidature au cercle", required: ["statut", "nom", "email", "expertise", "ville", "metier", "portfolio"] },
+  acces: { label: "Accès au cercle", required: ["prenom", "nom", "entreprise", "email"], b2b: true }
 };
 
 const LABELS = {
@@ -40,6 +42,17 @@ const clean = (v) => {
   if (v === null || v === undefined) return "";
   return String(v).replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g, "").trim().slice(0, MAX_FIELD);
 };
+const FREE_MAIL = /@(gmail|googlemail|yahoo|ymail|hotmail|outlook|live|msn|icloud|me|mac|aol|gmx|proton|protonmail|pm|yandex|mail|orange|wanadoo|free|sfr|neuf|laposte|bbox|numericable|club-internet|aliceadsl|libertysurf|voila|tutanota|zoho|hey)\.[a-z.]+$/i;
+// Vérifie que le domaine de l'adresse reçoit des e-mails (enregistrement MX). En cas de lenteur DNS, on laisse passer.
+async function domainReceivesMail(email) {
+  const domain = email.split("@").pop();
+  try {
+    const mx = await Promise.race([dns.resolveMx(domain), new Promise((_, rej) => setTimeout(() => rej(new Error("timeout")), 2500))]);
+    return Array.isArray(mx) && mx.length > 0;
+  } catch (e) {
+    return e.message === "timeout" ? true : false;
+  }
+}
 const isEmail = (s) => /^[^\s@<>()]+@[^\s@<>()]+\.[a-z]{2,}$/i.test(s);
 const display = (key, v) => {
   const val = Array.isArray(v) ? v.join(", ") : v;
@@ -160,6 +173,10 @@ export default async function handler(req, res) {
   const missing = TYPES[type].required.filter((k) => !data[k] || (Array.isArray(data[k]) && !data[k].length));
   if (missing.length) return send(res, 422, { ok: false, error: "champs manquants : " + missing.map((k) => LABELS[k]).join(", ") });
   if (data.email && !isEmail(data.email)) return send(res, 422, { ok: false, error: "adresse e-mail invalide" });
+  if (TYPES[type].b2b) {
+    if (FREE_MAIL.test(data.email)) return send(res, 422, { ok: false, error: "merci d'utiliser votre adresse e-mail professionnelle" });
+    if (!(await domainReceivesMail(data.email))) return send(res, 422, { ok: false, error: "le domaine de cette adresse e-mail ne reçoit pas d'e-mails" });
+  }
 
   if (!process.env.RESEND_API_KEY || !process.env.LEAD_FROM) {
     console.error("RESEND_API_KEY ou LEAD_FROM manquant");
