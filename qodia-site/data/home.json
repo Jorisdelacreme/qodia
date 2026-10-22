@@ -1,71 +1,71 @@
 {
   "_comment": "Textes de la page d'accueil, modifiables dans l'Éditeur Qodia (onglet Accueil). Un retour à la ligne dans un titre devient un saut de ligne.",
+  "blog": {
+    "label": "Le blog",
+    "link": "Tous les articles",
+    "title": "Bien s'entourer."
+  },
+  "circle": {
+    "button": "Voir les {n} membres",
+    "label": "Le cercle",
+    "lead": "Une partie du cercle est visible ici. Après votre brief, on vous présente aussi des profils qui ne sont pas publiés.",
+    "title": "Quelques membres."
+  },
+  "cta": {
+    "button1": "Déposer un brief",
+    "button2": "Réserver un appel",
+    "lead": "Déposez un brief ou réservez un appel de 20 minutes. On vous rappelle dans la journée.",
+    "title": "Parlons de votre projet."
+  },
   "hero": {
     "badge": "Une initiative DeLaCrème",
-    "title": "Le cercle fermé des spécialistes du branding et du marketing digital.",
-    "lead": "Une centaine de freelances et d'agences choisis un par un. Choisissez votre expert, ou laissez-nous composer l'équipe.",
+    "helpAfter": ", on vous rappelle dans la journée.",
     "helpBefore": "Pas sûr de ce qu'il vous faut ?",
     "helpLink": "Déposez un brief",
-    "helpAfter": ", on vous rappelle dans la journée."
+    "lead": "Une centaine de freelances et d'agences choisis un par un. Choisissez votre expert, ou laissez-nous composer l'équipe.",
+    "title": "Le cercle fermé des spécialistes du branding et du marketing digital."
+  },
+  "how": {
+    "label": "Comment ça marche",
+    "lead": "Dans les deux cas, chaque demande est qualifiée par l'équipe Qodia avant la mise en relation.",
+    "mode1Button": "Explorer le cercle",
+    "mode1Label": "Mise en relation",
+    "mode1Step1": "Vous demandez un contact depuis la fiche du membre.",
+    "mode1Step2": "On vous rappelle dans la journée pour cadrer le besoin.",
+    "mode1Step3": "Vous échangez avec le membre et signez avec lui.",
+    "mode1Text": "Vous parcourez le cercle, vous choisissez un freelance ou une agence, on vous présente. Vous pilotez la mission en direct.",
+    "mode1Title": "Je choisis mon expert.",
+    "mode2Button": "Déposer un brief",
+    "mode2Label": "Projet piloté",
+    "mode2Step1": "Vous déposez un brief en cinq minutes.",
+    "mode2Step2": "On vous propose une équipe et un devis global.",
+    "mode2Step3": "Qodia coordonne les experts jusqu'à la livraison.",
+    "mode2Text": "Vous décrivez votre projet, on compose l'équipe dans le cercle et on la pilote. Un interlocuteur, une seule facture.",
+    "mode2Title": "Qodia s'occupe de tout.",
+    "title": "Deux façons de travailler avec le cercle."
+  },
+  "join": {
+    "button": "Candidater au cercle",
+    "label": "Freelance ou agence",
+    "text": "Le cercle s'agrandit par cooptation et sélection. Des missions qualifiées, sans prospection, au sein d'un réseau de pairs.",
+    "title": "Rejoindre le cercle."
   },
   "logos": {
     "label": "Ils nous font confiance"
   },
-  "how": {
-    "label": "Comment ça marche",
-    "title": "Deux façons de travailler avec le cercle.",
-    "lead": "Dans les deux cas, chaque demande est qualifiée par l'équipe Qodia avant la mise en relation.",
-    "mode1Label": "Mise en relation",
-    "mode1Title": "Je choisis mon expert.",
-    "mode1Text": "Vous parcourez le cercle, vous choisissez un freelance ou une agence, on vous présente. Vous pilotez la mission en direct.",
-    "mode1Step1": "Vous demandez un contact depuis la fiche du membre.",
-    "mode1Step2": "On vous rappelle dans la journée pour cadrer le besoin.",
-    "mode1Step3": "Vous échangez avec le membre et signez avec lui.",
-    "mode1Button": "Explorer le cercle",
-    "mode2Label": "Projet piloté",
-    "mode2Title": "Qodia s'occupe de tout.",
-    "mode2Text": "Vous décrivez votre projet, on compose l'équipe dans le cercle et on la pilote. Un interlocuteur, une seule facture.",
-    "mode2Step1": "Vous déposez un brief en cinq minutes.",
-    "mode2Step2": "On vous propose une équipe et un devis global.",
-    "mode2Step3": "Qodia coordonne les experts jusqu'à la livraison.",
-    "mode2Button": "Déposer un brief"
-  },
-  "circle": {
-    "label": "Le cercle",
-    "title": "Quelques membres.",
-    "lead": "Une partie du cercle est visible ici. Après votre brief, on vous présente aussi des profils qui ne sont pas publiés.",
-    "button": "Voir les {n} membres"
-  },
   "needs": {
     "label": "Par expertise",
-    "title": "De quoi avez-vous besoin ?",
-    "sectorsLabel": "Ou par secteur"
+    "sectorsLabel": "Ou par secteur",
+    "title": "De quoi avez-vous besoin ?"
   },
   "why": {
     "label": "Pourquoi un cercle fermé",
-    "title": "Moins de profils.\nDe meilleurs profils.",
-    "r1Title": "Choisis un par un",
     "r1Text": "Chaque membre est coopté, rencontré et vérifié : portfolio, références, documents légaux. Pas d'inscription libre.",
-    "r2Title": "Le réseau d'une agence",
+    "r1Title": "Choisis un par un",
     "r2Text": "Le cercle est né du réseau de DeLaCrème, agence fondée en 2015 et forte de plus de 170 clients. Ses membres sont des partenaires avec qui l'agence a déjà travaillé.",
+    "r2Title": "Le réseau d'une agence",
+    "r3Text": "Chaque demande est lue par l'équipe et vous êtes rappelé dans la journée. Les avis clients sont recueillis par Qodia en fin de mission.",
     "r3Title": "Un humain au bout du fil",
-    "r3Text": "Chaque demande est lue par l'équipe et vous êtes rappelé dans la journée. Les avis clients sont recueillis par Qodia en fin de mission."
-  },
-  "blog": {
-    "label": "Le blog",
-    "title": "Bien s'entourer.",
-    "link": "Tous les articles"
-  },
-  "join": {
-    "label": "Freelance ou agence",
-    "title": "Rejoindre le cercle.",
-    "text": "Le cercle s'agrandit par cooptation et sélection. Des missions qualifiées, sans prospection, au sein d'un réseau de pairs.",
-    "button": "Candidater au cercle"
-  },
-  "cta": {
-    "title": "Parlons de votre projet.",
-    "lead": "Déposez un brief ou réservez un appel de 20 minutes. On vous rappelle dans la journée.",
-    "button1": "Déposer un brief",
-    "button2": "Réserver un appel"
+    "title": "Moins de profils.\nDe meilleurs profils."
   }
 }

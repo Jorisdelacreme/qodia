@@ -3,25 +3,85 @@
   "url": "https://qodia.pro",
   "email": "hello@delacreme.pro",
   "families": [
-    { "id": "branding", "label": "Branding & design", "desc": "Identité de marque, UX/UI, direction artistique" },
-    { "id": "contenu", "label": "Contenu & vidéo", "desc": "Vidéo, motion design, brand content" },
-    { "id": "acquisition", "label": "Acquisition", "desc": "SEO, GEO, SEA, media buying" },
-    { "id": "web", "label": "Web & e-commerce", "desc": "Développement, WordPress, Shopify, no-code" },
-    { "id": "social", "label": "Social media", "desc": "Community management, social ads" },
-    { "id": "strategie", "label": "Stratégie & direction", "desc": "CMO à temps partiel, direction de création" }
+    {
+      "id": "branding",
+      "label": "Branding & design",
+      "desc": "Identité de marque, UX/UI, direction artistique"
+    },
+    {
+      "id": "contenu",
+      "label": "Contenu & vidéo",
+      "desc": "Vidéo, motion design, brand content"
+    },
+    {
+      "id": "acquisition",
+      "label": "Acquisition",
+      "desc": "SEO, GEO, SEA, media buying"
+    },
+    {
+      "id": "web",
+      "label": "Web & e-commerce",
+      "desc": "Développement, WordPress, Shopify, no-code"
+    },
+    {
+      "id": "social",
+      "label": "Social media",
+      "desc": "Community management, social ads"
+    },
+    {
+      "id": "strategie",
+      "label": "Stratégie & direction",
+      "desc": "CMO à temps partiel, direction de création"
+    }
   ],
   "brands": [
-    { "name": "Engie", "logo": "/assets/logos/clients/engie.png" },
-    { "name": "Paris Basketball", "logo": "/assets/logos/clients/paris-basketball.png" },
-    { "name": "Fédération Française de Rugby", "logo": "/assets/logos/clients/ffr.png" },
-    { "name": "Institut Français de l'Expérience Patient", "logo": "/assets/logos/clients/ifep.png" },
-    { "name": "Les Caves du Louvre", "logo": "/assets/logos/clients/caves-du-louvre.png" },
-    { "name": "Ligue Nationale de Volley", "logo": "/assets/logos/clients/lnv.png" },
-    { "name": "Cepton Stratégies", "logo": "/assets/logos/clients/cepton.png" },
-    { "name": "Domani", "logo": "/assets/logos/clients/domani.png" },
-    { "name": "Brico Dépôt", "logo": "/assets/logos/clients/brico-depot.png" },
-    { "name": "John Lobb", "logo": "/assets/logos/clients/john-lobb.png" },
-    { "name": "ICC", "logo": "/assets/logos/clients/icc.png" },
-    { "name": "Réside Études", "logo": "/assets/logos/clients/reside-etudes.png" }
+    {
+      "name": "Engie",
+      "logo": "/assets/logos/clients/engie.png"
+    },
+    {
+      "name": "Paris Basketball",
+      "logo": "/assets/logos/clients/paris-basketball.png"
+    },
+    {
+      "name": "Fédération Française de Rugby",
+      "logo": "/assets/logos/clients/ffr.png"
+    },
+    {
+      "name": "Institut Français de l'Expérience Patient",
+      "logo": "/assets/logos/clients/ifep.png"
+    },
+    {
+      "name": "Les Caves du Louvre",
+      "logo": "/assets/logos/clients/caves-du-louvre.png"
+    },
+    {
+      "name": "Ligue Nationale de Volley",
+      "logo": "/assets/logos/clients/lnv.png"
+    },
+    {
+      "name": "Cepton Stratégies",
+      "logo": "/assets/logos/clients/cepton.png"
+    },
+    {
+      "name": "Domani",
+      "logo": "/assets/logos/clients/domani.png"
+    },
+    {
+      "name": "Brico Dépôt",
+      "logo": "/assets/logos/clients/brico-depot.png"
+    },
+    {
+      "name": "John Lobb",
+      "logo": "/assets/logos/clients/john-lobb.png"
+    },
+    {
+      "name": "ICC",
+      "logo": "/assets/logos/clients/icc.png"
+    },
+    {
+      "name": "Réside Études",
+      "logo": "/assets/logos/clients/reside-etudes.png"
+    }
   ]
 }

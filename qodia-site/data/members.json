@@ -2,56 +2,10 @@
   "_comment": "Fiches publiques du cercle. Ce fichier sera remplacé par l'export du CRM (voir README, section CRM). Seuls les membres avec \"visible\": true sont publiés. Infos relevées sur les sites publics des membres le 27/09/2026 : à faire valider par chaque membre avant mise en ligne.",
   "members": [
     {
-      "slug": "mothaiba",
-      "visible": true,
-      "featured": true,
-      "featuredOrder": 0,
-      "name": "Mothaiba",
-      "kind": "agence",
-      "family": "contenu",
-      "headline": "Agence créative : production audiovisuelle et formats pour les plateformes",
-      "city": "Ivry-sur-Seine",
-      "bio": [
-        "Mothaiba conçoit et produit des contenus pour les marques comme pour les créateurs : événements, contenus d'influence, productions corporate, vidéos YouTube et TikTok.",
-        "Le studio porte la direction artistique autant que la production. Pour un dispositif régulier, l'agence propose aussi une offre dédiée au brand content, Mothaiba DLC."
-      ],
-      "skills": [
-        "Production audiovisuelle",
-        "Direction artistique",
-        "Formats YouTube & TikTok",
-        "Contenus créateurs",
-        "Brand content"
-      ],
-      "tools": [],
-      "sectors": [
-        "Sport",
-        "Médias & divertissement",
-        "Grande consommation"
-      ],
-      "references": [
-        "Lacoste",
-        "Red Bull",
-        "Prime Video",
-        "Ligue 1",
-        "Betclic",
-        "Deliveroo",
-        "Super U",
-        "Deezer"
-      ],
-      "referencesNote": "Et côté créateurs : Inoxtag, Michou, EnjoyPhoenix, Joyca.",
-      "website": "https://www.mothaiba.co/",
-      "portfolio": "https://www.mothaiba.co/nos-realisations",
-      "logo": "",
-      "photo": "",
-      "cover": "",
-      "color": "rouge",
-      "projects": []
-    },
-    {
       "slug": "lucas-dautun",
       "visible": true,
       "featured": true,
-      "featuredOrder": 1,
+      "featuredOrder": 0,
       "name": "Lucas Dautun",
       "kind": "freelance",
       "family": "branding",
@@ -99,141 +53,10 @@
       "projects": []
     },
     {
-      "slug": "coudac",
-      "visible": true,
-      "featured": true,
-      "featuredOrder": 2,
-      "name": "Coudac",
-      "kind": "agence",
-      "family": "acquisition",
-      "headline": "Agence d'acquisition et de performance marketing",
-      "city": "Paris",
-      "bio": [
-        "Coudac pilote l'acquisition payante de marques e-commerce et SaaS : Google Ads, Meta Ads, Amazon Ads, TikTok Shop, avec un tracking server-side pour mesurer juste.",
-        "L'agence annonce plus de 150 clients actifs, et son groupe incube d'autres agences spécialisées."
-      ],
-      "skills": [
-        "Google Ads",
-        "Meta Ads",
-        "Amazon Ads",
-        "TikTok Shop",
-        "Tracking server-side"
-      ],
-      "tools": [],
-      "sectors": [
-        "Mode & beauté",
-        "E-commerce",
-        "SaaS & tech"
-      ],
-      "references": [
-        "Eden Park",
-        "Gerard Darel",
-        "PayFit",
-        "Wonderbox",
-        "L'Oréal",
-        "Aubade",
-        "Spring",
-        "Fursac"
-      ],
-      "website": "https://www.coudac.com/",
-      "portfolio": "",
-      "logo": "",
-      "photo": "",
-      "cover": "",
-      "color": "jaune",
-      "projects": []
-    },
-    {
-      "slug": "grapheine",
-      "visible": true,
-      "featured": true,
-      "featuredOrder": 3,
-      "name": "Graphéine",
-      "kind": "agence",
-      "family": "branding",
-      "headline": "Agence de design de marque : identité visuelle, stratégie de marque, design graphique",
-      "city": "Paris, Lyon",
-      "bio": [
-        "Créée en 2002, Graphéine accompagne institutions, lieux culturels et organisations dans la construction de leur identité : stratégie de marque, identité visuelle, design graphique.",
-        "L'agence est une référence des identités publiques et de l'enseignement supérieur."
-      ],
-      "skills": [
-        "Identité visuelle",
-        "Stratégie de marque",
-        "Design graphique",
-        "Signalétique"
-      ],
-      "tools": [],
-      "sectors": [
-        "Éducation",
-        "Culture & institutions",
-        "Associations"
-      ],
-      "references": [
-        "Université de Toulouse",
-        "Université de Lille",
-        "Université Paris Cité",
-        "Opéra de Saint-Étienne",
-        "Mont-Saint-Michel",
-        "Fondation pour le Logement",
-        "Smile"
-      ],
-      "website": "https://grapheine.com/",
-      "portfolio": "",
-      "logo": "",
-      "photo": "",
-      "cover": "",
-      "color": "violet",
-      "projects": []
-    },
-    {
-      "slug": "sebastien-navizet",
-      "visible": true,
-      "featured": true,
-      "featuredOrder": 4,
-      "name": "Sébastien Navizet",
-      "kind": "freelance",
-      "family": "branding",
-      "headline": "Directeur de création et brand designer",
-      "city": "Paris",
-      "bio": [
-        "Sébastien construit des marques pour les entreprises tech, de la levée de fonds à l'échelle : plateforme de marque, identité, direction de création.",
-        "Associé et directeur créatif chez The Design Crew, il a accompagné plus de 40 entreprises, dont Algolia de la série A à la série D."
-      ],
-      "skills": [
-        "Direction de création",
-        "Brand design",
-        "Identité visuelle",
-        "Design produit"
-      ],
-      "tools": [
-        "Figma",
-        "Framer",
-        "Adobe Suite",
-        "Midjourney"
-      ],
-      "sectors": [
-        "SaaS & tech"
-      ],
-      "references": [
-        "Algolia",
-        "Pigment",
-        "Dylogy",
-        "Specify"
-      ],
-      "website": "https://www.studionvzt.com/",
-      "portfolio": "https://dribbble.com/SebastienNvzt",
-      "logo": "",
-      "photo": "",
-      "cover": "",
-      "color": "rouge",
-      "projects": []
-    },
-    {
       "slug": "fred-fischer",
       "visible": true,
       "featured": true,
-      "featuredOrder": 5,
+      "featuredOrder": 1,
       "name": "Fred Fischer",
       "kind": "freelance",
       "family": "web",
@@ -277,9 +100,92 @@
       "projects": []
     },
     {
+      "slug": "fabien-huet",
+      "visible": true,
+      "featured": true,
+      "featuredOrder": 2,
+      "name": "Fabien Huet",
+      "kind": "freelance",
+      "family": "acquisition",
+      "headline": "Consultant SEO, GEO et SEA",
+      "city": "Angers",
+      "bio": [
+        "Ancien traffic manager en PME, Fabien travaille la visibilité de ses clients sur les moteurs de recherche comme sur les IA génératives : SEO, GEO, campagnes Google Ads et rédaction web.",
+        "Une approche de terrain pour les PME et l'e-commerce."
+      ],
+      "skills": [
+        "SEO",
+        "GEO",
+        "Google Ads",
+        "Rédaction web"
+      ],
+      "tools": [
+        "Google Ads"
+      ],
+      "sectors": [
+        "PME & start-up",
+        "E-commerce"
+      ],
+      "references": [],
+      "website": "https://www.fhdigital.fr/",
+      "portfolio": "https://www.malt.fr/profile/fabienhuet1",
+      "logo": "",
+      "photo": "",
+      "cover": "",
+      "color": "jaune",
+      "projects": []
+    },
+    {
+      "slug": "mothaiba",
+      "visible": true,
+      "featured": true,
+      "featuredOrder": 3,
+      "name": "Mothaiba",
+      "kind": "agence",
+      "family": "contenu",
+      "headline": "Agence créative : production audiovisuelle et formats pour les plateformes",
+      "city": "Ivry-sur-Seine",
+      "bio": [
+        "Mothaiba conçoit et produit des contenus pour les marques comme pour les créateurs : événements, contenus d'influence, productions corporate, vidéos YouTube et TikTok.",
+        "Le studio porte la direction artistique autant que la production. Pour un dispositif régulier, l'agence propose aussi une offre dédiée au brand content, Mothaiba DLC."
+      ],
+      "skills": [
+        "Production audiovisuelle",
+        "Direction artistique",
+        "Formats YouTube & TikTok",
+        "Contenus créateurs",
+        "Brand content"
+      ],
+      "tools": [],
+      "sectors": [
+        "Sport",
+        "Médias & divertissement",
+        "Grande consommation"
+      ],
+      "references": [
+        "Lacoste",
+        "Red Bull",
+        "Prime Video",
+        "Ligue 1",
+        "Betclic",
+        "Deliveroo",
+        "Super U",
+        "Deezer"
+      ],
+      "referencesNote": "Et côté créateurs : Inoxtag, Michou, EnjoyPhoenix, Joyca.",
+      "website": "https://www.mothaiba.co/",
+      "portfolio": "https://www.mothaiba.co/nos-realisations",
+      "logo": "",
+      "photo": "",
+      "cover": "",
+      "color": "rouge",
+      "projects": []
+    },
+    {
       "slug": "31-grammes-studio",
       "visible": true,
-      "featured": false,
+      "featured": true,
+      "featuredOrder": 4,
       "name": "31 Grammes Studio",
       "kind": "agence",
       "family": "branding",
@@ -305,6 +211,84 @@
       "photo": "",
       "cover": "",
       "color": "rouge",
+      "projects": []
+    },
+    {
+      "slug": "startperf",
+      "visible": true,
+      "featured": true,
+      "featuredOrder": 5,
+      "name": "StartPerf",
+      "kind": "agence",
+      "family": "acquisition",
+      "headline": "Agence SEO data-driven et stratégie d'acquisition",
+      "city": "Paris",
+      "bio": [
+        "Créée en 2014, StartPerf construit des stratégies de référencement naturel pilotées par la donnée, pour des PME, des start-up et des grands groupes.",
+        "Une vingtaine de collaborateurs, et une approche de l'acquisition qui part de la recherche."
+      ],
+      "skills": [
+        "SEO",
+        "Stratégie d'acquisition",
+        "Audit technique",
+        "Contenu SEO"
+      ],
+      "tools": [],
+      "sectors": [
+        "PME & start-up",
+        "Grands groupes"
+      ],
+      "references": [],
+      "website": "https://www.startperf.com/",
+      "portfolio": "",
+      "logo": "",
+      "photo": "",
+      "cover": "",
+      "color": "violet",
+      "projects": []
+    },
+    {
+      "slug": "coudac",
+      "visible": true,
+      "featured": false,
+      "name": "Coudac",
+      "kind": "agence",
+      "family": "acquisition",
+      "headline": "Agence d'acquisition et de performance marketing",
+      "city": "Paris",
+      "bio": [
+        "Coudac pilote l'acquisition payante de marques e-commerce et SaaS : Google Ads, Meta Ads, Amazon Ads, TikTok Shop, avec un tracking server-side pour mesurer juste.",
+        "L'agence annonce plus de 150 clients actifs, et son groupe incube d'autres agences spécialisées."
+      ],
+      "skills": [
+        "Google Ads",
+        "Meta Ads",
+        "Amazon Ads",
+        "TikTok Shop",
+        "Tracking server-side"
+      ],
+      "tools": [],
+      "sectors": [
+        "Mode & beauté",
+        "E-commerce",
+        "SaaS & tech"
+      ],
+      "references": [
+        "Eden Park",
+        "Gerard Darel",
+        "PayFit",
+        "Wonderbox",
+        "L'Oréal",
+        "Aubade",
+        "Spring",
+        "Fursac"
+      ],
+      "website": "https://www.coudac.com/",
+      "portfolio": "",
+      "logo": "",
+      "photo": "",
+      "cover": "",
+      "color": "jaune",
       "projects": []
     },
     {
@@ -348,71 +332,87 @@
       "projects": []
     },
     {
-      "slug": "fabien-huet",
+      "slug": "grapheine",
       "visible": true,
       "featured": false,
-      "name": "Fabien Huet",
-      "kind": "freelance",
-      "family": "acquisition",
-      "headline": "Consultant SEO, GEO et SEA",
-      "city": "Angers",
-      "bio": [
-        "Ancien traffic manager en PME, Fabien travaille la visibilité de ses clients sur les moteurs de recherche comme sur les IA génératives : SEO, GEO, campagnes Google Ads et rédaction web.",
-        "Une approche de terrain pour les PME et l'e-commerce."
-      ],
-      "skills": [
-        "SEO",
-        "GEO",
-        "Google Ads",
-        "Rédaction web"
-      ],
-      "tools": [
-        "Google Ads"
-      ],
-      "sectors": [
-        "PME & start-up",
-        "E-commerce"
-      ],
-      "references": [],
-      "website": "https://www.fhdigital.fr/",
-      "portfolio": "https://www.malt.fr/profile/fabienhuet1",
-      "logo": "",
-      "photo": "",
-      "cover": "",
-      "color": "jaune",
-      "projects": []
-    },
-    {
-      "slug": "startperf",
-      "visible": true,
-      "featured": false,
-      "name": "StartPerf",
+      "name": "Graphéine",
       "kind": "agence",
-      "family": "acquisition",
-      "headline": "Agence SEO data-driven et stratégie d'acquisition",
-      "city": "Paris",
+      "family": "branding",
+      "headline": "Agence de design de marque : identité visuelle, stratégie de marque, design graphique",
+      "city": "Paris, Lyon",
       "bio": [
-        "Créée en 2014, StartPerf construit des stratégies de référencement naturel pilotées par la donnée, pour des PME, des start-up et des grands groupes.",
-        "Une vingtaine de collaborateurs, et une approche de l'acquisition qui part de la recherche."
+        "Créée en 2002, Graphéine accompagne institutions, lieux culturels et organisations dans la construction de leur identité : stratégie de marque, identité visuelle, design graphique.",
+        "L'agence est une référence des identités publiques et de l'enseignement supérieur."
       ],
       "skills": [
-        "SEO",
-        "Stratégie d'acquisition",
-        "Audit technique",
-        "Contenu SEO"
+        "Identité visuelle",
+        "Stratégie de marque",
+        "Design graphique",
+        "Signalétique"
       ],
       "tools": [],
       "sectors": [
-        "PME & start-up",
-        "Grands groupes"
+        "Éducation",
+        "Culture & institutions",
+        "Associations"
       ],
-      "references": [],
-      "website": "https://www.startperf.com/",
+      "references": [
+        "Université de Toulouse",
+        "Université de Lille",
+        "Université Paris Cité",
+        "Opéra de Saint-Étienne",
+        "Mont-Saint-Michel",
+        "Fondation pour le Logement",
+        "Smile"
+      ],
+      "website": "https://grapheine.com/",
       "portfolio": "",
       "logo": "",
       "photo": "",
       "cover": "",
       "color": "violet",
+      "projects": []
+    },
+    {
+      "slug": "sebastien-navizet",
+      "visible": true,
+      "featured": false,
+      "name": "Sébastien Navizet",
+      "kind": "freelance",
+      "family": "branding",
+      "headline": "Directeur de création et brand designer",
+      "city": "Paris",
+      "bio": [
+        "Sébastien construit des marques pour les entreprises tech, de la levée de fonds à l'échelle : plateforme de marque, identité, direction de création.",
+        "Associé et directeur créatif chez The Design Crew, il a accompagné plus de 40 entreprises, dont Algolia de la série A à la série D."
+      ],
+      "skills": [
+        "Direction de création",
+        "Brand design",
+        "Identité visuelle",
+        "Design produit"
+      ],
+      "tools": [
+        "Figma",
+        "Framer",
+        "Adobe Suite",
+        "Midjourney"
+      ],
+      "sectors": [
+        "SaaS & tech"
+      ],
+      "references": [
+        "Algolia",
+        "Pigment",
+        "Dylogy",
+        "Specify"
+      ],
+      "website": "https://www.studionvzt.com/",
+      "portfolio": "https://dribbble.com/SebastienNvzt",
+      "logo": "",
+      "photo": "",
+      "cover": "",
+      "color": "rouge",
       "projects": []
     }
   ]
