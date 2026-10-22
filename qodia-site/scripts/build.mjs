@@ -40,6 +40,7 @@ async function loadMembers() {
 }
 
 const site = await json("data/site.json");
+const home = await json("data/home.json");
 const FAM = Object.fromEntries(site.families.map((f) => [f.id, f]));
 const members = (await loadMembers()).filter((m) => m.visible !== false).map((m) => ({ ...m, slug: m.slug || slugify(m.name) }));
 const SECTORS = [...new Set(members.flatMap((m) => m.sectors || []))].sort((a, b) => a.localeCompare(b, "fr"));
@@ -516,7 +517,13 @@ const directives = {
   "email": () => site.email,
   "build-date": () => fmtDate(BUILD_DATE)
 };
+function homeText(pathStr) {
+  const v = pathStr.split(".").reduce((o, k) => (o == null ? undefined : o[k]), home);
+  if (typeof v !== "string") throw new Error(`Texte d'accueil manquant : ${pathStr}`);
+  return esc(v.replace(/\{n\}/g, String(members.length))).replace(/\n/g, "<br>");
+}
 function render(src) {
+  src = src.replace(/<!--@t:([a-zA-Z0-9_.]+)-->/g, (all, p) => homeText(p));
   return src.replace(/<!--@([a-z0-9-]+)-->/g, (all, name) => {
     if (!directives[name]) throw new Error(`Directive inconnue : ${name}`);
     return directives[name]();
