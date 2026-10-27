@@ -157,13 +157,15 @@
       "headline": "Directeur artistique, brand designer et développeur WordPress",
       "city": "Lyon",
       "bio": [
-        "Dareth conçoit des identités de marque et des sites web éthiques et responsables : direction artistique, supports print et digitaux, sites WordPress éco-conçus et accessibles.",
-        "Plus de vingt ans de métier, entre son studio D SIGNED puis DZGND.studio, la direction de projet chez Insign et le pilotage de l'équipe Run de Be API, agence WordPress. Il a aussi été associé de DeLaCrème de 2018 à 2020."
+        "Dareth conçoit des stratégies et identités de marque pour aligner votre communication avec vos valeurs. La passion pour ses métiers lui permet d’explorer les différents terrains d’une campagne, notamment en passant de la stratégie aux tâches opérationnelles comme la direction artistique, les déclinaisons sur supports print ou digital, les Design Systems, le développement de sites WordPress éco-conçus et accessibles.",
+        "Plus de 25 ans de métier, entre son studio D SIGNED devenu DZGND.studio, la direction de projet chez Insign et le pilotage de l'équipe Run de Be API, agence WordPress. Il a aussi été associé de DeLaCrème de 2018 à 2020."
       ],
       "skills": [
-        "Direction artistique",
+        "Stratégie de marque",
         "Identité visuelle",
+        "Direction artistique",
         "Brand design",
+        "Design system",
         "Sites WordPress éco-conçus",
         "SEO",
         "Formation"
@@ -180,12 +182,17 @@
         "Éducation"
       ],
       "references": [
+        "Matomo",
         "Devialet",
         "Eurosport",
+        "Sparklane (Groupe Ellisphere)",
+        "Goodloop",
+        "Polylang",
+        "SecuPress",
         "Universal Music France",
+        "Orange",
         "Tencent",
         "BlackBerry",
-        "Orange",
         "Mairie de Villeurbanne",
         "Université Claude Bernard Lyon 1"
       ],
