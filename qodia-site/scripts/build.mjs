@@ -58,6 +58,80 @@ const SECTORS = [...new Set(members.flatMap((m) => m.sectors || []))].sort((a, b
 const COLORS = { violet: "#350085", rouge: "#FF294A", jaune: "#FFD300", cyan: "#00F3E9" };
 
 /* ------------------------------------------------------------------ */
+/* Logos des agences : sans logo ajouté dans l'Éditeur, on récupère    */
+/* l'icône du site de l'agence au moment du build (apple-touch-icon,   */
+/* icône déclarée, puis service d'icônes Google), copiée sur qodia.pro */
+/* ------------------------------------------------------------------ */
+const LOGO_FILES = [];
+const LOGO_REPORT = [];
+const UA = { "User-Agent": "Mozilla/5.0 (compatible; QodiaBot/1.0; +https://qodia.pro)", Accept: "*/*" };
+async function get(url, ms = 7000) {
+  const ctl = new AbortController(); const t = setTimeout(() => ctl.abort(), ms);
+  try { const r = await fetch(url, { headers: UA, redirect: "follow", signal: ctl.signal }); if (!r.ok) throw new Error(`HTTP ${r.status}`); return r; }
+  finally { clearTimeout(t); }
+}
+function imageSize(buf, type) {
+  if (type.includes("svg")) return 999;
+  if (buf.length > 24 && buf.readUInt32BE(0) === 0x89504e47) return Math.min(buf.readUInt32BE(16), buf.readUInt32BE(20));
+  if (buf.length > 6 && buf.readUInt16LE(0) === 0 && buf.readUInt16LE(2) === 1) { let m = 0; for (let i = 0; i < buf.readUInt16LE(4); i++) { const w = buf[6 + i * 16] || 256; m = Math.max(m, w); } return m; }
+  if (buf.length > 4 && buf[0] === 0xff && buf[1] === 0xd8) { let i = 2; while (i < buf.length - 9) { if (buf[i] !== 0xff) { i++; continue; } const mk = buf[i + 1]; if (mk >= 0xc0 && mk <= 0xcf && ![0xc4, 0xc8, 0xcc].includes(mk)) return Math.min(buf.readUInt16BE(i + 5), buf.readUInt16BE(i + 7)); i += 2 + buf.readUInt16BE(i + 2); } }
+  if (buf.length > 30 && buf.toString("ascii", 0, 4) === "RIFF" && buf.toString("ascii", 8, 12) === "WEBP") return 128;
+  return 0;
+}
+function iconCandidates(html, base) {
+  const out = [];
+  for (const tag of html.match(/<link\b[^>]*>/gi) || []) {
+    const rel = (tag.match(/\brel=["']?([^"'>]+)/i) || [])[1] || "";
+    const href = (tag.match(/\bhref=["']?([^"'\s>]+)/i) || [])[1];
+    if (!href || !/icon/i.test(rel) || /mask-icon/i.test(rel)) continue;
+    const sizes = (tag.match(/\bsizes=["']?([^"'>]+)/i) || [])[1] || "";
+    const size = Math.max(0, ...sizes.split(/\s+/).map((x) => parseInt(x, 10) || 0));
+    const svg = /\.svg(\?|$)/i.test(href) || /svg/i.test(tag);
+    let score = /apple-touch/i.test(rel) ? 1000 + (size || 180) : svg ? 900 : size;
+    try { out.push({ url: new URL(href.replace(/&amp;/g, "&"), base).href, score }); } catch {}
+  }
+  return out.sort((a, b) => b.score - a.score);
+}
+async function fetchLogo(m) {
+  const site = m.website;
+  let html = "", base = site;
+  try { const r = await get(site); html = await r.text(); base = r.url || site; } catch (e) { LOGO_REPORT.push({ slug: m.slug, error: "site " + e.message }); }
+  const host = (() => { try { return new URL(base).hostname; } catch { return ""; } })();
+  const cands = [...iconCandidates(html, base).map((c) => c.url)];
+  if (host) cands.push(`https://${host}/apple-touch-icon.png`, `https://www.google.com/s2/favicons?domain=${host}&sz=256`);
+  for (const url of [...new Set(cands)]) {
+    try {
+      const r = await get(url);
+      const type = (r.headers.get("content-type") || "").toLowerCase();
+      const buf = Buffer.from(await r.arrayBuffer());
+      const svgText = buf.slice(0, 400).toString("utf8");
+      const isSvg = type.includes("svg") || /<svg[\s>]/i.test(svgText);
+      if (!isSvg && !type.startsWith("image/")) continue;
+      if (buf.length < 100 || buf.length > 1_500_000) continue;
+      const size = imageSize(buf, isSvg ? "svg" : type);
+      if (size && size < 64) continue;
+      const ext = isSvg ? "svg" : type.includes("png") ? "png" : type.includes("jpeg") || type.includes("jpg") ? "jpg" : type.includes("webp") ? "webp" : type.includes("icon") ? "ico" : "png";
+      const rel = `/assets/logos/membres/${m.slug}.${ext}`;
+      LOGO_FILES.push([rel, buf]);
+      LOGO_REPORT.push({ slug: m.slug, source: url, size: size || null });
+      return rel;
+    } catch {}
+  }
+  LOGO_REPORT.push({ slug: m.slug, error: "aucune icône exploitable" });
+  return "";
+}
+async function resolveLogos(list) {
+  const todo = list.filter((m) => m.kind === "agence" && !m.logo && m.website);
+  if (!todo.length || process.env.QODIA_SKIP_LOGOS) return;
+  let i = 0;
+  await Promise.all(Array.from({ length: 8 }, async () => {
+    while (i < todo.length) { const m = todo[i++]; const logo = await fetchLogo(m); if (logo) { m.logo = logo; m.logoAuto = true; } }
+  }));
+  console.log(`Logos d'agences récupérés : ${todo.filter((m) => m.logo).length}/${todo.length}.`);
+}
+await resolveLogos(members);
+
+/* ------------------------------------------------------------------ */
 /* Éléments communs                                                    */
 /* ------------------------------------------------------------------ */
 const ICON = {
@@ -210,7 +284,7 @@ function page(meta, body) {
 /* ------------------------------------------------------------------ */
 function avatar(m, size = "") {
   const cls = `avatar ${size ? "avatar--" + size : ""}`;
-  if (m.logo) return `<span class="${cls} avatar--logo"><img src="${esc(m.logo)}" alt="" loading="lazy"></span>`;
+  if (m.logo) return `<span class="${cls} ${m.logoAuto ? "avatar--icon" : "avatar--logo"}"><img src="${esc(m.logo)}" alt="" loading="lazy"></span>`;
   if (m.photo) return `<span class="${cls} avatar--photo"><img src="${esc(m.photo)}" alt="" loading="lazy"></span>`;
   return `<span class="${cls} avatar--${m.color || "violet"}" aria-hidden="true">${esc(initials(m.name))}</span>`;
 }
@@ -589,6 +663,8 @@ async function out(rel, html) {
 await rm(DIST, { recursive: true, force: true });
 await mkdir(DIST, { recursive: true });
 await cp(path.join(ROOT, "static"), DIST, { recursive: true });
+for (const [rel, buf] of LOGO_FILES) { await mkdir(path.dirname(path.join(DIST, rel)), { recursive: true }); await writeFile(path.join(DIST, rel), buf); }
+await writeFile(path.join(DIST, "data-logos.json"), JSON.stringify({ generated: new Date().toISOString(), logos: LOGO_REPORT }, null, 2)).catch(() => {});
 
 const urls = [];
 for (const f of (await readdir(path.join(ROOT, "src/pages"))).filter((f) => f.endsWith(".html"))) {

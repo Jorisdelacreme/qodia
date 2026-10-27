@@ -522,3 +522,6 @@ html:not(.has-access) .needs-access { display: none !important; }
 .legend dl > div { display: grid; grid-template-columns: 170px 1fr; gap: var(--space-4); align-items: start; }
 .legend dd { margin: 0; font-size: 14px; color: var(--ink-muted); }
 @media (max-width: 640px) { .legend dl > div { grid-template-columns: 1fr; gap: var(--space-1); } }
+/* Icône récupérée sur le site de l'agence : carrée, plein cadre */
+.avatar--icon { background: #fff; border: 1px solid var(--line); }
+.avatar--icon img { width: 100%; height: 100%; object-fit: cover; }
