@@ -10,6 +10,14 @@ import { fileURLToPath } from "node:url";
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const DIST = path.join(ROOT, "dist");
 const BUILD_DATE = new Date().toISOString().slice(0, 10);
+/* Version des CSS/JS : change à chaque modification, pour que les navigateurs ne gardent pas l'ancienne version en cache */
+import { createHash } from "node:crypto";
+const ASSET_V = await (async () => {
+  const h = createHash("sha1");
+  for (const dir of ["static/assets/css", "static/assets/js"]) for (const f of (await readdir(path.join(ROOT, dir))).sort()) h.update(await readFile(path.join(ROOT, dir, f)));
+  return h.digest("hex").slice(0, 8);
+})();
+const v = (src) => (src.startsWith("/assets/") ? `${src}?v=${ASSET_V}` : src);
 
 const esc = (s = "") => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const slugify = (s) => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/&/g, "et").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
@@ -170,11 +178,11 @@ ${meta.noindex ? '<meta name="robots" content="noindex">' : ""}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
-<link rel="stylesheet" href="/assets/css/qodia.css">
+<link rel="stylesheet" href="${v("/assets/css/qodia.css")}">
 <script>try{if(localStorage.getItem("qodia_access"))document.documentElement.classList.add("has-access")}catch(e){}</script>
-<script src="/assets/js/config.js"></script>
-<script src="/assets/js/site.js" defer></script>
-${(meta.scripts || []).map((s) => `<script src="${s}" defer></script>`).join("\n")}
+<script src="${v("/assets/js/config.js")}"></script>
+<script src="${v("/assets/js/site.js")}" defer></script>
+${(meta.scripts || []).map((s) => `<script src="${v(s)}" defer></script>`).join("\n")}
 ${meta.jsonld ? `<script type="application/ld+json">${JSON.stringify(meta.jsonld)}</script>` : ""}
 </head>
 <body>
