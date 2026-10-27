@@ -338,7 +338,8 @@ select.field__input { appearance: none; background-image: url("data:image/svg+xm
 /* Annuaire */
 .dir-head { padding: var(--space-16) 0 var(--space-12); }
 .filters { display: grid; gap: var(--space-4); padding: var(--space-6); border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--surface); margin-top: var(--space-8); }
-.filters__row { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: var(--space-3); }
+.filters__row { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: var(--space-3); }
+.filters__tags { display: flex; flex-wrap: wrap; gap: var(--space-3) var(--space-8); }
 @media (max-width: 860px) { .filters__row { grid-template-columns: 1fr; } }
 .search { position: relative; }
 .search svg { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; color: var(--ink-muted); }
@@ -490,3 +491,34 @@ html:not(.has-access) .gated > .access-wall { display: block; position: absolute
 html:not(.has-access) .card.is-locked .card__body > *, html:not(.has-access) .card.is-locked .card__avatar { filter: blur(5px); }
 html:not(.has-access) .card.is-locked::after { content: "Profil réservé"; position: absolute; left: 50%; top: 58%; transform: translate(-50%, -50%); background: var(--violet); color: #fff; font: 500 12px/1 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; padding: 8px 12px; border-radius: var(--radius-pill); pointer-events: none; white-space: nowrap; }
 html:not(.has-access) .needs-access { display: none !important; }
+
+/* Statuts (Membre / Recommandé / Sponsorisé) et équipes */
+.card__badges { position: relative; display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; }
+.badge--onlight { background: #fff; color: var(--violet); }
+.badge--outline { background: rgba(255,255,255,.88); color: var(--ink-muted); }
+.card--sponsored { border-color: var(--jaune); box-shadow: 0 0 0 2px var(--jaune); }
+.card[style*="--team"] { border-top: 0; }
+.card[style*="--team"]::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 6px; background: var(--team); z-index: 2; }
+.team { display: flex; align-items: center; gap: 8px; margin: 0; font-size: 13px; line-height: 18px; color: var(--ink); min-width: 0; }
+.team .avatar--xs { width: 24px; height: 24px; font-size: 10px; letter-spacing: 0; border-radius: 6px; box-shadow: 0 0 0 2px var(--team, var(--violet)); }
+.team .avatar--xs.avatar--logo { padding: 2px; }
+.team__label { font: 500 11px/16px var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-muted); }
+.team__dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; background: var(--violet); }
+.team--free .team__dot { background: transparent; border: 2px solid var(--ink-muted); }
+.team--agency .team__dot { border-radius: 3px; background: var(--rouge); }
+.team--lg { font-size: 16px; line-height: 22px; font-weight: 600; margin: var(--space-2) 0; }
+.team--lg .avatar--xs { width: 32px; height: 32px; font-size: 12px; }
+.team--lg a { color: var(--ink-brand); }
+.notice { margin: var(--space-4) 0 var(--space-6); padding: var(--space-4) var(--space-6); border-radius: var(--radius-md, 12px); background: var(--surface-alt); border-left: 4px solid var(--line-strong); display: grid; gap: var(--space-2); }
+.notice p { margin: 0; }
+.roster { list-style: none; padding: 0; margin: var(--space-4) 0 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: var(--space-3); }
+.roster__item { display: flex; gap: var(--space-3); align-items: center; padding: var(--space-3); border: 1px solid var(--line); border-radius: var(--radius-lg); text-decoration: none; color: var(--ink); }
+.roster__item:hover { border-color: var(--ink-brand); }
+.roster__item .avatar { width: 48px; height: 48px; font-size: 18px; box-shadow: none; }
+.roster__item > span { display: grid; gap: 2px; min-width: 0; }
+.legend { margin: 0 0 var(--space-6); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: var(--space-3) var(--space-6); }
+.legend summary { cursor: pointer; font-weight: 500; }
+.legend dl { display: grid; gap: var(--space-3); margin: var(--space-4) 0 var(--space-2); }
+.legend dl > div { display: grid; grid-template-columns: 170px 1fr; gap: var(--space-4); align-items: start; }
+.legend dd { margin: 0; font-size: 14px; color: var(--ink-muted); }
+@media (max-width: 640px) { .legend dl > div { grid-template-columns: 1fr; gap: var(--space-1); } }

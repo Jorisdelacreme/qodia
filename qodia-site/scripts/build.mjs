@@ -18,7 +18,9 @@ const initials = (name) => {
   if (/^\d/.test(w[0] || "")) return w[0].slice(0, 2);
   return (w.length > 1 ? w[0][0] + w[1][0] : (w[0] || "Q").slice(0, 2)).toUpperCase();
 };
-const KIND = { agence: "Agence", freelance: "Freelance", employe: "Expert en agence" };
+const KIND = { agence: "Agence", freelance: "Freelance", employe: "En poste" };
+/* Statut de référencement : membre (a rejoint le cercle) ou recommandé (sélectionné par Qodia, sans adhésion) */
+const STATUS = { membre: "Membre Qodia", recommande: "Recommandé par Qodia" };
 
 async function json(p) { return JSON.parse(await readFile(path.join(ROOT, p), "utf8")); }
 
@@ -42,7 +44,16 @@ async function loadMembers() {
 const site = await json("data/site.json");
 const home = await json("data/home.json");
 const FAM = Object.fromEntries(site.families.map((f) => [f.id, f]));
-const members = (await loadMembers()).filter((m) => m.visible !== false).map((m) => ({ ...m, slug: m.slug || slugify(m.name) }));
+const rank = (m) => (m.sponsored ? 0 : 4) + (m.featured ? 0 : 2) + (m.status === "membre" ? 0 : 1);
+const members = (await loadMembers()).filter((m) => m.visible !== false)
+  .map((m) => ({ ...m, slug: m.slug || slugify(m.name), status: m.status === "membre" ? "membre" : "recommande", sponsored: !!m.sponsored }))
+  .sort((a, b) => rank(a) - rank(b) || String(a.name).localeCompare(String(b.name), "fr"));
+const BY_SLUG = Object.fromEntries(members.map((m) => [m.slug, m]));
+/* Équipes : un expert « en poste » appartient à une agence du cercle (champ employer = slug de l'agence) */
+const teamOf = (m) => (m.kind === "employe" && m.employer && BY_SLUG[m.employer]) || null;
+const rosterOf = (a) => members.filter((o) => o.kind === "employe" && o.employer === a.slug);
+/* Accès libre : profils à la une et profils sponsorisés */
+const isOpen = (m) => !!(m.featured || m.sponsored);
 const SECTORS = [...new Set(members.flatMap((m) => m.sectors || []))].sort((a, b) => a.localeCompare(b, "fr"));
 const COLORS = { violet: "#350085", rouge: "#FF294A", jaune: "#FFD300", cyan: "#00F3E9" };
 
@@ -209,17 +220,34 @@ const memberUrl = (m) => `/membres/${m.slug}`;
 function card(m, headingLevel = "h3") {
   const refs = (m.references || []).slice(0, 3);
   const search = [m.name, m.headline, (m.skills || []).join(" "), (m.tools || []).join(" "), (m.sectors || []).join(" "), (m.references || []).join(" "), m.city, FAM[m.family]?.label, KIND[m.kind]].join(" ");
-  const locked = !m.featured;
-  return `<article class="card${locked ? " is-locked" : ""}"${locked ? " data-locked" : ""} data-member data-family="${esc(m.family)}" data-kind="${esc(m.kind)}" data-sectors="${esc((m.sectors || []).join("|"))}" data-search="${esc(search)}">
-  <div class="card__cover${coverStyle(m)}">${m.cover ? `<img class="cover-img" src="${esc(m.cover)}" alt="" loading="lazy">` : ""}<span class="badge ${m.color === "violet" ? "badge--light" : "badge--brand"}">${KIND[m.kind] || ""}</span></div>
+  const locked = !isOpen(m);
+  const t = teamOf(m);
+  return `<article class="card${locked ? " is-locked" : ""}${m.sponsored ? " card--sponsored" : ""}"${locked ? " data-locked" : ""} data-member data-family="${esc(m.family)}" data-kind="${esc(m.kind)}" data-status="${m.status}"${t ? ` data-team="${esc(t.slug)}"` : ""} data-sectors="${esc((m.sectors || []).join("|"))}" data-search="${esc(search + (t ? " " + t.name : ""))}"${t ? ` style="--team:${COLORS[t.color] || COLORS.violet}"` : ""}>
+  <div class="card__cover${coverStyle(t && !m.cover ? { ...m, color: t.color } : m)}">${m.cover ? `<img class="cover-img" src="${esc(m.cover)}" alt="" loading="lazy">` : ""}<span class="card__badges">${m.sponsored ? '<span class="badge badge--jaune">Sponsorisé</span>' : ""}${statusBadge(m, true)}</span></div>
   <div class="card__avatar">${avatar(m)}</div>
   <div class="card__body">
+    ${teamLine(m)}
     <${headingLevel} class="card__name"><a href="${memberUrl(m)}" data-track="click_member_card" data-track-label="${esc(m.name)}">${esc(m.name)}</a></${headingLevel}>
     <p class="card__meta">${esc([FAM[m.family]?.label, m.city].filter(Boolean).join(" · "))}</p>
     <p class="card__role">${esc(m.headline)}</p>
     ${refs.length ? `<div class="card__refs"><span class="label">A travaillé pour</span><p>${esc(refs.join(", "))}</p></div>` : ""}
   </div>
 </article>`;
+}
+
+/* Statut et « maillot » d'équipe */
+function statusBadge(m, onCover = false) {
+  if (m.status === "membre") return `<span class="badge ${onCover ? "badge--onlight" : "badge--brand"}" title="A rejoint le cercle Qodia">Membre</span>`;
+  return `<span class="badge ${onCover ? "badge--onlight badge--outline" : "badge--neutral"}" title="Sélectionné par l'équipe Qodia, n'a pas encore rejoint le cercle">Recommandé</span>`;
+}
+function teamMark(t, size = "xs") { return avatar(t, size); }
+function teamLine(m, big = false) {
+  const t = teamOf(m);
+  if (t) return `<p class="team${big ? " team--lg" : ""}" style="--team:${COLORS[t.color] || COLORS.violet}">${teamMark(t)}<span><span class="team__label">En poste chez</span> ${big ? `<a href="${memberUrl(t)}">${esc(t.name)}</a>` : esc(t.name)}</span></p>`;
+  if (m.kind === "employe") return `<p class="team${big ? " team--lg" : ""}"><span class="team__dot" aria-hidden="true"></span><span><span class="team__label">En poste</span>${m.employerName ? " chez " + esc(m.employerName) : ""}</span></p>`;
+  if (m.kind === "freelance") return `<p class="team team--free${big ? " team--lg" : ""}"><span class="team__dot" aria-hidden="true"></span><span class="team__label">Indépendant</span></p>`;
+  const n = rosterOf(m).length;
+  return `<p class="team team--agency${big ? " team--lg" : ""}"><span class="team__dot" aria-hidden="true"></span><span><span class="team__label">Agence</span>${n ? ` · ${n} expert${n > 1 ? "s" : ""} sur Qodia` : ""}</span></p>`;
 }
 
 function logosGrid() {
@@ -351,9 +379,10 @@ function postCard(p) {
 /* ------------------------------------------------------------------ */
 function memberPage(m) {
   const fam = FAM[m.family];
-  const others = members.filter((o) => o.slug !== m.slug).sort((a, b) => (b.family === m.family) - (a.family === m.family)).slice(0, 3);
+  const others = members.filter((o) => o.slug !== m.slug && !(m.kind === "agence" && o.employer === m.slug)).sort((a, b) => ((b.employer && b.employer === m.employer) - (a.employer && a.employer === m.employer)) || ((b.family === m.family) - (a.family === m.family))).slice(0, 3);
   const refLogos = m.referenceLogos || {};
-  const site_ = m.website ? `<a${m.featured ? "" : ' class="needs-access"'} href="${esc(m.website)}" rel="noopener" target="_blank" data-track="click_member_website" data-track-label="${esc(m.name)}">${esc(m.website.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, ""))} ${ICON.ext}</a>` : "";
+  const open = isOpen(m), t = teamOf(m), roster = m.kind === "agence" ? rosterOf(m) : [];
+  const site_ = m.website ? `<a${open ? "" : ' class="needs-access"'} href="${esc(m.website)}" rel="noopener" target="_blank" data-track="click_member_website" data-track-label="${esc(m.name)}">${esc(m.website.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, ""))} ${ICON.ext}</a>` : "";
   const projects = (m.projects || []).filter((p) => p.image);
   const brief = (mode) => `/brief?membre=${m.slug}&mode=${mode}`;
   const jsonld = {
@@ -361,22 +390,28 @@ function memberPage(m) {
     "@type": m.kind === "agence" ? "Organization" : "Person",
     name: m.name, description: m.headline, url: site.url + memberUrl(m),
     ...(m.website ? { sameAs: [m.website] } : {}),
-    ...(m.kind === "agence" ? {} : { jobTitle: m.headline })
+    ...(m.kind === "agence" ? {} : { jobTitle: m.headline }),
+    ...(t ? { worksFor: { "@type": "Organization", name: t.name, url: site.url + memberUrl(t) } } : {}),
+    ...(roster.length ? { employee: roster.map((e) => ({ "@type": "Person", name: e.name, jobTitle: e.headline, url: site.url + memberUrl(e) })) } : {})
   };
+  const optOut = `mailto:${site.email}?subject=${encodeURIComponent("Fiche Qodia : " + m.name)}`;
   const body = `
-<div class="profile-cover${coverStyle(m)}">${m.cover ? `<img class="cover-img" src="${esc(m.cover)}" alt="">` : ""}</div>
+<div class="profile-cover${coverStyle(t && !m.cover ? { ...m, color: t.color } : m)}">${m.cover ? `<img class="cover-img" src="${esc(m.cover)}" alt="">` : ""}</div>
 <div class="wrap">
   <div class="profile-head">
     ${avatar(m, "lg")}
     <div class="profile-head__text">
-      <div style="display:flex;gap:8px;flex-wrap:wrap"><span class="badge badge--brand">Membre du cercle</span><span class="badge badge--neutral">${KIND[m.kind]}</span></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">${statusBadge(m)}${m.sponsored ? '<span class="badge badge--jaune">Sponsorisé</span>' : ""}<span class="badge badge--neutral">${KIND[m.kind]}</span></div>
       <h1 class="display">${esc(m.name)}</h1>
+      ${teamLine(m, true)}
       <p class="profile-head__meta"><span>${esc(m.headline)}</span>${m.city ? `<span>${esc(m.city)}</span>` : ""}${site_}</p>
     </div>
   </div>
   <ol class="crumbs" aria-label="Fil d'Ariane"><li><a href="/annuaire">Le cercle</a></li><li><a href="/annuaire?expertise=${m.family}">${esc(fam?.label || "")}</a></li><li aria-current="page">${esc(m.name)}</li></ol>
-  <div class="profile${m.featured ? "" : " gated"}" style="padding-top:var(--space-4)">
-    ${m.featured ? "" : accessWall(`Le profil complet de ${m.name}`)}
+  ${m.status === "recommande" ? `<div class="notice notice--reco"><p><strong>Profil recommandé par Qodia.</strong> ${esc(m.name)} n'a pas encore rejoint le cercle : cette fiche est rédigée par l'équipe Qodia à partir d'informations publiques. La mise en relation passe par Qodia.</p><p class="small">Vous êtes ${esc(m.name)} ? <a href="${optOut}">Demander une modification ou le retrait</a> · <a href="/rejoindre">Rejoindre le cercle</a></p></div>` : ""}
+  ${m.sponsored ? `<p class="small muted" style="margin-top:var(--space-3)">Sponsorisé : ${esc(m.name)} rémunère Qodia pour la mise en avant de ce profil.</p>` : ""}
+  <div class="profile${open ? "" : " gated"}" style="padding-top:var(--space-4)">
+    ${open ? "" : accessWall(`Le profil complet de ${m.name}`)}
     <div class="profile__main">
       <section aria-labelledby="apropos">
         <h2 class="h2" id="apropos">À propos</h2>
@@ -385,6 +420,12 @@ function memberPage(m) {
         ${(m.tools || []).length ? `<p class="small muted">Outils : ${esc(m.tools.join(", "))}</p>` : ""}
       </section>
 
+      ${roster.length ? `<section aria-labelledby="equipe">
+        <h2 class="h2" id="equipe">L'équipe sur Qodia</h2>
+        <p class="muted">${roster.length > 1 ? "Ces experts de " + esc(m.name) + " sont mobilisables" : "Cet expert de " + esc(m.name) + " est mobilisable"} via Qodia, en renfort ou en mise à disposition sur votre projet.</p>
+        <ul class="roster">${roster.map((e) => `<li><a class="roster__item" href="${memberUrl(e)}">${avatar(e)}<span><strong>${esc(e.name)}</strong><span class="small muted">${esc(e.headline)}</span></span></a></li>`).join("")}</ul>
+      </section>` : ""}
+
       <section aria-labelledby="realisations">
         <div class="section-head" style="margin:0"><h2 class="h2" id="realisations">Réalisations</h2>${m.portfolio ? `<a class="link-arrow" href="${esc(m.portfolio)}" rel="noopener" target="_blank" data-track="click_member_portfolio" data-track-label="${esc(m.name)}">Tout le portfolio ${ICON.ext}</a>` : ""}</div>
         ${projects.length ? `<div class="projects">${projects.map((p) => `<figure class="project" style="margin:0"><div class="project__media"><img src="${esc(p.image)}" alt="${esc(p.title)}" loading="lazy"></div><figcaption><span class="label">${esc([p.client, p.discipline].filter(Boolean).join(" · "))}</span><p class="project__title">${esc(p.title)}</p></figcaption></figure>`).join("")}</div>`
@@ -392,10 +433,10 @@ function memberPage(m) {
       </section>
 
       ${(m.references || []).length ? `<section aria-labelledby="refs">
-        <h2 class="h2" id="refs">${m.kind === "freelance" ? "Ils lui ont fait confiance" : "Ils leur ont fait confiance"}</h2>
+        <h2 class="h2" id="refs">${m.kind === "agence" ? "Ils leur ont fait confiance" : "Ils lui ont fait confiance"}</h2>
         <ul class="refs">${m.references.map((r) => `<li>${refLogos[r] ? `<img src="${esc(refLogos[r])}" alt="${esc(r)}" loading="lazy">` : esc(r)}</li>`).join("")}</ul>
         ${m.referencesNote ? `<p class="muted">${esc(m.referencesNote)}</p>` : ""}
-        <p class="small muted">Références publiées par ${esc(m.name)}.</p>
+        <p class="small muted">${m.status === "membre" ? "Références publiées par " + esc(m.name) + "." : "Références publiques relevées par Qodia (site, portfolio ou réseaux de " + esc(m.name) + ")."}</p>
       </section>` : ""}
 
       <section aria-labelledby="avis">
@@ -417,7 +458,10 @@ function memberPage(m) {
         <p class="small" style="color:var(--on-brand-muted)">On vous rappelle dans la journée pour cadrer le besoin.</p>
       </div>
       <div class="facts"><dl>
-        <div><dt>Type</dt><dd>${KIND[m.kind]}</dd></div>
+        <div><dt>Statut</dt><dd>${STATUS[m.status]}${m.sponsored ? " · sponsorisé" : ""}</dd></div>
+        <div><dt>Type</dt><dd>${m.kind === "freelance" ? "Freelance indépendant" : KIND[m.kind]}</dd></div>
+        ${t ? `<div><dt>Équipe</dt><dd><a href="${memberUrl(t)}">${esc(t.name)}</a></dd></div>` : m.employerName ? `<div><dt>Équipe</dt><dd>${esc(m.employerName)}</dd></div>` : ""}
+        ${roster.length ? `<div><dt>Effectif sur Qodia</dt><dd>${roster.length} expert${roster.length > 1 ? "s" : ""}</dd></div>` : ""}
         <div><dt>Expertise</dt><dd>${esc(fam?.label || "")}</dd></div>
         ${m.city ? `<div><dt>Basé à</dt><dd>${esc(m.city)}</dd></div>` : ""}
         ${(m.sectors || []).length ? `<div><dt>Secteurs</dt><dd>${esc(m.sectors.join(", "))}</dd></div>` : ""}
@@ -447,8 +491,8 @@ document.querySelectorAll('input[name="mode-${m.slug}"]').forEach(function(r){r.
 </script>`;
   return page({
     title: `${m.name}, ${m.headline.charAt(0).toLowerCase() + m.headline.slice(1)}`.slice(0, 90),
-    ogTitle: `${m.name} · membre du cercle Qodia`,
-    description: `${m.name} (${KIND[m.kind].toLowerCase()}${m.city ? ", " + m.city : ""}) : ${m.headline}. Membre du cercle Qodia, mise en relation sous 24 h.`.slice(0, 160),
+    ogTitle: `${m.name} · ${m.status === "membre" ? "membre du cercle Qodia" : "recommandé par Qodia"}`,
+    description: `${m.name} (${(t ? "en poste chez " + t.name : KIND[m.kind]).toLowerCase()}${m.city ? ", " + m.city : ""}) : ${m.headline}. ${m.status === "membre" ? "Membre du cercle Qodia" : "Recommandé par Qodia"}, mise en relation sous 24 h.`.slice(0, 160),
     path: memberUrl(m), nav: "annuaire", ogType: "profile", jsonld
   }, body);
 }
@@ -496,8 +540,11 @@ function accessWall(title) {
 
 const directives = {
   "access-panel": () => accessWall("Le reste du cercle"),
-  "free-count": () => String(members.filter((m) => m.featured).length),
-  "locked-count": () => String(members.filter((m) => !m.featured).length),
+  "free-count": () => String(members.filter(isOpen).length),
+  "locked-count": () => String(members.filter((m) => !isOpen(m)).length),
+  "membre-count": () => String(members.filter((m) => m.status === "membre").length),
+  "reco-count": () => String(members.filter((m) => m.status === "recommande").length),
+  "team-options": () => opts(members.filter((m) => m.kind === "agence" && rosterOf(m).length).map((m) => [m.slug, m.name])),
   "logos": () => logosGrid(),
   "cards-featured": () => members.filter((m) => m.featured).sort((a, b) => (a.featuredOrder ?? 99) - (b.featuredOrder ?? 99)).slice(0, 6).map((m) => card(m)).join(""),
   "cards-all": () => members.map((m) => card(m, "h2")).join(""),
@@ -577,6 +624,6 @@ for (const p of posts) {
 
 await out("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `  <url><loc>${site.url}${u === "/" ? "/" : u}</loc><lastmod>${BUILD_DATE}</lastmod></url>`).join("\n")}\n</urlset>\n`);
 await out("robots.txt", `User-agent: *\nAllow: /\nDisallow: /api/\n\nSitemap: ${site.url}/sitemap.xml\n`);
-await out("data/members.json", JSON.stringify({ generated: BUILD_DATE, members: members.map(({ slug, name, kind, family, headline, city, sectors, skills, logo, photo, color }) => ({ slug, name, kind, family, headline, city, sectors, skills, logo, photo, color, url: memberUrl({ slug }) })) }, null, 2));
+await out("data/members.json", JSON.stringify({ generated: BUILD_DATE, members: members.map(({ slug, name, kind, status, sponsored, employer, family, headline, city, sectors, skills, logo, photo, color }) => ({ slug, name, kind, status, sponsored, employer: employer || undefined, family, headline, city, sectors, skills, logo, photo, color, url: memberUrl({ slug }) })) }, null, 2));
 
 console.log(`Site généré dans dist/ : ${urls.length} pages, ${members.length} membres, ${posts.length} articles.`);

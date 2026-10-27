@@ -6,7 +6,7 @@
     "title": "Bien s'entourer."
   },
   "circle": {
-    "button": "Voir les {n} membres",
+    "button": "Voir les {n} profils",
     "label": "Le cercle",
     "lead": "Une partie du cercle est visible ici. Après votre brief, on vous présente aussi des profils qui ne sont pas publiés.",
     "title": "Quelques membres."

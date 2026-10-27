@@ -9,18 +9,27 @@
     <div class="stack-4" style="max-width:760px">
       <span class="label">Le cercle</span>
       <h1 class="display">Trouver le bon expert.</h1>
-      <p class="lead">Freelances, agences et experts en agence, choisis un par un par l'équipe Qodia. Une partie du cercle est visible ici : déposez un brief pour recevoir une sélection complète.</p>
+      <p class="lead">Freelances, agences et experts en poste dans ces agences, choisis un par un par l'équipe Qodia. Déposez un brief pour recevoir une sélection complète.</p>
     </div>
     <form class="filters" id="dir-form" role="search" aria-label="Filtrer les membres">
       <div class="filters__row">
         <div class="field search"><label class="sr-only" for="f-q">Rechercher par nom ou par besoin</label><!--@icon-search--><input class="field__input" id="f-q" name="q" type="search" placeholder="Un nom, un besoin, un outil : Shopify, motion design, SEO…" autocomplete="off"></div>
         <div class="field"><label class="sr-only" for="f-family">Expertise</label><select class="field__input" id="f-family" name="expertise"><option value="">Toutes les expertises</option><!--@family-options--></select></div>
         <div class="field"><label class="sr-only" for="f-sector">Secteur</label><select class="field__input" id="f-sector" name="secteur"><option value="">Tous les secteurs</option><!--@sector-options--></select></div>
+        <div class="field"><label class="sr-only" for="f-team">Équipe</label><select class="field__input" id="f-team" name="equipe"><option value="">Toutes les équipes</option><!--@team-options--></select></div>
       </div>
-      <div class="tags" role="group" aria-label="Type de membre">
-        <button type="button" class="tag" data-kind="" aria-pressed="true">Tous</button>
-        <button type="button" class="tag" data-kind="agence" aria-pressed="false">Agences</button>
-        <button type="button" class="tag" data-kind="freelance" aria-pressed="false">Freelances</button>
+      <div class="filters__tags">
+        <div class="tags" role="group" aria-label="Type de profil">
+          <button type="button" class="tag" data-kind="" aria-pressed="true">Tous</button>
+          <button type="button" class="tag" data-kind="agence" aria-pressed="false">Agences</button>
+          <button type="button" class="tag" data-kind="freelance" aria-pressed="false">Freelances</button>
+          <button type="button" class="tag" data-kind="employe" aria-pressed="false">Experts en poste</button>
+        </div>
+        <div class="tags" role="group" aria-label="Statut">
+          <button type="button" class="tag" data-status="" aria-pressed="true">Tous les statuts</button>
+          <button type="button" class="tag" data-status="membre" aria-pressed="false">Membres</button>
+          <button type="button" class="tag" data-status="recommande" aria-pressed="false">Recommandés</button>
+        </div>
       </div>
     </form>
   </div>
@@ -28,9 +37,18 @@
 <section class="section" style="padding-top:0">
   <div class="wrap">
     <div class="dir-meta">
-      <p><strong id="dir-count" aria-live="polite"><!--@member-count--> membres</strong> <span class="muted">visibles dans le cercle</span></p>
+      <p><strong id="dir-count" aria-live="polite"><!--@member-count--> profils</strong> <span class="muted">dans le cercle</span></p>
       <button type="button" class="link" style="background:none;border:0;cursor:pointer;padding:0" data-reset>Effacer les filtres</button>
     </div>
+    <details class="legend">
+      <summary>Membre, Recommandé, Sponsorisé : ce que signifient les étiquettes</summary>
+      <dl>
+        <div><dt><span class="badge badge--brand">Membre</span></dt><dd>A rejoint le cercle Qodia : profil vérifié (portfolio, références, documents légaux) et charte membre signée.</dd></div>
+        <div><dt><span class="badge badge--neutral">Recommandé</span></dt><dd>Sélectionné par l'équipe Qodia pour la qualité de son travail, sans avoir encore rejoint le cercle. Fiche rédigée à partir d'informations publiques, mise en relation assurée par Qodia.</dd></div>
+        <div><dt><span class="badge badge--jaune">Sponsorisé</span></dt><dd>Mise en avant payante : le profil apparaît en tête de l'annuaire. Ce statut s'ajoute à « Membre » ou « Recommandé » sans le remplacer.</dd></div>
+        <div><dt><span class="team team--free" style="margin:0"><span class="team__dot" aria-hidden="true"></span><span class="team__label">Indépendant</span></span></dt><dd>Freelance qui travaille à son compte. Les experts <strong>en poste</strong> portent les couleurs de leur agence : son nom et son logo apparaissent sur leur fiche, et l'agence peut les mettre à disposition sur votre projet.</dd></div>
+      </dl>
+    </details>
     <div class="cards" id="members"><!--@cards-all--></div>
     <div class="access-panel">
       <p class="lead center" style="margin:var(--space-12) auto var(--space-6);max-width:640px"><!--@free-count--> profils sont en accès libre. Les <!--@locked-count--> autres, et les profils présentés après un brief, sont réservés aux entreprises.</p>

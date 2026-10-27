@@ -6,8 +6,11 @@
       "visible": true,
       "featured": true,
       "featuredOrder": 0,
+      "status": "membre",
+      "sponsored": false,
       "name": "Lucas Dautun",
-      "kind": "freelance",
+      "kind": "employe",
+      "employer": "delacreme",
       "family": "branding",
       "headline": "UX/UI designer et directeur artistique",
       "city": "",
@@ -57,8 +60,11 @@
       "visible": true,
       "featured": true,
       "featuredOrder": 1,
+      "status": "membre",
+      "sponsored": false,
       "name": "Fred Fischer",
-      "kind": "freelance",
+      "kind": "employe",
+      "employer": "delacreme",
       "family": "web",
       "headline": "Développeur full stack, webdesigner et expert WordPress",
       "city": "Lille",
@@ -104,8 +110,11 @@
       "visible": true,
       "featured": true,
       "featuredOrder": 2,
+      "status": "membre",
+      "sponsored": false,
       "name": "Fabien Huet",
-      "kind": "freelance",
+      "kind": "employe",
+      "employer": "delacreme",
       "family": "acquisition",
       "headline": "Consultant SEO, GEO et SEA",
       "city": "Angers",
@@ -140,6 +149,8 @@
       "visible": true,
       "featured": true,
       "featuredOrder": 3,
+      "status": "membre",
+      "sponsored": false,
       "name": "Dareth Nhang",
       "kind": "freelance",
       "family": "branding",
@@ -193,6 +204,8 @@
       "visible": true,
       "featured": true,
       "featuredOrder": 4,
+      "status": "membre",
+      "sponsored": false,
       "name": "Quentin Boulestin",
       "kind": "freelance",
       "family": "branding",
@@ -238,6 +251,8 @@
       "visible": true,
       "featured": true,
       "featuredOrder": 5,
+      "status": "membre",
+      "sponsored": false,
       "name": "Jordan Toi",
       "kind": "freelance",
       "family": "acquisition",
@@ -288,6 +303,8 @@
       "slug": "31-grammes-studio",
       "visible": true,
       "featured": false,
+      "status": "recommande",
+      "sponsored": false,
       "name": "31 Grammes Studio",
       "kind": "agence",
       "family": "branding",
@@ -316,9 +333,342 @@
       "projects": []
     },
     {
+      "slug": "anthony-cheylan",
+      "visible": true,
+      "featured": false,
+      "status": "recommande",
+      "sponsored": false,
+      "name": "Anthony Cheylan",
+      "kind": "freelance",
+      "family": "branding",
+      "headline": "Stratège en marketing culturel et brand content, cofondateur de Curaterz",
+      "city": "",
+      "bio": [
+        "Anthony Cheylan conseille les marques, les médias et les talents en marketing culturel et en brand content. Depuis 2022, il est cofondateur et consultant senior de Curaterz, et il est éditorialiste pour GQ depuis 2023.",
+        "Ancien directeur adjoint de la communication de Canon France, puis rédacteur en chef digital et directeur des contenus de Clique TV, il a piloté des contenus de marque pour Nike, PlayStation, Beats by Dre, McDonald's ou Spotify, et travaillé avec AVNIER, Sony Music et Universal Music."
+      ],
+      "skills": [
+        "Marketing culturel",
+        "Brand content",
+        "Stratégie de contenus",
+        "Social media",
+        "Partenariats artistes"
+      ],
+      "tools": [],
+      "sectors": [
+        "Médias & divertissement",
+        "Mode & beauté"
+      ],
+      "references": [
+        "Nike",
+        "PlayStation",
+        "Beats by Dre",
+        "Spotify",
+        "AVNIER",
+        "Canon"
+      ],
+      "website": "",
+      "portfolio": "",
+      "logo": "",
+      "photo": "",
+      "cover": "",
+      "color": "violet",
+      "projects": [],
+      "budget": "",
+      "qodiaNote": ""
+    },
+    {
+      "slug": "arkee",
+      "visible": true,
+      "featured": false,
+      "status": "recommande",
+      "sponsored": false,
+      "name": "Arkée",
+      "kind": "agence",
+      "family": "acquisition",
+      "headline": "Agence SEO, SEA et social media",
+      "city": "Levallois-Perret",
+      "bio": [
+        "Arkée est une agence de marketing digital créée en 2018. Elle intervient sur trois leviers : le référencement naturel (SEO), le référencement payant (SEA) et les réseaux sociaux.",
+        "L'agence, aujourd'hui présentée sous le nom « Arkée by Jaws », veut aider ses clients à se démarquer sur leur marché par des stratégies d'acquisition créatives."
+      ],
+      "skills": [
+        "SEO",
+        "SEA",
+        "Google Ads",
+        "Social media"
+      ],
+      "tools": [
+        "Google Ads"
+      ],
+      "sectors": [
+        "PME & start-up"
+      ],
+      "references": [],
+      "website": "",
+      "portfolio": "",
+      "logo": "",
+      "photo": "",
+      "cover": "",
+      "color": "rouge",
+      "projects": [],
+      "budget": "",
+      "qodiaNote": ""
+    },
+    {
+      "slug": "arthur-king-estienne",
+      "visible": true,
+      "featured": false,
+      "status": "recommande",
+      "sponsored": false,
+      "name": "Arthur King Estienne",
+      "kind": "freelance",
+      "family": "branding",
+      "headline": "Directeur de création, cofondateur de Feelings",
+      "city": "",
+      "bio": [
+        "Arthur King Estienne est directeur de création. Il a été directeur artistique de Konbini pendant cinq ans, puis a travaillé pour Brut, avant de cofonder Feelings, une agence de création (idées, design, image).",
+        "Ancien DJ, il a notamment travaillé sur la campagne Sosh « Je suis passé chez Sosh » et sur le clip « Here » de Christine and the Queens avec Booba."
+      ],
+      "skills": [
+        "Direction de création",
+        "Direction artistique",
+        "Branding",
+        "Clips et contenus vidéo"
+      ],
+      "tools": [],
+      "sectors": [
+        "Médias & divertissement"
+      ],
+      "references": [
+        "Konbini",
+        "Brut",
+        "Sosh"
+      ],
+      "website": "https://www.feelings-online.com/",
+      "portfolio": "",
+      "logo": "",
+      "photo": "",
+      "cover": "",
+      "color": "jaune",
+      "projects": [],
+      "budget": "",
+      "qodiaNote": ""
+    },
+    {
+      "slug": "axome",
+      "visible": true,
+      "featured": false,
+      "status": "recommande",
+      "sponsored": false,
+      "name": "Axome",
+      "kind": "agence",
+      "family": "web",
+      "headline": "Agence e-commerce Shopify Plus, du branding à la performance",
+      "city": "Paris, Saint-Étienne",
+      "bio": [
+        "Fondée en 2000, Axome est une agence e-commerce de 110 personnes installée à Paris et Saint-Étienne. Elle couvre la marque et l'expérience (branding, UX/UI, contenus), la technique (Shopify et Shopify B2B, PrestaShop, WordPress, Webflow, PIM, intégrations) et la croissance (CRM Klaviyo, CRO, marketplaces).",
+        "L'agence est partenaire Shopify Platinum et certifiée PrestaShop et Webflow. Elle accompagne notamment Kusmi Tea, Withings, Delsey Paris, Tediber, Payot et Balibaris."
+      ],
+      "skills": [
+        "Sites Shopify Plus",
+        "Shopify B2B",
+        "PrestaShop",
+        "UX/UI",
+        "CRM Klaviyo",
+        "CRO"
+      ],
+      "tools": [
+        "Shopify Plus",
+        "PrestaShop",
+        "Klaviyo",
+        "Webflow",
+        "n8n"
+      ],
+      "sectors": [
+        "E-commerce",
+        "Mode & beauté",
+        "Food & nutrition"
+      ],
+      "references": [
+        "Kusmi Tea",
+        "Withings",
+        "Delsey Paris",
+        "Tediber",
+        "Payot",
+        "Balibaris",
+        "Devred",
+        "Nutrimuscle"
+      ],
+      "website": "https://www.axome.com/",
+      "portfolio": "",
+      "logo": "",
+      "photo": "",
+      "cover": "",
+      "color": "rouge",
+      "projects": [],
+      "budget": "",
+      "qodiaNote": ""
+    },
+    {
+      "slug": "be-api",
+      "visible": true,
+      "featured": false,
+      "status": "recommande",
+      "sponsored": false,
+      "name": "Be API",
+      "kind": "agence",
+      "family": "web",
+      "headline": "Première agence 100 % WordPress en France, partenaire WordPress VIP",
+      "city": "Paris, Lyon, Lille",
+      "bio": [
+        "Créée en 2009, Be API se présente comme la première agence française 100 % WordPress. Elle conçoit et refond des sites corporate, médias et e-commerce (WooCommerce), des fabriques de sites et des intranets, et assure hébergement, maintenance et développement d'extensions.",
+        "Partenaire WordPress VIP, l'agence compte une quarantaine d'experts et travaille sur des projets à forts enjeux de sécurité et de performance, pour BNP Paribas, le Groupe BPCE, Dassault Aviation, Free, Action contre la Faim ou le Secours populaire."
+      ],
+      "skills": [
+        "Sites WordPress",
+        "Gutenberg",
+        "WooCommerce",
+        "Maintenance WordPress",
+        "Intranets",
+        "SEO et GEO"
+      ],
+      "tools": [
+        "WordPress",
+        "Gutenberg",
+        "WooCommerce",
+        "WordPress VIP"
+      ],
+      "sectors": [
+        "Grands groupes",
+        "Associations",
+        "Médias & divertissement"
+      ],
+      "references": [
+        "BNP Paribas",
+        "Groupe BPCE",
+        "Dassault Aviation",
+        "Free",
+        "Kiloutou",
+        "Intersport",
+        "Action contre la Faim",
+        "Secours populaire"
+      ],
+      "website": "https://beapi.fr/",
+      "portfolio": "",
+      "logo": "",
+      "photo": "",
+      "cover": "",
+      "color": "jaune",
+      "projects": [],
+      "budget": "",
+      "qodiaNote": ""
+    },
+    {
+      "slug": "bonhomme",
+      "visible": true,
+      "featured": false,
+      "status": "recommande",
+      "sponsored": false,
+      "name": "Bonhomme",
+      "kind": "agence",
+      "family": "web",
+      "headline": "Studio de design digital : expériences web immersives et e-commerce premium",
+      "city": "Paris",
+      "bio": [
+        "Bonhomme est un studio parisien fondé en 2013 par Morgane Urbain (direction de création) et Emmanuel Cruellas (direction artistique et design d'interaction). Il conçoit des sites immersifs, des boutiques e-commerce premium, des applications et des installations interactives, surtout pour des marques de luxe.",
+        "Le studio revendique plus de 125 projets et plus de 200 prix internationaux, avec plusieurs nominations « Studio of the Year » aux Awwwards. Parmi ses clients : TAG Heuer, Lacoste, Cartier, Audi ou France Télévisions."
+      ],
+      "skills": [
+        "UX/UI design",
+        "Sites immersifs (WebGL)",
+        "E-commerce premium",
+        "Design system",
+        "Applications mobiles",
+        "Installations interactives"
+      ],
+      "tools": [
+        "Figma",
+        "WebGL"
+      ],
+      "sectors": [
+        "Mode & beauté",
+        "Médias & divertissement",
+        "Grands groupes"
+      ],
+      "references": [
+        "TAG Heuer",
+        "Lacoste",
+        "Cartier",
+        "Audi",
+        "Perrier",
+        "France Télévisions",
+        "Festival de Cannes",
+        "Coca-Cola"
+      ],
+      "website": "https://bonhommeparis.com/",
+      "portfolio": "",
+      "logo": "",
+      "photo": "",
+      "cover": "",
+      "color": "violet",
+      "projects": [],
+      "budget": "",
+      "qodiaNote": ""
+    },
+    {
+      "slug": "colorz",
+      "visible": true,
+      "featured": false,
+      "status": "recommande",
+      "sponsored": false,
+      "name": "Colorz",
+      "kind": "agence",
+      "family": "web",
+      "headline": "Agence e-commerce créative, Shopify Platinum Partner",
+      "city": "Paris",
+      "bio": [
+        "Créée en 2015, Colorz est une agence digitale créative spécialisée dans le e-commerce : stratégie et branding, UX/UI, développement Shopify et Magento, migrations, performance (acquisition, CRO, CRM), contenus et social media.",
+        "L'agence, Shopify Platinum Partner, fait partie du groupe Davidson. Basée à Paris (11e) avec un bureau à Boulogne-Billancourt, elle compte environ 90 collaborateurs et travaille pour des marques de mode, de luxe et de beauté comme Ami Paris, Drôle de Monsieur ou Footkorner."
+      ],
+      "skills": [
+        "Sites Shopify Plus",
+        "Migration e-commerce",
+        "Branding",
+        "UX/UI",
+        "CRO",
+        "Content et social media"
+      ],
+      "tools": [
+        "Shopify Plus",
+        "Magento"
+      ],
+      "sectors": [
+        "E-commerce",
+        "Mode & beauté"
+      ],
+      "references": [
+        "Ami Paris",
+        "Drôle de Monsieur",
+        "Footkorner",
+        "Mathon"
+      ],
+      "website": "https://www.colorz.fr/",
+      "portfolio": "",
+      "logo": "",
+      "photo": "",
+      "cover": "",
+      "color": "rouge",
+      "projects": [],
+      "budget": "",
+      "qodiaNote": ""
+    },
+    {
       "slug": "coudac",
       "visible": true,
       "featured": false,
+      "status": "recommande",
+      "sponsored": false,
       "name": "Coudac",
       "kind": "agence",
       "family": "acquisition",
@@ -360,9 +710,165 @@
       "projects": []
     },
     {
+      "slug": "cuuut",
+      "visible": true,
+      "featured": false,
+      "status": "recommande",
+      "sponsored": false,
+      "name": "Cuuut",
+      "kind": "agence",
+      "family": "contenu",
+      "headline": "Société de production : films publicitaires, packshots et CGI pour le luxe et la beauté",
+      "city": "Paris",
+      "bio": [
+        "Cuuut produit des films publicitaires, des clips, des packshots et des images de synthèse (CGI), avec une approche artistique exigeante, de la conception à la livraison. La société est installée à Paris.",
+        "Elle a été fondée par Romaric Baudoin, Jérémie Cot, Aurélien Kouby et Davy Rathsasombath. Elle travaille surtout pour le luxe et la beauté : Dior, Yves Saint Laurent, Lancôme, Prada, Armani, Clarins ou Kérastase."
+      ],
+      "skills": [
+        "Films publicitaires",
+        "Packshots",
+        "CGI et 3D",
+        "Clips musicaux",
+        "Post-production"
+      ],
+      "tools": [],
+      "sectors": [
+        "Mode & beauté",
+        "Grands groupes"
+      ],
+      "references": [
+        "Dior",
+        "Yves Saint Laurent",
+        "Lancôme",
+        "Prada",
+        "Armani",
+        "Clarins",
+        "Kérastase",
+        "Mugler"
+      ],
+      "website": "https://www.cuuut.com/",
+      "portfolio": "",
+      "logo": "",
+      "photo": "",
+      "cover": "",
+      "color": "violet",
+      "projects": [],
+      "budget": "",
+      "qodiaNote": ""
+    },
+    {
+      "slug": "delacreme",
+      "visible": true,
+      "featured": false,
+      "status": "membre",
+      "sponsored": false,
+      "name": "DeLaCrème",
+      "kind": "agence",
+      "family": "branding",
+      "headline": "Agence de branding, UX/UI, sites no-code et CMO à temps partagé",
+      "city": "Saint-Germain-en-Laye",
+      "bio": [
+        "DeLaCrème est une agence digitale créative fondée en 2015 et installée à Saint-Germain-en-Laye. Elle croit au pouvoir de la marque face à la sélection par le prix : branding, design UX/UI, stratégie digitale (SEO, Meta Ads, Google Ads, emailing, social media) et sites no-code sur Webflow et Shopify.",
+        "L'agence propose aussi un service de CMO à temps partagé. Elle a accompagné plus de 170 clients, dont Paris Basketball, la Ligue nationale de volley, Devialet, Kaufman & Broad, ENGIE et Bouygues. Qodia est une initiative de DeLaCrème."
+      ],
+      "skills": [
+        "Branding",
+        "UX/UI design",
+        "Sites Webflow",
+        "Boutiques Shopify",
+        "Stratégie digitale",
+        "CMO à temps partagé"
+      ],
+      "tools": [
+        "Webflow",
+        "Shopify",
+        "WordPress",
+        "Figma"
+      ],
+      "sectors": [
+        "Sport",
+        "Grands groupes",
+        "PME & start-up"
+      ],
+      "references": [
+        "Paris Basketball",
+        "Ligue nationale de volley",
+        "Devialet",
+        "Kaufman & Broad",
+        "ENGIE",
+        "Bouygues",
+        "Doctissimo",
+        "Cepton Strategies"
+      ],
+      "website": "https://www.delacreme.pro/",
+      "portfolio": "",
+      "logo": "",
+      "photo": "",
+      "cover": "",
+      "color": "rouge",
+      "projects": [],
+      "budget": "",
+      "qodiaNote": ""
+    },
+    {
+      "slug": "deux-io",
+      "visible": true,
+      "featured": false,
+      "status": "recommande",
+      "sponsored": false,
+      "name": "deux.io",
+      "kind": "agence",
+      "family": "acquisition",
+      "headline": "Agence growth marketing : SEO, SEA, social ads et prospection",
+      "city": "Paris",
+      "bio": [
+        "deux.io est une agence de growth marketing parisienne créée en 2012. Elle combine SEO, SEA, social ads (LinkedIn, Meta, YouTube), génération de leads et une méthode d'itération rapide pour trouver les canaux d'acquisition qui fonctionnent.",
+        "L'agence dispose de pôles dédiés au e-commerce et au B2B/SaaS, propose une formation growth et revendique plus de 600 clients accompagnés, dont Weglot, TeamViewer, HEC, MeilleursAgents et Saint-Gobain."
+      ],
+      "skills": [
+        "Growth marketing",
+        "SEO",
+        "Google Ads",
+        "LinkedIn Ads",
+        "Meta Ads",
+        "Génération de leads"
+      ],
+      "tools": [
+        "Google Ads",
+        "LinkedIn Ads",
+        "Meta Ads"
+      ],
+      "sectors": [
+        "SaaS & tech",
+        "E-commerce",
+        "PME & start-up"
+      ],
+      "references": [
+        "Weglot",
+        "TeamViewer",
+        "HEC",
+        "MeilleursAgents",
+        "Saint-Gobain",
+        "Axa",
+        "Majelan",
+        "Cybertek"
+      ],
+      "website": "https://deux.io/",
+      "portfolio": "",
+      "logo": "",
+      "photo": "",
+      "cover": "",
+      "color": "jaune",
+      "projects": [],
+      "budget": "",
+      "qodiaNote": ""
+    },
+    {
       "slug": "dhs-digital",
       "visible": true,
       "featured": false,
+      "status": "recommande",
+      "sponsored": false,
       "name": "DHS Digital",
       "kind": "agence",
       "family": "acquisition",
@@ -400,9 +906,198 @@
       "projects": []
     },
     {
+      "slug": "digidop",
+      "visible": true,
+      "featured": false,
+      "status": "recommande",
+      "sponsored": false,
+      "name": "Digidop",
+      "kind": "agence",
+      "family": "web",
+      "headline": "Agence Webflow, partenaire Webflow Enterprise",
+      "city": "Paris (100 % à distance)",
+      "bio": [
+        "Digidop conçoit des sites marketing sur Webflow : stratégie, webdesign, développement, migration, maintenance et croissance. L'agence a été fondée en 2021 par Thomas Labonne et Florian Bodelot.",
+        "Née à Paris et organisée à 100 % à distance, elle est partenaire Webflow Enterprise et a reçu plusieurs distinctions de Webflow. Elle revendique plus de 180 clients, dont Zenchef, Paris Basketball, Orpi et Greenly."
+      ],
+      "skills": [
+        "Sites Webflow",
+        "Webdesign",
+        "Migration vers Webflow",
+        "Webflow Enterprise",
+        "Maintenance et croissance"
+      ],
+      "tools": [
+        "Webflow",
+        "Figma"
+      ],
+      "sectors": [
+        "SaaS & tech",
+        "PME & start-up",
+        "Sport"
+      ],
+      "references": [
+        "Zenchef",
+        "Paris Basketball",
+        "Orpi",
+        "Greenly",
+        "Chargemap",
+        "Ramify",
+        "Bsport",
+        "Septeo"
+      ],
+      "website": "https://www.digidop.com/",
+      "portfolio": "",
+      "logo": "",
+      "photo": "",
+      "cover": "",
+      "color": "cyan",
+      "projects": [],
+      "budget": "",
+      "qodiaNote": ""
+    },
+    {
+      "slug": "eskimoz",
+      "visible": true,
+      "featured": false,
+      "status": "recommande",
+      "sponsored": false,
+      "name": "Eskimoz",
+      "kind": "agence",
+      "family": "acquisition",
+      "headline": "Agence SEO, GEO et acquisition multicanale pour ETI et grands comptes",
+      "city": "Paris",
+      "bio": [
+        "Eskimoz est l'une des principales agences SEO en France. Fondée par Andréa Bensaid, elle accompagne des ETI, des grands comptes, des sites e-commerce et des médias en SEO international, stratégie de contenu, data et paid media.",
+        "L'agence a levé 17 M€ et compte plus d'une centaine de collaborateurs. Elle développe aussi le GEO (visibilité dans les moteurs d'IA) avec son outil LLM Ranking, qui mesure la présence d'une marque dans les grands modèles de langage."
+      ],
+      "skills": [
+        "SEO",
+        "SEO international",
+        "GEO",
+        "Stratégie de contenu",
+        "Paid media",
+        "Data"
+      ],
+      "tools": [
+        "LLM Ranking"
+      ],
+      "sectors": [
+        "E-commerce",
+        "Grands groupes",
+        "Médias & divertissement"
+      ],
+      "references": [],
+      "website": "https://www.eskimoz.fr/",
+      "portfolio": "",
+      "logo": "",
+      "photo": "",
+      "cover": "",
+      "color": "cyan",
+      "projects": [],
+      "budget": "",
+      "qodiaNote": ""
+    },
+    {
+      "slug": "florent-kiecken",
+      "visible": true,
+      "featured": false,
+      "status": "recommande",
+      "sponsored": false,
+      "name": "Florent Kiecken",
+      "kind": "freelance",
+      "family": "acquisition",
+      "headline": "Consultant et formateur CRO, fondateur de SDLV",
+      "city": "",
+      "bio": [
+        "Florent Kiecken est consultant CRO (optimisation du taux de conversion) certifié CXL. Depuis plus de six ans, il accompagne des sites e-commerce, des SaaS et des agences avec des audits CRO et un accompagnement sur mesure.",
+        "Fondateur de SDLV, il anime une formation CRO francophone (data, recherche utilisateur, psychologie, design, copywriting, tests A/B) et une newsletter suivie par plus de 4 000 abonnés. Il revendique plus de 130 marques accompagnées."
+      ],
+      "skills": [
+        "CRO",
+        "Audit de conversion",
+        "Tests A/B",
+        "Recherche utilisateur",
+        "Formation CRO"
+      ],
+      "tools": [],
+      "sectors": [
+        "E-commerce",
+        "SaaS & tech"
+      ],
+      "references": [],
+      "website": "https://www.sdlv.fr/",
+      "portfolio": "",
+      "logo": "",
+      "photo": "",
+      "cover": "",
+      "color": "cyan",
+      "projects": [],
+      "budget": "",
+      "qodiaNote": ""
+    },
+    {
+      "slug": "galadrim",
+      "visible": true,
+      "featured": false,
+      "status": "recommande",
+      "sponsored": false,
+      "name": "Galadrim",
+      "kind": "agence",
+      "family": "web",
+      "headline": "Agence de développement web, mobile et IA sur mesure",
+      "city": "Paris, Nantes, Lyon",
+      "bio": [
+        "Galadrim conçoit et développe des sites, applications web et mobiles, logiciels SaaS et solutions d'IA sur mesure. L'agence a été fondée par Jean Ashton et Arnaud Albalat ; elle est basée à Paris, avec des bureaux à Nantes, Lyon, Madrid et Barcelone.",
+        "Son équipe de développeurs, product managers et designers travaille sur WordPress, Webflow, React, React Native ou Laravel, pour des clients comme Leroy Merlin, Decathlon, BNP Paribas, Bpifrance ou Chanel."
+      ],
+      "skills": [
+        "Développement web sur mesure",
+        "Applications mobiles",
+        "Sites WordPress",
+        "Solutions IA",
+        "SaaS sur mesure",
+        "UX/UI"
+      ],
+      "tools": [
+        "WordPress",
+        "Webflow",
+        "React",
+        "React Native",
+        "Laravel",
+        "Flutter"
+      ],
+      "sectors": [
+        "Grands groupes",
+        "SaaS & tech",
+        "PME & start-up"
+      ],
+      "references": [
+        "Leroy Merlin",
+        "Decathlon",
+        "BNP Paribas",
+        "Bpifrance",
+        "Chanel",
+        "Clarins",
+        "La Poste",
+        "Konbini"
+      ],
+      "website": "https://galadrim.fr/",
+      "portfolio": "",
+      "logo": "",
+      "photo": "",
+      "cover": "",
+      "color": "violet",
+      "projects": [],
+      "budget": "",
+      "qodiaNote": ""
+    },
+    {
       "slug": "grapheine",
       "visible": true,
       "featured": false,
+      "status": "recommande",
+      "sponsored": false,
       "name": "Graphéine",
       "kind": "agence",
       "family": "branding",
@@ -442,9 +1137,487 @@
       "projects": []
     },
     {
+      "slug": "growth-room",
+      "visible": true,
+      "featured": false,
+      "status": "recommande",
+      "sponsored": false,
+      "name": "Growth Room",
+      "kind": "agence",
+      "family": "acquisition",
+      "headline": "Agence growth marketing : SEO, ads, outbound et RevOps",
+      "city": "Paris",
+      "bio": [
+        "Growth Room est une agence de growth marketing installée à Paris (2e). Elle s'organise en quatre pôles : Growth SEO, Growth Ads (paid media), Growth Outbound (prospection digitale) et RevOps (CRM et marketing automation).",
+        "L'équipe, d'une trentaine de personnes, accompagne des scale-up et des grands comptes, dont Axeptio, PrestaShop, ManoMano, Veolia, Michelin, Lemlist et Roche Bobois."
+      ],
+      "skills": [
+        "SEO",
+        "Paid media",
+        "Prospection outbound",
+        "RevOps",
+        "Marketing automation",
+        "Growth marketing"
+      ],
+      "tools": [
+        "Google Ads",
+        "Meta Ads",
+        "HubSpot"
+      ],
+      "sectors": [
+        "SaaS & tech",
+        "E-commerce",
+        "Grands groupes"
+      ],
+      "references": [
+        "Axeptio",
+        "PrestaShop",
+        "ManoMano",
+        "Veolia",
+        "Michelin",
+        "Lemlist",
+        "Roche Bobois"
+      ],
+      "website": "https://www.growthroom.co/",
+      "portfolio": "",
+      "logo": "",
+      "photo": "",
+      "cover": "",
+      "color": "violet",
+      "projects": [],
+      "budget": "",
+      "qodiaNote": ""
+    },
+    {
+      "slug": "insign",
+      "visible": true,
+      "featured": false,
+      "status": "recommande",
+      "sponsored": false,
+      "name": "Insign",
+      "kind": "agence",
+      "family": "strategie",
+      "headline": "Groupe de conseil en marque, marque employeur et technologies digitales",
+      "city": "Paris, Lyon",
+      "bio": [
+        "Insign est un groupe d'agences fondé en 2010, d'environ 200 collaborateurs répartis en 15 business units, à Paris, Lyon, Tournon-sur-Rhône et Los Angeles.",
+        "Il intervient sur trois terrains : la marque (plateformes et identités de marque), le capital humain (marque employeur, accompagnement du changement) et la technologie (écosystèmes digitaux, sites et e-commerce, IA). Parmi ses clients : Michelin, Sephora, Cegid, Forvis Mazars, la Marine nationale et Interflora."
+      ],
+      "skills": [
+        "Stratégie de marque",
+        "Marque employeur",
+        "Identité visuelle",
+        "Sites web et e-commerce",
+        "Accompagnement du changement",
+        "IA appliquée"
+      ],
+      "tools": [
+        "WordPress"
+      ],
+      "sectors": [
+        "Grands groupes",
+        "Industrie",
+        "Culture & institutions"
+      ],
+      "references": [
+        "Michelin",
+        "Sephora",
+        "Cegid",
+        "Forvis Mazars",
+        "Marine nationale",
+        "Interflora",
+        "Bjorg",
+        "Geopost"
+      ],
+      "website": "https://www.insign.fr/",
+      "portfolio": "",
+      "logo": "",
+      "photo": "",
+      "cover": "",
+      "color": "cyan",
+      "projects": [],
+      "budget": "",
+      "qodiaNote": ""
+    },
+    {
+      "slug": "junto",
+      "visible": true,
+      "featured": false,
+      "status": "recommande",
+      "sponsored": false,
+      "name": "Junto",
+      "kind": "agence",
+      "family": "acquisition",
+      "headline": "Agence d'acquisition et de performance marketing : SEA, social ads et SEO",
+      "city": "",
+      "bio": [
+        "Junto est une agence spécialisée dans l'acquisition digitale et la performance marketing : SEA et social ads, SEO et content marketing, tracking et data, paid media B2B (Google, LinkedIn, Meta) et alignement marketing-ventes dans HubSpot.",
+        "L'agence fait partie du groupe Blueland. Elle est Google Premier Partner, Meta Business Partner et HubSpot Platinum Partner, gère plus de 10 M€ de budgets média par an et a accompagné Pennylane, PwC, OVHcloud, Livestorm et CybelAngel."
+      ],
+      "skills": [
+        "Google Ads",
+        "Social ads",
+        "SEO",
+        "Paid media B2B",
+        "Tracking et data",
+        "HubSpot"
+      ],
+      "tools": [
+        "Google Ads",
+        "Meta Ads",
+        "LinkedIn Ads",
+        "HubSpot"
+      ],
+      "sectors": [
+        "SaaS & tech",
+        "E-commerce",
+        "Grands groupes"
+      ],
+      "references": [
+        "Pennylane",
+        "PwC",
+        "OVHcloud",
+        "Livestorm",
+        "CybelAngel",
+        "Dext"
+      ],
+      "website": "https://junto.fr/",
+      "portfolio": "",
+      "logo": "",
+      "photo": "",
+      "cover": "",
+      "color": "jaune",
+      "projects": [],
+      "budget": "",
+      "qodiaNote": ""
+    },
+    {
+      "slug": "kronik",
+      "visible": true,
+      "featured": false,
+      "status": "recommande",
+      "sponsored": false,
+      "name": "Kronik",
+      "kind": "agence",
+      "family": "contenu",
+      "headline": "Agence vidéo : témoignages clients, portraits collaborateurs et démos produit",
+      "city": "Paris",
+      "bio": [
+        "Kronik produit des vidéos d'entreprise fondées sur le storytelling : témoignages clients, portraits de collaborateurs, démos produit, visites de bureaux, aftermovies et podcasts vidéo.",
+        "Fondée en 2017 à Paris par trois associés venus des médias, du documentaire et de la tech, dont Mathieu Tonin, l'agence s'appuie sur un réseau de réalisateurs, journalistes et ingénieurs du son. Elle a accompagné plus de 300 entreprises, de Qonto à Doctolib, Payfit et Alan."
+      ],
+      "skills": [
+        "Vidéo témoignage client",
+        "Marque employeur",
+        "Démo produit",
+        "Aftermovie",
+        "Podcast vidéo"
+      ],
+      "tools": [],
+      "sectors": [
+        "SaaS & tech",
+        "PME & start-up"
+      ],
+      "references": [
+        "Qonto",
+        "Doctolib",
+        "Payfit",
+        "Alan",
+        "Aircall",
+        "Superprof"
+      ],
+      "website": "https://www.kronik.com/",
+      "portfolio": "",
+      "logo": "",
+      "photo": "",
+      "cover": "",
+      "color": "cyan",
+      "projects": [],
+      "budget": "",
+      "qodiaNote": ""
+    },
+    {
+      "slug": "kymono",
+      "visible": true,
+      "featured": false,
+      "status": "recommande",
+      "sponsored": false,
+      "name": "Kymono",
+      "kind": "agence",
+      "family": "branding",
+      "headline": "Culture design : merchandising, aménagement de bureaux et événements d'entreprise",
+      "city": "Paris, Bordeaux",
+      "bio": [
+        "Kymono aide les entreprises à incarner leur culture : merchandising personnalisé et éco-responsable, conception et aménagement d'espaces de travail (office design), événements internes et séminaires, et ateliers de culture d'entreprise.",
+        "Fondée en 2017 par Olivier Ramel, l'entreprise compte une quarantaine de personnes entre Paris et Bordeaux et revendique plus de 10 000 clients B2B, start-up, PME et grands groupes."
+      ],
+      "skills": [
+        "Office design",
+        "Aménagement d'espaces",
+        "Merchandising",
+        "Événements d'entreprise",
+        "Culture d'entreprise"
+      ],
+      "tools": [],
+      "sectors": [
+        "PME & start-up",
+        "Grands groupes"
+      ],
+      "references": [],
+      "website": "https://kymono.co/",
+      "portfolio": "",
+      "logo": "",
+      "photo": "",
+      "cover": "",
+      "color": "cyan",
+      "projects": [],
+      "budget": "",
+      "qodiaNote": ""
+    },
+    {
+      "slug": "kom",
+      "visible": true,
+      "featured": false,
+      "status": "recommande",
+      "sponsored": false,
+      "name": "KÖM",
+      "kind": "agence",
+      "family": "contenu",
+      "headline": "Agence de production vidéo et brand content pour PME et grands comptes",
+      "city": "",
+      "bio": [
+        "KÖM est une agence de production créative et de brand content dont la mission est de rendre la vidéo accessible à toutes les entreprises, de la start-up au grand groupe : contenus pour les réseaux sociaux, vidéos de notoriété et formats longs pour raconter une marque.",
+        "L'agence est dirigée par Harold Gardas, qui a aussi lancé KÖM Média, un média vidéo consacré aux entrepreneurs. Elle revendique plus de 500 clients, dont Club Med, Renault, L'Oréal, TF1, Uber, Center Parcs et l'ESSEC."
+      ],
+      "skills": [
+        "Production vidéo",
+        "Brand content",
+        "Contenus social media",
+        "Motion design",
+        "Formats longs et documentaires"
+      ],
+      "tools": [],
+      "sectors": [
+        "Grands groupes",
+        "PME & start-up"
+      ],
+      "references": [
+        "Club Med",
+        "Renault",
+        "L'Oréal",
+        "TF1",
+        "Uber",
+        "Center Parcs",
+        "Adobe",
+        "ESSEC Business School"
+      ],
+      "website": "https://www.komagence.com/",
+      "portfolio": "",
+      "logo": "",
+      "photo": "",
+      "cover": "",
+      "color": "jaune",
+      "projects": [],
+      "budget": "",
+      "qodiaNote": ""
+    },
+    {
+      "slug": "la-framerie",
+      "visible": true,
+      "featured": false,
+      "status": "recommande",
+      "sponsored": false,
+      "name": "La Framerie",
+      "kind": "agence",
+      "family": "contenu",
+      "headline": "Studio de production créative : photo, vidéo et post-production",
+      "city": "Paris",
+      "bio": [
+        "La Framerie est un studio de production créative parisien : production photo et vidéo, post-production et retouche photo, films, stop motion et contenus pour les campagnes digitales. Le studio explore aussi l'image assistée par IA.",
+        "Il travaille surtout pour la mode et la cosmétique : Louis Vuitton, Dior, Lacoste, Lancôme, Louboutin, Yves Rocher, mais aussi Bonne Maman, Andros ou la FFBB."
+      ],
+      "skills": [
+        "Retouche photo",
+        "Post-production",
+        "Production photo",
+        "Production vidéo",
+        "Stop motion"
+      ],
+      "tools": [],
+      "sectors": [
+        "Mode & beauté",
+        "Food & nutrition"
+      ],
+      "references": [
+        "Louis Vuitton",
+        "Dior",
+        "Lacoste",
+        "Lancôme",
+        "Louboutin",
+        "Yves Rocher",
+        "Bonne Maman",
+        "Andros"
+      ],
+      "website": "https://laframerie.com/",
+      "portfolio": "",
+      "logo": "",
+      "photo": "",
+      "cover": "",
+      "color": "rouge",
+      "projects": [],
+      "budget": "",
+      "qodiaNote": ""
+    },
+    {
+      "slug": "lord",
+      "visible": true,
+      "featured": false,
+      "status": "recommande",
+      "sponsored": false,
+      "name": "LORD",
+      "kind": "agence",
+      "family": "branding",
+      "headline": "Agence internationale de branding et de sites web",
+      "city": "Paris",
+      "bio": [
+        "LORD est une agence de branding et de web à l'approche stratégique et créative, installée à Paris (11e). Elle conçoit des identités de marque et des sites web pour des start-up et des scale-up.",
+        "L'agence a été cofondée par Constant Revest (directeur de création) et Frédéric Le Gall. Elle a notamment travaillé pour Swile, iBanFirst, l'Ircam, Wecasa, Shotgun, Lalalab et Hublo."
+      ],
+      "skills": [
+        "Branding",
+        "Identité visuelle",
+        "Stratégie de marque",
+        "Webdesign",
+        "Sites web"
+      ],
+      "tools": [],
+      "sectors": [
+        "SaaS & tech",
+        "PME & start-up",
+        "Culture & institutions"
+      ],
+      "references": [
+        "Swile",
+        "iBanFirst",
+        "Ircam",
+        "Wecasa",
+        "Shotgun",
+        "Lalalab",
+        "Hublo"
+      ],
+      "website": "https://www.callmelord.com/",
+      "portfolio": "",
+      "logo": "",
+      "photo": "",
+      "cover": "",
+      "color": "violet",
+      "projects": [],
+      "budget": "",
+      "qodiaNote": ""
+    },
+    {
+      "slug": "maison-transversale",
+      "visible": true,
+      "featured": false,
+      "status": "recommande",
+      "sponsored": false,
+      "name": "Maison Transversale",
+      "kind": "agence",
+      "family": "web",
+      "headline": "Agence e-shop et merchandising pour les clubs et marques de sport",
+      "city": "",
+      "bio": [
+        "Maison Transversale fait du merchandising un levier de chiffre d'affaires et d'image : conception et développement de boutiques en ligne, campagnes commerciales, logistique avec son partenaire Oreca, et création de lignes de produits et collections événementielles.",
+        "Son collectif réunit des experts du merchandising, des créatifs et des développeurs. L'agence travaille avec de grands clubs sportifs : Paris Basketball, RC Lens, Paris FC, Stade Rennais, Olympique de Marseille et la Fédération française de handball."
+      ],
+      "skills": [
+        "Boutiques en ligne",
+        "Merchandising",
+        "Collections produits",
+        "Shootings produits",
+        "Logistique e-commerce"
+      ],
+      "tools": [],
+      "sectors": [
+        "Sport",
+        "E-commerce"
+      ],
+      "references": [
+        "Paris Basketball",
+        "RC Lens",
+        "Paris FC",
+        "Stade Rennais",
+        "Olympique de Marseille",
+        "Fédération française de handball",
+        "DFCO"
+      ],
+      "website": "https://www.maisontransversale.fr/",
+      "portfolio": "",
+      "logo": "",
+      "photo": "",
+      "cover": "",
+      "color": "jaune",
+      "projects": [],
+      "budget": "",
+      "qodiaNote": ""
+    },
+    {
+      "slug": "moon-moon",
+      "visible": true,
+      "featured": false,
+      "status": "recommande",
+      "sponsored": false,
+      "name": "Moon Moon",
+      "kind": "agence",
+      "family": "web",
+      "headline": "Agence Shopify Plus, certifiée Shopify Platinum Partner",
+      "city": "Nantes, Bordeaux, Rennes",
+      "bio": [
+        "Moon Moon conçoit et fait évoluer des boutiques Shopify et Shopify Plus : création et refonte sur mesure, UI/UX et branding, migrations depuis PrestaShop, WooCommerce ou Magento, CRO, B2B, international et connexions ERP.",
+        "L'agence est certifiée Shopify Platinum Partner. Son siège est à Nantes, avec une direction conseil à Bordeaux et une direction graphique à Rennes."
+      ],
+      "skills": [
+        "Boutiques Shopify Plus",
+        "Refonte e-commerce",
+        "Migration vers Shopify",
+        "CRO",
+        "Shopify POS",
+        "CRM Klaviyo"
+      ],
+      "tools": [
+        "Shopify Plus",
+        "Klaviyo",
+        "Shopify POS"
+      ],
+      "sectors": [
+        "E-commerce",
+        "Mode & beauté",
+        "Food & nutrition"
+      ],
+      "references": [
+        "Pyrex",
+        "Cimalp",
+        "Rendel",
+        "Jolly Mama",
+        "Cécile & Jeanne",
+        "La Petite Épicerie"
+      ],
+      "website": "https://moon-moon.fr/",
+      "portfolio": "",
+      "logo": "",
+      "photo": "",
+      "cover": "",
+      "color": "jaune",
+      "projects": [],
+      "budget": "",
+      "qodiaNote": ""
+    },
+    {
       "slug": "mothaiba",
       "visible": true,
       "featured": false,
+      "status": "membre",
+      "sponsored": false,
       "name": "Mothaiba",
       "kind": "agence",
       "family": "contenu",
@@ -487,9 +1660,249 @@
       "projects": []
     },
     {
+      "slug": "pelo-studio",
+      "visible": true,
+      "featured": false,
+      "status": "recommande",
+      "sponsored": false,
+      "name": "Pelo Studio",
+      "kind": "agence",
+      "family": "branding",
+      "headline": "Studio de branding, UX/UI et développement web pour start-up",
+      "city": "Paris",
+      "bio": [
+        "Pelo Studio accompagne les start-up de la marque au produit : branding, design UI/UX, design systems et développement de sites web.",
+        "Le studio parisien travaille avec un CMS headless (Storyblok, dont il est partenaire) et des technologies comme Next.js. Il a notamment réalisé les sites de Shoppingfeed, Beamy, Bitstack et Electra."
+      ],
+      "skills": [
+        "Branding",
+        "UI/UX design",
+        "Design system",
+        "Développement web",
+        "Sites headless"
+      ],
+      "tools": [
+        "Storyblok",
+        "Next.js",
+        "Figma"
+      ],
+      "sectors": [
+        "SaaS & tech",
+        "PME & start-up"
+      ],
+      "references": [
+        "Shoppingfeed",
+        "Beamy",
+        "Bitstack",
+        "Electra",
+        "Folde"
+      ],
+      "website": "https://pelo.studio/",
+      "portfolio": "",
+      "logo": "",
+      "photo": "",
+      "cover": "",
+      "color": "cyan",
+      "projects": [],
+      "budget": "",
+      "qodiaNote": ""
+    },
+    {
+      "slug": "pepperclip",
+      "visible": true,
+      "featured": false,
+      "status": "recommande",
+      "sponsored": false,
+      "name": "Pepperclip Studio",
+      "kind": "agence",
+      "family": "branding",
+      "headline": "Studio créatif de branding, UX/UI et sites Webflow",
+      "city": "Paris",
+      "bio": [
+        "Pepperclip est un studio créatif et digital parisien fondé en 2016 par Nathan et Dorian. Il conçoit des identités de marque, des parcours UX, des interfaces et des sites web.",
+        "Le studio est expert Webflow. Parmi ses projets publiés : En Voiture Simone, Pepette, Yala Agency ou The Spicy Food Show."
+      ],
+      "skills": [
+        "Branding",
+        "Identité visuelle",
+        "UX/UI design",
+        "Webdesign",
+        "Sites Webflow"
+      ],
+      "tools": [
+        "Webflow",
+        "Figma"
+      ],
+      "sectors": [
+        "PME & start-up",
+        "Food & nutrition"
+      ],
+      "references": [
+        "En Voiture Simone",
+        "Pepette",
+        "Yala Agency",
+        "The Spicy Food Show"
+      ],
+      "website": "https://www.pepperclip.com/",
+      "portfolio": "",
+      "logo": "",
+      "photo": "",
+      "cover": "",
+      "color": "rouge",
+      "projects": [],
+      "budget": "",
+      "qodiaNote": ""
+    },
+    {
+      "slug": "roads",
+      "visible": true,
+      "featured": false,
+      "status": "recommande",
+      "sponsored": false,
+      "name": "Roads",
+      "kind": "agence",
+      "family": "acquisition",
+      "headline": "Agence Social Ads et SEA pour marques e-commerce",
+      "city": "100 % à distance",
+      "bio": [
+        "Roads pilote les campagnes payantes des marques e-commerce : social ads (Meta, TikTok, Snapchat, Pinterest) et SEA (Google Ads : Search, Shopping, YouTube, Performance Max). L'agence a été créée début 2023 par Etienne Garcia, passé auparavant par les équipes Google Ads.",
+        "Organisée à 100 % à distance, l'équipe compte plus de 45 personnes et revendique plus de 250 marques accompagnées. La production des créas publicitaires (vidéo, statique, UGC) est assurée par l'agence sœur Kreads."
+      ],
+      "skills": [
+        "Meta Ads",
+        "TikTok Ads",
+        "Google Ads",
+        "Snapchat Ads",
+        "Créas publicitaires et UGC",
+        "Acquisition e-commerce"
+      ],
+      "tools": [
+        "Google Ads",
+        "Meta Ads",
+        "TikTok Ads",
+        "Snapchat Ads",
+        "Pinterest Ads"
+      ],
+      "sectors": [
+        "E-commerce",
+        "Mode & beauté"
+      ],
+      "references": [],
+      "website": "https://www.roads.social/",
+      "portfolio": "",
+      "logo": "",
+      "photo": "",
+      "cover": "",
+      "color": "violet",
+      "projects": [],
+      "budget": "",
+      "qodiaNote": ""
+    },
+    {
+      "slug": "ruban-blanc",
+      "visible": true,
+      "featured": false,
+      "status": "recommande",
+      "sponsored": false,
+      "name": "Ruban Blanc",
+      "kind": "agence",
+      "family": "strategie",
+      "headline": "Agence indépendante de communication corporate et financière",
+      "city": "Paris",
+      "bio": [
+        "Ruban Blanc est une agence indépendante spécialiste de la communication corporate et financière : rapports annuels et documents d'enregistrement universel, plateformes de reporting, communication RSE, messages de marque, sites et motion design.",
+        "Créée en 2012 et installée à Paris (9e), l'agence compte plus de 15 collaborateurs. Elle travaille pour des PME comme pour des sociétés cotées : Air France-KLM, Air Liquide, Danone, Kering, Thales, Saint-Gobain ou EssilorLuxottica."
+      ],
+      "skills": [
+        "Communication financière",
+        "Rapport annuel",
+        "Communication corporate",
+        "Communication RSE",
+        "Motion design"
+      ],
+      "tools": [],
+      "sectors": [
+        "Grands groupes",
+        "Industrie"
+      ],
+      "references": [
+        "Air France-KLM",
+        "Air Liquide",
+        "Danone",
+        "Kering",
+        "Thales",
+        "Saint-Gobain",
+        "EssilorLuxottica",
+        "Bouygues"
+      ],
+      "website": "https://www.rubanblanc.fr/",
+      "portfolio": "",
+      "logo": "",
+      "photo": "",
+      "cover": "",
+      "color": "violet",
+      "projects": [],
+      "budget": "",
+      "qodiaNote": ""
+    },
+    {
+      "slug": "slidor",
+      "visible": true,
+      "featured": false,
+      "status": "recommande",
+      "sponsored": false,
+      "name": "Slidor",
+      "kind": "agence",
+      "family": "branding",
+      "headline": "Agence spécialiste des présentations PowerPoint et Keynote",
+      "city": "Paris, Bordeaux",
+      "bio": [
+        "Slidor conçoit des présentations à fort enjeu : présentations commerciales, pitch decks de levée de fonds, présentations financières et événementielles, templates PowerPoint et formations. L'agence réalise aussi des sites Webflow.",
+        "Le studio compte une trentaine de personnes entre Paris et Bordeaux, dont plus de 25 designers en CDI, et revendique plus de 3 000 clients, dont plus de 200 sociétés cotées."
+      ],
+      "skills": [
+        "Présentations commerciales",
+        "Pitch deck",
+        "Templates PowerPoint",
+        "Présentations financières",
+        "Formation PowerPoint",
+        "Sites Webflow"
+      ],
+      "tools": [
+        "PowerPoint",
+        "Keynote",
+        "Webflow"
+      ],
+      "sectors": [
+        "Grands groupes",
+        "PME & start-up"
+      ],
+      "references": [
+        "Air France",
+        "Chanel",
+        "LVMH",
+        "Google",
+        "Nespresso",
+        "Renault",
+        "Sephora",
+        "Microsoft"
+      ],
+      "website": "https://www.slidor.agency/",
+      "portfolio": "",
+      "logo": "",
+      "photo": "",
+      "cover": "",
+      "color": "jaune",
+      "projects": [],
+      "budget": "",
+      "qodiaNote": ""
+    },
+    {
       "slug": "startperf",
       "visible": true,
       "featured": false,
+      "status": "recommande",
+      "sponsored": false,
       "name": "StartPerf",
       "kind": "agence",
       "family": "acquisition",
@@ -520,9 +1933,61 @@
       "projects": []
     },
     {
+      "slug": "studio-elias",
+      "visible": true,
+      "featured": false,
+      "status": "recommande",
+      "sponsored": false,
+      "name": "Studio Elias",
+      "kind": "agence",
+      "family": "branding",
+      "headline": "Studio de branding, rebranding et sites Webflow",
+      "city": "Paris",
+      "bio": [
+        "Studio Elias accompagne les marques de la stratégie au site web : positionnement, naming, identité visuelle, motion design et 3D, puis design UX/UI et intégration Webflow. Le studio réalise aussi pitch decks et brandbooks.",
+        "Fondé en 2020 et installé à Paris, il fait partie du groupe Kincy et est dirigé par Axel. Il revendique des projets pour Thales, Hermès, PrestaShop, Fiverr ou la Commission européenne, ainsi que pour de nombreuses start-up."
+      ],
+      "skills": [
+        "Branding",
+        "Rebranding",
+        "Naming",
+        "Identité visuelle",
+        "Sites Webflow",
+        "Motion design"
+      ],
+      "tools": [
+        "Webflow",
+        "Figma"
+      ],
+      "sectors": [
+        "PME & start-up",
+        "SaaS & tech",
+        "Grands groupes"
+      ],
+      "references": [
+        "Thales",
+        "Hermès",
+        "PrestaShop",
+        "Fiverr",
+        "Fifty-Five",
+        "Commission européenne"
+      ],
+      "website": "https://www.elias.studio/",
+      "portfolio": "",
+      "logo": "",
+      "photo": "",
+      "cover": "",
+      "color": "violet",
+      "projects": [],
+      "budget": "",
+      "qodiaNote": ""
+    },
+    {
       "slug": "sebastien-navizet",
       "visible": true,
       "featured": false,
+      "status": "recommande",
+      "sponsored": false,
       "name": "Sébastien Navizet",
       "kind": "freelance",
       "family": "branding",
@@ -560,6 +2025,429 @@
       "cover": "",
       "color": "rouge",
       "projects": []
+    },
+    {
+      "slug": "sebastien-tortu",
+      "visible": true,
+      "featured": false,
+      "status": "recommande",
+      "sponsored": false,
+      "name": "Sébastien Tortu",
+      "kind": "freelance",
+      "family": "acquisition",
+      "headline": "Spécialiste CRO e-commerce, fondateur de Boost Conversion",
+      "city": "",
+      "bio": [
+        "Sébastien Tortu aide les marques e-commerce à augmenter leur taux de conversion et leur panier moyen : analyse du comportement des visiteurs, optimisation des pages, landing pages et tests A/B. Il a fondé Boost Conversion en 2023.",
+        "Il est l'auteur de « DNVB, le renouveau du commerce » et de « Brand Ikigai », et partage sa méthode CRO sur LinkedIn et YouTube. Parmi les marques accompagnées : Spring et Sport Découverte."
+      ],
+      "skills": [
+        "CRO",
+        "Tests A/B",
+        "Landing pages",
+        "Optimisation e-commerce",
+        "Analyse comportementale"
+      ],
+      "tools": [
+        "Figma"
+      ],
+      "sectors": [
+        "E-commerce"
+      ],
+      "references": [
+        "Spring",
+        "Sport Découverte"
+      ],
+      "website": "https://boostconversion.fr/",
+      "portfolio": "",
+      "logo": "",
+      "photo": "",
+      "cover": "",
+      "color": "rouge",
+      "projects": [],
+      "budget": "",
+      "qodiaNote": ""
+    },
+    {
+      "slug": "the-geek-family",
+      "visible": true,
+      "featured": false,
+      "status": "recommande",
+      "sponsored": false,
+      "name": "The Geek Family",
+      "kind": "agence",
+      "family": "web",
+      "headline": "Agence digitale : sites, e-commerce, applications et IA sur mesure",
+      "city": "Paris, Lyon, Bordeaux",
+      "bio": [
+        "The Geek Family est une agence digitale créée en 2018, présente à Paris, Lyon et Bordeaux. Son équipe de 25 personnes (développeurs, chefs de projet, CTO, experts IA) conçoit des sites et CMS, des boutiques e-commerce, des plateformes métier, des applications mobiles et des systèmes d'IA.",
+        "L'agence maîtrise un large spectre technique (WordPress, Drupal, PrestaShop, Shopify, Laravel, Symfony, React Native) et intègre CRM, ERP et API. Elle travaille pour Quick, Brico Dépôt, Domitys, Cerballiance, Ibis ou Weldom."
+      ],
+      "skills": [
+        "Sites web et CMS",
+        "E-commerce",
+        "Applications mobiles",
+        "Plateformes métier",
+        "Solutions IA",
+        "Intégrations CRM et ERP"
+      ],
+      "tools": [
+        "WordPress",
+        "Drupal",
+        "PrestaShop",
+        "Shopify",
+        "Laravel",
+        "React Native"
+      ],
+      "sectors": [
+        "Grands groupes",
+        "E-commerce",
+        "Santé"
+      ],
+      "references": [
+        "Quick",
+        "Brico Dépôt",
+        "Domitys",
+        "Cerballiance",
+        "Ibis",
+        "Weldom",
+        "Corsair"
+      ],
+      "website": "https://thegeek.family/",
+      "portfolio": "",
+      "logo": "",
+      "photo": "",
+      "cover": "",
+      "color": "cyan",
+      "projects": [],
+      "budget": "",
+      "qodiaNote": ""
+    },
+    {
+      "slug": "tire-fesses",
+      "visible": true,
+      "featured": false,
+      "status": "recommande",
+      "sponsored": false,
+      "name": "Tire-Fesses",
+      "kind": "agence",
+      "family": "social",
+      "headline": "Agence social media indépendante, spécialiste des marques de grande consommation",
+      "city": "Rennes",
+      "bio": [
+        "Tire-Fesses est une agence social media indépendante installée à Rennes, avec un studio de création intégré. Elle accompagne surtout des marques de grande consommation et de l'agroalimentaire sur TikTok, Instagram et les autres réseaux.",
+        "L'équipe d'environ 25 personnes couvre quatre métiers en interne : stratégie, création de contenus, community management et acquisition (social ads et croissance organique). L'agence dit travailler chaque mois pour plus de 50 marques."
+      ],
+      "skills": [
+        "Stratégie social media",
+        "Création de contenus",
+        "Community management",
+        "Social ads",
+        "Marketing d'influence",
+        "TikTok"
+      ],
+      "tools": [
+        "TikTok",
+        "Instagram",
+        "Meta Ads"
+      ],
+      "sectors": [
+        "Grande consommation",
+        "Food & nutrition"
+      ],
+      "references": [
+        "Tipiak",
+        "B&B Hotels",
+        "d'aucy",
+        "Savéol",
+        "Fever-Tree",
+        "Mutti",
+        "Connétable",
+        "Briochin"
+      ],
+      "website": "https://tire-fesses.fr/",
+      "portfolio": "",
+      "logo": "",
+      "photo": "",
+      "cover": "",
+      "color": "rouge",
+      "projects": [],
+      "budget": "",
+      "qodiaNote": ""
+    },
+    {
+      "slug": "tyrsa",
+      "visible": true,
+      "featured": false,
+      "status": "recommande",
+      "sponsored": false,
+      "name": "Tyrsa (Alexis Taïeb)",
+      "kind": "freelance",
+      "family": "branding",
+      "headline": "Typographe et directeur artistique, fondateur du Studio Tyrsa",
+      "city": "Paris",
+      "bio": [
+        "Alexis Taïeb, alias Tyrsa, est un typographe et directeur artistique parisien passé par le graffiti puis l'école des Gobelins. Son Studio Tyrsa mêle typographie, lettering, branding, direction artistique, motion et 3D.",
+        "Il a signé le lettering du clip « This Is America » de Childish Gambino, l'identité de House 99 (la marque de David Beckham avec L'Oréal), des logos pour McDonald's France et des typographies pour Nike, Moët & Chandon, Dior ou Louis Vuitton."
+      ],
+      "skills": [
+        "Typographie",
+        "Lettering",
+        "Identité visuelle",
+        "Direction artistique",
+        "Création de caractères"
+      ],
+      "tools": [],
+      "sectors": [
+        "Mode & beauté",
+        "Sport",
+        "Médias & divertissement"
+      ],
+      "references": [
+        "Nike",
+        "Jordan",
+        "Dior",
+        "Louis Vuitton",
+        "Moët & Chandon",
+        "McDonald's",
+        "Netflix",
+        "Paris Saint-Germain"
+      ],
+      "website": "https://www.studiotyrsa.com/",
+      "portfolio": "",
+      "logo": "",
+      "photo": "",
+      "cover": "",
+      "color": "violet",
+      "projects": [],
+      "budget": "",
+      "qodiaNote": ""
+    },
+    {
+      "slug": "urban-act",
+      "visible": true,
+      "featured": false,
+      "status": "recommande",
+      "sponsored": false,
+      "name": "Urban Act",
+      "kind": "agence",
+      "family": "contenu",
+      "headline": "Agence de street marketing, guérilla marketing et marketing événementiel",
+      "city": "Saint-Ouen-sur-Seine",
+      "bio": [
+        "Urban Act conçoit et déploie des opérations de marketing dans la rue : street marketing (affichage mobile, distribution, mascottes), guérilla marketing (fresques, bâches, signalétique urbaine), collage street art et marketing événementiel (roadshows, brand experience).",
+        "Basée à Saint-Ouen-sur-Seine, l'agence se présente comme une référence du street et du guérilla marketing en France, avec des opérations menées aussi à l'international."
+      ],
+      "skills": [
+        "Street marketing",
+        "Guérilla marketing",
+        "Fresques murales",
+        "Marketing événementiel",
+        "Roadshow",
+        "Green marketing"
+      ],
+      "tools": [],
+      "sectors": [
+        "Grande consommation",
+        "Médias & divertissement"
+      ],
+      "references": [
+        "Netflix"
+      ],
+      "website": "https://www.urbanact.com/",
+      "portfolio": "",
+      "logo": "",
+      "photo": "",
+      "cover": "",
+      "color": "rouge",
+      "projects": [],
+      "budget": "",
+      "qodiaNote": ""
+    },
+    {
+      "slug": "yann-leonardi",
+      "visible": true,
+      "featured": false,
+      "status": "recommande",
+      "sponsored": false,
+      "name": "Yann Leonardi",
+      "kind": "freelance",
+      "family": "branding",
+      "headline": "Consultant en brand building et brand-led growth",
+      "city": "",
+      "bio": [
+        "Yann Leonardi est consultant indépendant en branding et growth marketing depuis 2017, après avoir créé et revendu des start-up. Ancien « growth », il défend l'idée que la marque est le principal levier de croissance à long terme.",
+        "Il est coauteur du livre « Growth Marketing », créateur de la newsletter La Growth Semaine et du podcast AARRR Appliqué, et a conçu les GROWTH Cartes, un outil pour définir les attributs d'une marque."
+      ],
+      "skills": [
+        "Brand building",
+        "Plateforme de marque",
+        "Growth marketing",
+        "Formation"
+      ],
+      "tools": [],
+      "sectors": [
+        "PME & start-up",
+        "SaaS & tech"
+      ],
+      "references": [],
+      "website": "https://brandledgrowth.substack.com/",
+      "portfolio": "",
+      "logo": "",
+      "photo": "",
+      "cover": "",
+      "color": "jaune",
+      "projects": [],
+      "budget": "",
+      "qodiaNote": ""
+    },
+    {
+      "slug": "yard",
+      "visible": true,
+      "featured": false,
+      "status": "recommande",
+      "sponsored": false,
+      "name": "YARD",
+      "kind": "agence",
+      "family": "strategie",
+      "headline": "Agence créative pop culture : stratégie, création et production",
+      "city": "Paris, Los Angeles",
+      "bio": [
+        "YARD fait le lien entre les marques et les générations façonnées par la pop culture et le hip-hop. Fondée à Paris en 2014 par Tom Brunet et Yoan Prat, l'agence est aussi un média et une maison de production événementielle, centrée sur la musique, la mode, l'art et le sport.",
+        "Présente à Paris et Los Angeles, membre du kyu Collective (après avoir rejoint Sid Lee en 2017), elle couvre la stratégie (positionnement, influence, social media), la création (branding, expériences, activations) et la production (événements, contenus). Clients : Nike, Jordan, UGG, Uber Eats, Decathlon, Paris Basketball."
+      ],
+      "skills": [
+        "Marketing culturel",
+        "Stratégie de marque",
+        "Influence",
+        "Activations",
+        "Événements",
+        "Brand content"
+      ],
+      "tools": [],
+      "sectors": [
+        "Sport",
+        "Mode & beauté",
+        "Médias & divertissement"
+      ],
+      "references": [
+        "Nike",
+        "Jordan",
+        "UGG",
+        "Uber Eats",
+        "Decathlon",
+        "Paris Basketball",
+        "Havana Club",
+        "Converse"
+      ],
+      "website": "https://www.yard.me/",
+      "portfolio": "",
+      "logo": "",
+      "photo": "",
+      "cover": "",
+      "color": "jaune",
+      "projects": [],
+      "budget": "",
+      "qodiaNote": ""
+    },
+    {
+      "slug": "yateo",
+      "visible": true,
+      "featured": false,
+      "status": "recommande",
+      "sponsored": false,
+      "name": "Yateo",
+      "kind": "agence",
+      "family": "web",
+      "headline": "Agence e-commerce et acquisition, partenaire PrestaShop",
+      "city": "Paris",
+      "bio": [
+        "Fondée en 2006, Yateo est une agence parisienne d'une quarantaine de personnes organisée en trois pôles : conception de plateformes e-commerce, acquisition (SEO, SEA, growth) et conseil.",
+        "Partenaire PrestaShop de premier plan, elle travaille aussi sur Shopify, Adobe Commerce (Magento), Sylius, WooCommerce et WordPress. Ses références incluent BNP Paribas, L'Oréal, Hertz, Eurostar, le Paris Saint-Germain et Institut Esthederm."
+      ],
+      "skills": [
+        "Sites e-commerce PrestaShop",
+        "Développement sur mesure",
+        "SEO",
+        "SEA",
+        "UX/UI",
+        "Growth marketing"
+      ],
+      "tools": [
+        "PrestaShop",
+        "Shopify",
+        "Adobe Commerce",
+        "Sylius",
+        "WooCommerce",
+        "WordPress"
+      ],
+      "sectors": [
+        "E-commerce",
+        "Grands groupes",
+        "Mode & beauté"
+      ],
+      "references": [
+        "BNP Paribas",
+        "L'Oréal",
+        "Hertz",
+        "Eurostar",
+        "Paris Saint-Germain",
+        "Institut Esthederm",
+        "Cushman & Wakefield",
+        "Point S"
+      ],
+      "website": "https://www.yateo.com/",
+      "portfolio": "",
+      "logo": "",
+      "photo": "",
+      "cover": "",
+      "color": "rouge",
+      "projects": [],
+      "budget": "",
+      "qodiaNote": ""
+    },
+    {
+      "slug": "yohann-ancele",
+      "visible": true,
+      "featured": false,
+      "status": "recommande",
+      "sponsored": false,
+      "name": "Yohann Ancele",
+      "kind": "freelance",
+      "family": "contenu",
+      "headline": "Directeur artistique de shows de danse pour l'événementiel (EYYE Productions)",
+      "city": "Paris",
+      "bio": [
+        "Yohann Ancele crée et met en scène des shows de danse pour les événements d'entreprise et les agences événementielles, des formats clés en main aux créations sur mesure. Il dirige EYYE Productions et accompagne aussi les chefs de projet événementiel en conseil.",
+        "Primé au Club des DA, il a conçu des performances pour Sephora (lancement de la campagne avec John Legend), Mercedes, Gan Assurances, Fountaine-Pajot ou Adwork's."
+      ],
+      "skills": [
+        "Shows de danse",
+        "Mise en scène",
+        "Direction artistique événementielle",
+        "Conseil événementiel"
+      ],
+      "tools": [],
+      "sectors": [
+        "Grands groupes",
+        "Mode & beauté"
+      ],
+      "references": [
+        "Sephora",
+        "Mercedes",
+        "Gan Assurances",
+        "Fountaine-Pajot",
+        "Adwork's"
+      ],
+      "website": "",
+      "portfolio": "",
+      "logo": "",
+      "photo": "",
+      "cover": "",
+      "color": "rouge",
+      "projects": [],
+      "budget": "",
+      "qodiaNote": ""
     }
   ]
 }
