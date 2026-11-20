@@ -172,6 +172,7 @@ ${meta.noindex ? '<meta name="robots" content="noindex">' : ""}
 <meta property="og:image" content="${site.url}${og}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#350085">
+<meta name="impact-site-verification" value="c0b49b29-70fa-4e00-9b4a-a0b956d75d05" content="c0b49b29-70fa-4e00-9b4a-a0b956d75d05">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
