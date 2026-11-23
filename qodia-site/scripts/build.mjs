@@ -685,6 +685,7 @@ function rookiePage(r) {
         ${r.school ? `<div><dt>Formation</dt><dd>${esc(r.school)}</dd></div>` : ""}
         <div><dt>Expertise</dt><dd>${esc(fam?.label || "")}</dd></div>
         ${r.city ? `<div><dt>Basé à</dt><dd>${esc(r.city)}</dd></div>` : ""}
+        ${r.website ? `<div><dt>En ligne</dt><dd><a href="${esc(r.website)}" rel="noopener" target="_blank">${/linkedin\.com/.test(r.website) ? "Profil LinkedIn" : esc(r.website.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, ""))} ${ICON.ext}</a></dd></div>` : ""}
         ${r.availability ? `<div><dt>Disponibilités</dt><dd>${esc(r.availability)}</dd></div>` : ""}
         ${mentor ? `<div><dt>Parrain</dt><dd><a href="${memberUrl(mentor)}">${esc(mentor.name)}</a></dd></div>` : ""}
       </dl></div>
