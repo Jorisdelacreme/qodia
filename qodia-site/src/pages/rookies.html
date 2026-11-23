@@ -1,0 +1,129 @@
+<!--meta {
+  "title": "Qodia Rookies : les jeunes talents du digital, encadrés par le cercle",
+  "description": "Étudiants, alternants, jeunes diplômés et freelances débutants en branding, contenu, web et acquisition : Qodia Rookies les fait progresser jusqu'au référencement dans le cercle.",
+  "nav": "rookies"
+} -->
+<section class="brand-band hero" aria-labelledby="rookies-hero">
+  <div class="brand-band__motif" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="hero__content">
+      <span class="badge badge--light" style="justify-self:start">Programme jeunes talents</span>
+      <h1 class="display-xl" id="rookies-hero">Qodia Rookies.</h1>
+      <p class="hero__lead">Les jeunes talents du branding, du contenu, du web et de l'acquisition, repérés et encadrés par le cercle. Pour les agences qui veulent les tester, les entreprises aux budgets serrés, et les rookies qui veulent passer au niveau supérieur.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn btn--accent" href="#acces">Consulter les rookies <!--@icon-arrow--></a><a class="btn btn--ghost-light" href="#candidature-rookie">Je suis un rookie</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="rookies-pour-qui">
+  <div class="wrap">
+    <div class="section-head"><div><span class="label">Pour qui</span><h2 class="display" id="rookies-pour-qui">Un programme, trois façons d'en profiter.</h2></div></div>
+    <div class="grid grid--3">
+      <div class="reason"><h3>Les agences</h3><p>Testez un junior sur une mission avant de le recruter, de le prendre en stage ou en alternance, ou de lui confier vos débordements. Chaque rookie est présenté par Qodia, avec son niveau et son parcours.</p></div>
+      <div class="reason"><h3>Les entreprises</h3><p>Pour un besoin simple ou un budget serré : déclinaisons graphiques, contenus pour les réseaux, petits sites, premières campagnes. Un rookie, encadré par un membre confirmé du cercle.</p></div>
+      <div class="reason"><h3>Les rookies</h3><p>Étudiants, alternants, jeunes diplômés ou freelances qui se lancent : de vraies missions, un parrain dans le cercle et un objectif clair, devenir membre référencé de Qodia.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt" aria-labelledby="rookies-parcours">
+  <div class="wrap">
+    <div class="section-head"><div><span class="label">Le parcours</span><h2 class="display" id="rookies-parcours">De rookie à membre du cercle.</h2></div></div>
+    <div class="grid grid--4 rookie-steps">
+      <div class="mode"><span class="mode__num">01</span><h3 class="h3">Sélection</h3><p class="muted">Le rookie candidate avec son portfolio. L'équipe Qodia échange avec lui avant de l'intégrer au programme.</p></div>
+      <div class="mode"><span class="mode__num">02</span><h3 class="h3">Parrainage</h3><p class="muted">Un membre confirmé du cercle, freelance ou agence, l'encadre sur ses premières missions et relit son travail.</p></div>
+      <div class="mode"><span class="mode__num">03</span><h3 class="h3">Missions évaluées</h3><p class="muted">Chaque mission est évaluée par le client et par Qodia. Ateliers et retours sur portfolio complètent l'accompagnement.</p></div>
+      <div class="mode mode--brand"><span class="mode__num">04</span><h3 class="h3">Référencement</h3><p class="muted">Quand ses missions et son niveau le justifient, le rookie rejoint le cercle comme membre, avec sa fiche publique.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="acces" aria-labelledby="rookies-acces-title">
+  <div class="wrap" style="max-width:860px">
+    <div class="stack-4" style="margin-bottom:var(--space-8)">
+      <span class="label">Agences et entreprises</span>
+      <h2 class="display" id="rookies-acces-title">Demander l'accès aux rookies.</h2>
+      <p class="lead">L'annuaire des rookies n'est pas public. Dites-nous qui vous êtes et ce que vous cherchez : l'équipe Qodia valide la demande et vous envoie l'accès par e-mail.</p>
+    </div>
+    <div class="form-card" style="box-shadow:none;border:1px solid var(--line)">
+      <form class="form" data-lead-form="rookies_acces" action="/api/lead" method="post" novalidate><input type="hidden" name="form_type" value="rookies_acces">
+        <div class="form__success" role="status">
+          <div class="form__success-icon"><!--@icon-check--></div>
+          <h3 class="h2">Demande reçue, merci.</h3>
+          <p class="lead">L'équipe Qodia la valide et vous envoie l'accès à l'annuaire des rookies par e-mail, en général dans la journée.</p>
+        </div>
+        <fieldset class="choices choices--3">
+          <legend>Vous êtes</legend>
+          <label class="choice"><input type="radio" name="profil" value="agence" required data-msg-required="Indiquez qui vous êtes."><strong>Une agence</strong><span>Tester ou recruter un junior</span></label>
+          <label class="choice"><input type="radio" name="profil" value="entreprise"><strong>Une entreprise</strong><span>Un besoin à petit budget</span></label>
+          <label class="choice"><input type="radio" name="profil" value="membre"><strong>Un membre du cercle</strong><span>Parrainer ou renforcer mon équipe</span></label>
+          <span class="field__error" style="grid-column:1/-1"></span>
+        </fieldset>
+        <div class="row">
+          <div class="field"><label class="field__label" for="ra-prenom">Prénom</label><input class="field__input" id="ra-prenom" name="prenom" autocomplete="given-name" required><span class="field__error"></span></div>
+          <div class="field"><label class="field__label" for="ra-nom">Nom</label><input class="field__input" id="ra-nom" name="nom" autocomplete="family-name" required><span class="field__error"></span></div>
+        </div>
+        <div class="row">
+          <div class="field"><label class="field__label" for="ra-email">E-mail professionnel</label><input class="field__input" id="ra-email" name="email" type="email" autocomplete="email" required data-b2b><span class="field__error"></span></div>
+          <div class="field"><label class="field__label" for="ra-entreprise">Entreprise</label><input class="field__input" id="ra-entreprise" name="entreprise" autocomplete="organization" required><span class="field__error"></span></div>
+        </div>
+        <div class="field"><label class="field__label" for="ra-besoin">Ce que vous cherchez <span class="opt">(facultatif)</span></label><textarea class="field__input" id="ra-besoin" name="message" maxlength="1500" style="min-height:100px" placeholder="Ex. : un motion designer junior pour des formats réseaux sociaux, deux jours par semaine"></textarea></div>
+        <div class="hp" aria-hidden="true"><label>Ne pas remplir <input name="website" tabindex="-1" autocomplete="off"></label></div>
+        <p class="form__status" aria-live="polite"></p>
+        <p class="form__legal">Réservé aux professionnels : une adresse d'entreprise est demandée. Vos coordonnées servent à traiter votre demande d'accès et à vous recontacter au sujet de vos besoins. <a href="/confidentialite">Confidentialité</a></p>
+        <button class="btn btn--primary" type="submit" style="justify-self:start">Demander l'accès <!--@icon-arrow--></button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt" id="candidature-rookie" aria-labelledby="rookie-apply-title">
+  <div class="wrap" style="max-width:860px">
+    <div class="stack-4" style="margin-bottom:var(--space-8)">
+      <span class="label">Rookies</span>
+      <h2 class="display" id="rookie-apply-title">Vous débutez ? Candidatez.</h2>
+      <p class="lead">Un portfolio, même court, et l'envie de progresser suffisent. Nous répondons à chaque candidature sous quinze jours ouvrés.</p>
+    </div>
+    <div class="form-card" style="box-shadow:none;border:1px solid var(--line)">
+      <form class="form" data-lead-form="rookie" action="/api/lead" method="post" novalidate><input type="hidden" name="form_type" value="rookie">
+        <div class="form__success" role="status">
+          <div class="form__success-icon"><!--@icon-check--></div>
+          <h3 class="h2">Candidature reçue, merci.</h3>
+          <p class="lead">Nous regardons votre portfolio et revenons vers vous sous quinze jours ouvrés.</p>
+        </div>
+        <fieldset class="choices choices--4">
+          <legend>Vous êtes</legend>
+          <label class="choice"><input type="radio" name="niveau" value="etudiant" required data-msg-required="Indiquez votre situation."><strong>Étudiant</strong></label>
+          <label class="choice"><input type="radio" name="niveau" value="alternant"><strong>Alternant</strong></label>
+          <label class="choice"><input type="radio" name="niveau" value="diplome"><strong>Jeune diplômé</strong></label>
+          <label class="choice"><input type="radio" name="niveau" value="freelance"><strong>Freelance débutant</strong></label>
+          <span class="field__error" style="grid-column:1/-1"></span>
+        </fieldset>
+        <div class="row">
+          <div class="field"><label class="field__label" for="r-nom">Prénom et nom</label><input class="field__input" id="r-nom" name="nom" autocomplete="name" required><span class="field__error"></span></div>
+          <div class="field"><label class="field__label" for="r-ecole">École ou formation <span class="opt">(facultatif)</span></label><input class="field__input" id="r-ecole" name="ecole"></div>
+        </div>
+        <div class="row">
+          <div class="field"><label class="field__label" for="r-email">E-mail</label><input class="field__input" id="r-email" name="email" type="email" autocomplete="email" required><span class="field__error"></span></div>
+          <div class="field"><label class="field__label" for="r-tel">Téléphone <span class="opt">(facultatif)</span></label><input class="field__input" id="r-tel" name="telephone" type="tel" autocomplete="tel" pattern="[0-9 +\-\.\(\)]{8,20}" data-msg-pattern="Indiquez un numéro de téléphone, par exemple 06 12 34 56 78."><span class="field__error"></span></div>
+        </div>
+        <div class="row">
+          <div class="field"><label class="field__label" for="r-famille">Expertise principale</label><select class="field__input" id="r-famille" name="expertise" required data-msg-required="Choisissez votre expertise principale."><option value="">Choisir…</option><!--@family-options--><option value="autre">Autre</option></select><span class="field__error"></span></div>
+          <div class="field"><label class="field__label" for="r-ville">Ville</label><input class="field__input" id="r-ville" name="ville" autocomplete="address-level2" required><span class="field__error"></span></div>
+        </div>
+        <div class="field"><label class="field__label" for="r-metier">Votre métier en une ligne</label><input class="field__input" id="r-metier" name="metier" required maxlength="140" placeholder="Ex. : Graphiste junior, identités visuelles et réseaux sociaux"><span class="field__error"></span></div>
+        <div class="row">
+          <div class="field"><label class="field__label" for="r-portfolio">Portfolio</label><input class="field__input" id="r-portfolio" name="portfolio" type="url" placeholder="https://" required inputmode="url" data-msg-required="Un lien vers vos travaux est demandé (Behance, site, Drive…)."><span class="field__error"></span></div>
+          <div class="field"><label class="field__label" for="r-linkedin">LinkedIn <span class="opt">(facultatif)</span></label><input class="field__input" id="r-linkedin" name="linkedin" type="url" placeholder="https://www.linkedin.com/in/…" inputmode="url"><span class="field__error"></span></div>
+        </div>
+        <div class="field"><label class="field__label" for="r-dispo">Disponibilités <span class="opt">(facultatif)</span></label><input class="field__input" id="r-dispo" name="disponibilite" maxlength="200" placeholder="Ex. : alternance à partir de septembre, missions le week-end, temps plein"></div>
+        <div class="field"><label class="field__label" for="r-motivation">Ce que vous voulez apprendre ou réussir <span class="opt">(facultatif)</span></label><textarea class="field__input" id="r-motivation" name="message" maxlength="1500" style="min-height:100px"></textarea></div>
+        <div class="field"><label class="field__label" for="r-parrain">Un membre du cercle vous recommande ? <span class="opt">(facultatif)</span></label><input class="field__input" id="r-parrain" name="parrain"></div>
+        <div class="hp" aria-hidden="true"><label>Ne pas remplir <input name="website" tabindex="-1" autocomplete="off"></label></div>
+        <p class="form__status" aria-live="polite"></p>
+        <p class="form__legal">Vos informations servent uniquement à étudier votre candidature. Sans suite, elles sont supprimées au bout de deux ans. <a href="/confidentialite">Politique de confidentialité</a></p>
+        <button class="btn btn--primary" type="submit" style="justify-self:start">Envoyer ma candidature <!--@icon-arrow--></button>
+      </form>
+    </div>
+  </div>
+</section>

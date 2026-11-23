@@ -53,7 +53,11 @@ const site = await json("data/site.json");
 const home = await json("data/home.json");
 const FAM = Object.fromEntries(site.families.map((f) => [f.id, f]));
 const rank = (m) => (m.sponsored ? 0 : 4) + (m.featured ? 0 : 2) + (m.status === "membre" ? 0 : 1);
-const members = (await loadMembers()).filter((m) => m.visible !== false)
+const ALL = await loadMembers();
+/* Qodia Rookies : fiches privées, jamais dans l'annuaire public, le sitemap ni data/members.json */
+const ROOKIE_LEVEL = { etudiant: "Étudiant", alternant: "Alternant", diplome: "Jeune diplômé", freelance: "Freelance débutant" };
+const rookies = ALL.filter((m) => m.rookie && m.visible !== false).map((m) => ({ ...m, slug: m.slug || slugify(m.name) })).sort((a, b) => String(a.name).localeCompare(String(b.name), "fr"));
+const members = ALL.filter((m) => !m.rookie && m.visible !== false)
   .map((m) => ({ ...m, slug: m.slug || slugify(m.name), status: m.status === "membre" ? "membre" : "recommande", sponsored: !!m.sponsored }))
   .sort((a, b) => rank(a) - rank(b) || String(a.name).localeCompare(String(b.name), "fr"));
 const BY_SLUG = Object.fromEntries(members.map((m) => [m.slug, m]));
@@ -195,6 +199,7 @@ function header(active) {
     ["annuaire", "/annuaire", "Explorer le cercle"],
     ["comment", "/#comment-ca-marche", "Comment ça marche"],
     ["rejoindre", "/rejoindre", "Rejoindre le cercle"],
+    ["rookies", "/rookies", "Qodia Rookies"],
     ["blog", "/blog", "Blog"],
     ["faq", "/faq", "FAQ"]
   ];
@@ -243,6 +248,7 @@ function footer() {
         <ul>
           <li><a href="/rejoindre">Rejoindre le cercle</a></li>
           <li><a href="/faq#membres">FAQ membres</a></li>
+          <li><a href="/rookies">Qodia Rookies</a></li>
         </ul>
       </div>
       <div>
@@ -581,6 +587,115 @@ document.querySelectorAll('input[name="mode-${m.slug}"]').forEach(function(r){r.
 }
 
 /* ------------------------------------------------------------------ */
+/* Qodia Rookies : annuaire privé, à une adresse non listée            */
+/* ------------------------------------------------------------------ */
+const ROOKIES_BASE = `/rookies/acces-${site.rookiesKey}`;
+const rookieUrl = (r) => `${ROOKIES_BASE}/${r.slug}`;
+function rookieCard(r) {
+  const mentor = r.mentor && BY_SLUG[r.mentor];
+  const search = [r.name, r.headline, (r.skills || []).join(" "), (r.tools || []).join(" "), r.city, r.school, FAM[r.family]?.label, ROOKIE_LEVEL[r.rookieLevel]].join(" ");
+  return `<article class="card card--rookie" data-member data-family="${esc(r.family)}" data-kind="rookie" data-status="rookie" data-sectors="${esc((r.sectors || []).join("|"))}" data-search="${esc(search)}">
+  <div class="card__cover${coverStyle(r)}">${r.cover ? `<img class="cover-img" src="${esc(r.cover)}" alt="" loading="lazy">` : ""}<span class="card__badges"><span class="badge badge--jaune">Rookie</span></span></div>
+  <div class="card__avatar">${avatar(r)}</div>
+  <div class="card__body">
+    <p class="team"><span class="team__dot" aria-hidden="true" style="background:var(--jaune)"></span><span class="team__label">${esc(ROOKIE_LEVEL[r.rookieLevel] || "Rookie")}${r.school ? " · " + esc(r.school) : ""}</span></p>
+    <h2 class="card__name"><a href="${rookieUrl(r)}">${esc(r.name)}</a></h2>
+    <p class="card__meta">${esc([FAM[r.family]?.label, r.city].filter(Boolean).join(" · "))}</p>
+    <p class="card__role">${esc(r.headline || "")}</p>
+    ${mentor ? `<div class="card__refs"><span class="label">Parrainé par</span><p>${esc(mentor.name)}</p></div>` : ""}
+  </div>
+</article>`;
+}
+function rookiesIndex() {
+  const body = `
+<section class="dir-head section--alt">
+  <div class="wrap">
+    <div class="stack-4" style="max-width:760px">
+      <span class="label">Qodia Rookies · accès réservé</span>
+      <h1 class="display">Les rookies du cercle.</h1>
+      <p class="lead">Des jeunes talents sélectionnés par Qodia et encadrés par des membres confirmés. Cette page est personnelle : merci de ne pas partager son adresse.</p>
+    </div>
+    <form class="filters" id="dir-form" role="search" aria-label="Filtrer les rookies">
+      <div class="filters__row" style="grid-template-columns:2fr 1fr">
+        <div class="field search"><label class="sr-only" for="f-q">Rechercher</label>${ICON.search}<input class="field__input" id="f-q" name="q" type="search" placeholder="Un nom, une compétence, une école…" autocomplete="off"></div>
+        <div class="field"><label class="sr-only" for="f-family">Expertise</label><select class="field__input" id="f-family" name="expertise"><option value="">Toutes les expertises</option>${opts(site.families.map((f) => [f.id, f.label]))}</select></div>
+      </div>
+      <select id="f-sector" hidden><option value=""></option></select>
+    </form>
+  </div>
+</section>
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <div class="dir-meta"><p><strong id="dir-count" aria-live="polite">${rookies.length} rookie${rookies.length > 1 ? "s" : ""}</strong> <span class="muted">dans le programme</span></p><button type="button" class="link" style="background:none;border:0;cursor:pointer;padding:0" data-reset>Effacer les filtres</button></div>
+    <div class="cards" id="members">${rookies.map(rookieCard).join("")}</div>
+    <div class="empty${rookies.length ? "" : " is-visible"}" id="dir-empty">
+      <h2 class="h3">${rookies.length ? "Aucun rookie ne correspond." : "Les premiers rookies arrivent."}</h2>
+      <p class="muted" style="max-width:520px">Décrivez votre besoin : l'équipe Qodia vous propose un rookie et son parrain dans la journée.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center"><a class="btn btn--primary" href="/brief?mode=pilote&amp;rookie=${encodeURIComponent("à proposer par Qodia")}">Décrire mon besoin</a></div>
+    </div>
+  </div>
+</section>`;
+  return page({ title: "Qodia Rookies : annuaire réservé", description: "Annuaire réservé des rookies Qodia.", path: ROOKIES_BASE, nav: "rookies", noindex: true, scripts: ["/assets/js/annuaire.js"] }, body);
+}
+function rookiePage(r) {
+  const fam = FAM[r.family];
+  const mentor = r.mentor && BY_SLUG[r.mentor];
+  const brief = `/brief?mode=pilote&rookie=${encodeURIComponent(r.name)}`;
+  const projects = (r.projects || []).filter((p) => p.image);
+  const body = `
+<div class="profile-cover${coverStyle(r)}">${r.cover ? `<img class="cover-img" src="${esc(r.cover)}" alt="">` : ""}</div>
+<div class="wrap">
+  <div class="profile-head">
+    ${avatar(r, "lg")}
+    <div class="profile-head__text">
+      <div style="display:flex;gap:8px;flex-wrap:wrap"><span class="badge badge--jaune">Rookie</span><span class="badge badge--neutral">${esc(ROOKIE_LEVEL[r.rookieLevel] || "Jeune talent")}</span></div>
+      <h1 class="display">${esc(r.name)}</h1>
+      ${mentor ? `<p class="team team--lg" style="--team:${COLORS[mentor.color] || COLORS.violet}">${avatar(mentor, "xs")}<span><span class="team__label">Parrainé par</span> <a href="${memberUrl(mentor)}">${esc(mentor.name)}</a></span></p>` : ""}
+      <p class="profile-head__meta"><span>${esc(r.headline || "")}</span>${r.city ? `<span>${esc(r.city)}</span>` : ""}${r.school ? `<span>${esc(r.school)}</span>` : ""}</p>
+    </div>
+  </div>
+  <ol class="crumbs" aria-label="Fil d'Ariane"><li><a href="/rookies">Qodia Rookies</a></li><li><a href="${ROOKIES_BASE}">Annuaire</a></li><li aria-current="page">${esc(r.name)}</li></ol>
+  <div class="profile" style="padding-top:var(--space-4)">
+    <div class="profile__main">
+      <section aria-labelledby="apropos">
+        <h2 class="h2" id="apropos">À propos</h2>
+        <div class="prose">${(r.bio || []).map((p) => `<p>${esc(p)}</p>`).join("")}</div>
+        ${(r.skills || []).length ? `<ul class="tags" aria-label="Compétences">${r.skills.map((s) => `<li class="tag tag--static">${esc(s)}</li>`).join("")}</ul>` : ""}
+        ${(r.tools || []).length ? `<p class="small muted">Outils : ${esc(r.tools.join(", "))}</p>` : ""}
+      </section>
+      <section aria-labelledby="realisations">
+        <div class="section-head" style="margin:0"><h2 class="h2" id="realisations">Travaux</h2>${r.portfolio ? `<a class="link-arrow" href="${esc(r.portfolio)}" rel="noopener" target="_blank">Tout le portfolio ${ICON.ext}</a>` : ""}</div>
+        ${projects.length ? `<div class="projects">${projects.map((p) => `<figure class="project" style="margin:0"><div class="project__media"><img src="${esc(p.image)}" alt="${esc(p.title)}" loading="lazy"></div><figcaption><span class="label">${esc([p.client, p.discipline].filter(Boolean).join(" · "))}</span><p class="project__title">${esc(p.title)}</p></figcaption></figure>`).join("")}</div>`
+        : `<p class="muted">${r.portfolio ? "Les travaux de " + esc(r.name) + " sont visibles sur son portfolio." : "Une sélection de travaux vous est envoyée sur demande."}</p>`}
+      </section>
+      <section aria-labelledby="parcours">
+        <h2 class="h2" id="parcours">Son parcours Qodia</h2>
+        <p class="muted">Chaque mission est évaluée par le client et par Qodia. ${mentor ? esc(mentor.name) + " l'encadre et relit son travail." : "Un membre confirmé du cercle l'encadre sur ses missions."} Quand ses évaluations le justifient, ${esc(r.name)} rejoint le cercle comme membre.</p>
+      </section>
+    </div>
+    <aside class="side" aria-label="Travailler avec ${esc(r.name)}">
+      <div class="contact-box on-brand">
+        <h2>Travailler avec ${esc(r.name)}</h2>
+        <p style="color:var(--on-brand-muted)">Qodia cadre la mission, présente ${esc(r.name)} et organise son encadrement par un membre du cercle.</p>
+        <a class="btn btn--accent btn--block" href="${brief}">Demander ce rookie ${ICON.arrow}</a>
+      </div>
+      <div class="facts"><dl>
+        <div><dt>Statut</dt><dd>Rookie Qodia</dd></div>
+        <div><dt>Situation</dt><dd>${esc(ROOKIE_LEVEL[r.rookieLevel] || "Jeune talent")}</dd></div>
+        ${r.school ? `<div><dt>Formation</dt><dd>${esc(r.school)}</dd></div>` : ""}
+        <div><dt>Expertise</dt><dd>${esc(fam?.label || "")}</dd></div>
+        ${r.city ? `<div><dt>Basé à</dt><dd>${esc(r.city)}</dd></div>` : ""}
+        ${r.availability ? `<div><dt>Disponibilités</dt><dd>${esc(r.availability)}</dd></div>` : ""}
+        ${mentor ? `<div><dt>Parrain</dt><dd><a href="${memberUrl(mentor)}">${esc(mentor.name)}</a></dd></div>` : ""}
+      </dl></div>
+      ${r.qodiaNote ? `<div class="reviews-empty"><span class="label">Le mot de Qodia</span><p>${esc(r.qodiaNote)}</p></div>` : ""}
+    </aside>
+  </div>
+</div>`;
+  return page({ title: `${r.name} · Qodia Rookies`, description: `${r.name}, rookie Qodia.`, path: rookieUrl(r), nav: "rookies", noindex: true }, body);
+}
+
+/* ------------------------------------------------------------------ */
 /* Directives des pages                                                */
 /* ------------------------------------------------------------------ */
 const opts = (arr, sel) => arr.map(([v, l]) => `<option value="${esc(v)}"${v === sel ? " selected" : ""}>${esc(l)}</option>`).join("");
@@ -684,6 +799,8 @@ for (const f of (await readdir(path.join(ROOT, "src/pages"))).filter((f) => f.en
   if (!meta.noindex) urls.push(meta.path);
 }
 for (const m of members) { await out(`membres/${m.slug}.html`, memberPage(m)); urls.push(memberUrl(m)); }
+await out(`${ROOKIES_BASE.slice(1)}.html`, rookiesIndex());
+for (const r of rookies) await out(`${rookieUrl(r).slice(1)}.html`, rookiePage(r));
 
 for (const p of posts) {
   const more = posts.filter((o) => o.slug !== p.slug).slice(0, 2);
@@ -708,7 +825,7 @@ for (const p of posts) {
 }
 
 await out("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `  <url><loc>${site.url}${u === "/" ? "/" : u}</loc><lastmod>${BUILD_DATE}</lastmod></url>`).join("\n")}\n</urlset>\n`);
-await out("robots.txt", `User-agent: *\nAllow: /\nDisallow: /api/\n\nSitemap: ${site.url}/sitemap.xml\n`);
+await out("robots.txt", `User-agent: *\nAllow: /\nDisallow: /api/\nDisallow: /rookies/\n\nSitemap: ${site.url}/sitemap.xml\n`);
 await out("data/members.json", JSON.stringify({ generated: BUILD_DATE, members: members.map(({ slug, name, kind, status, sponsored, employer, family, headline, city, sectors, skills, logo, photo, color }) => ({ slug, name, kind, status, sponsored, employer: employer || undefined, family, headline, city, sectors, skills, logo, photo, color, url: memberUrl({ slug }) })) }, null, 2));
 
 console.log(`Site généré dans dist/ : ${urls.length} pages, ${members.length} membres, ${posts.length} articles.`);

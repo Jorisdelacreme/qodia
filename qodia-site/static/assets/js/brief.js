@@ -56,6 +56,14 @@
     var note = document.getElementById("brief-context");
     if (note) { note.textContent = "Votre demande concerne " + name + "."; note.hidden = false; }
   }
+  var rookie = p.get("rookie");
+  if (rookie) {
+    if (!mode) mode = "pilote";
+    var rn = rookie.replace(/[<>]/g, "").slice(0, 80);
+    var hid = document.createElement("input"); hid.type = "hidden"; hid.name = "rookie"; hid.value = rn; form.appendChild(hid);
+    var rnote = document.getElementById("brief-context");
+    if (rnote) { rnote.textContent = "Votre demande concerne le rookie " + rn + ". Qodia vous le présente et organise son encadrement."; rnote.hidden = false; }
+  }
   if (mode) {
     var r = form.querySelector('input[name="mode"][value="' + CSS.escape(mode) + '"]');
     if (r) r.checked = true;

@@ -19,7 +19,9 @@ const TYPES = {
   brief: { label: "Nouveau brief", required: ["mode", "description", "prenom", "nom", "entreprise", "email", "telephone"] },
   rappel: { label: "Demande de rappel", required: ["nom", "telephone"] },
   candidature: { label: "Candidature au cercle", required: ["statut", "nom", "email", "expertise", "ville", "metier", "portfolio"] },
-  acces: { label: "Accès au cercle", required: ["prenom", "nom", "entreprise", "email"], b2b: true }
+  acces: { label: "Accès au cercle", required: ["prenom", "nom", "entreprise", "email"], b2b: true },
+  rookies_acces: { label: "Demande d'accès aux Qodia Rookies", required: ["profil", "prenom", "nom", "entreprise", "email"], b2b: true },
+  rookie: { label: "Candidature Qodia Rookies", required: ["niveau", "nom", "email", "expertise", "ville", "metier", "portfolio"] }
 };
 
 const LABELS = {
@@ -27,12 +29,14 @@ const LABELS = {
   secteur: "Secteur", site: "Site actuel", budget: "Budget", delai: "Délai", prenom: "Prénom", nom: "Nom",
   entreprise: "Entreprise", fonction: "Fonction", email: "E-mail", telephone: "Téléphone", contact: "Préférence de contact",
   creneau: "Créneau", message: "Besoin", statut: "Statut", structure: "Structure", expertise: "Expertise principale",
-  ville: "Ville", metier: "Métier", portfolio: "Portfolio", linkedin: "LinkedIn", references: "Références", parrain: "Recommandé par"
+  ville: "Ville", metier: "Métier", portfolio: "Portfolio", linkedin: "LinkedIn", references: "Références", parrain: "Recommandé par", profil: "Profil", niveau: "Situation", ecole: "École ou formation", disponibilite: "Disponibilités", rookie: "Rookie demandé"
 };
 const VALUE_LABELS = {
   mode: { pilote: "Qodia pilote le projet", "mise-en-relation": "Mise en relation directe", conseil: "Ne sait pas encore, à conseiller" },
   contact: { rappel: "Être rappelé aujourd'hui", calendly: "Réserver un créneau (Calendly)", email: "Recevoir un e-mail d'abord" },
-  statut: { freelance: "Freelance", agence: "Agence", employe: "Expert en agence membre" }
+  statut: { freelance: "Freelance", agence: "Agence", employe: "Expert en agence membre" },
+  profil: { agence: "Agence", entreprise: "Entreprise", membre: "Membre du cercle" },
+  niveau: { etudiant: "Étudiant", alternant: "Alternant", diplome: "Jeune diplômé", freelance: "Freelance débutant" }
 };
 
 const MAX_FIELD = 4000;
