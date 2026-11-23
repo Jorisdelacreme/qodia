@@ -612,12 +612,37 @@
       "mentor": "",
       "availability": "Recherche une alternance",
       "website": "https://www.linkedin.com/in/benoit-leflohic/",
-      "portfolio": "",
-      "logo": "",
+      "portfolio": "https://benoit-leflohic.framer.website/",
+      "logo": "https://framerusercontent.com/images/801yv7SRJHqVnpDPTOkSyoWDE.png",
       "photo": "",
       "cover": "",
       "color": "cyan",
-      "projects": [],
+      "projects": [
+        {
+          "client": "Chez Lulu",
+          "discipline": "UI/UX",
+          "image": "https://framerusercontent.com/images/EF6uxX99FHyKjQTSAURlrql3tg.png",
+          "title": "Refonte mobile du site d'un restaurant"
+        },
+        {
+          "client": "Gobelins",
+          "discipline": "UI/UX",
+          "image": "https://framerusercontent.com/images/aTMXxceH5t2kCcL8fyLxSD7blvU.png",
+          "title": "Refonte de la page de la formation UI/UX"
+        },
+        {
+          "client": "Abbaye de La Trappe",
+          "discipline": "UI/UX",
+          "image": "https://framerusercontent.com/images/UUZgZt9AOnb8yTvBQJwxeUcvADc.jpg",
+          "title": "Refonte du site de l'abbaye"
+        },
+        {
+          "client": "Projet personnel",
+          "discipline": "Illustration",
+          "image": "https://framerusercontent.com/images/UYCg4MHnalKVTMbMdNFMKlJif0M.png",
+          "title": "Illustration vectorielle de la Casio F-91W"
+        }
+      ],
       "budget": "",
       "qodiaNote": ""
     },
