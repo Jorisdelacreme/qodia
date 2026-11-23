@@ -572,6 +572,56 @@
       "qodiaNote": ""
     },
     {
+      "slug": "benoit-le-flohic",
+      "visible": true,
+      "featured": false,
+      "status": "recommande",
+      "sponsored": false,
+      "name": "Benoit Le Flohic",
+      "kind": "freelance",
+      "family": "branding",
+      "headline": "Designer UI/UX et graphiste en formation",
+      "city": "Paris",
+      "bio": [
+        "Benoit est designer UI/UX et graphiste, en DN MADE Graphisme à Gobelins Paris, dans le parcours designer d'interfaces. Il conçoit des identités visuelles et des maquettes d'interfaces : logos, packaging, choix typographiques, palettes de couleurs et déclinaisons sur différents supports.",
+        "En stage chez DeLaCrème, il a créé des identités et des maquettes UI/UX pour des briefs clients, réalisé le motion design et le montage d'un teaser de conférence, et harmonisé des pages WordPress. Il a aussi conçu une maquette Figma pour la Design Factory de La Poste Groupe, validée par l'équipe projet."
+      ],
+      "skills": [
+        "Design UI/UX",
+        "Identité visuelle",
+        "Design graphique",
+        "Packaging",
+        "Motion design",
+        "Montage vidéo"
+      ],
+      "tools": [
+        "Figma",
+        "Adobe Illustrator",
+        "Adobe Photoshop",
+        "Blender",
+        "WordPress"
+      ],
+      "sectors": [],
+      "references": [
+        "DeLaCrème",
+        "La Poste Groupe"
+      ],
+      "rookie": true,
+      "rookieLevel": "etudiant",
+      "school": "Gobelins Paris, DN MADE Graphisme (UI/UX)",
+      "mentor": "",
+      "availability": "Recherche une alternance",
+      "website": "https://www.linkedin.com/in/benoit-leflohic/",
+      "portfolio": "",
+      "logo": "",
+      "photo": "",
+      "cover": "",
+      "color": "cyan",
+      "projects": [],
+      "budget": "",
+      "qodiaNote": ""
+    },
+    {
       "slug": "bonhomme",
       "visible": true,
       "featured": false,
