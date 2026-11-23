@@ -143,6 +143,38 @@ async function resolveLogos(list) {
 }
 await resolveLogos(members);
 
+/* Images distantes (photo, logo, couverture, réalisations données en https://…) : copiées sur qodia.pro au build.
+   En cas d'échec, l'adresse d'origine est gardée. */
+async function localizeRemoteImages(list) {
+  const jobs = [];
+  for (const m of list) {
+    for (const f of ["photo", "logo", "cover"]) if (/^https?:\/\//.test(m[f] || "")) jobs.push([m, f, null]);
+    (m.projects || []).forEach((p, i) => { if (/^https?:\/\//.test(p.image || "")) jobs.push([m, "image", i]); });
+  }
+  if (!jobs.length || process.env.QODIA_SKIP_LOGOS) return;
+  let i = 0, ok = 0;
+  await Promise.all(Array.from({ length: 6 }, async () => {
+    while (i < jobs.length) {
+      const [m, f, idx] = jobs[i++];
+      const url = idx == null ? m[f] : m.projects[idx].image;
+      try {
+        const r = await get(url, 10000);
+        const type = (r.headers.get("content-type") || "").toLowerCase();
+        if (!type.startsWith("image/")) continue;
+        const buf = Buffer.from(await r.arrayBuffer());
+        if (buf.length > 8_000_000) continue;
+        const ext = type.includes("svg") ? "svg" : type.includes("png") ? "png" : type.includes("webp") ? "webp" : type.includes("gif") ? "gif" : "jpg";
+        const rel = `/assets/membres/${m.slug}-${idx == null ? f : "projet-" + (idx + 1)}.${ext}`;
+        LOGO_FILES.push([rel, buf]);
+        if (idx == null) m[f] = rel; else m.projects[idx].image = rel;
+        ok++;
+      } catch {}
+    }
+  }));
+  console.log(`Images distantes copiées : ${ok}/${jobs.length}.`);
+}
+await localizeRemoteImages([...members, ...rookies]);
+
 /* ------------------------------------------------------------------ */
 /* Éléments communs                                                    */
 /* ------------------------------------------------------------------ */
